@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
+  <link rel="stylesheet" href="/public/css/sinceui.css" />
+  <link rel="stylesheet" href="/public/css/since-icon.css" />
+</head>
+
+<body>
+  <div class="page">
+    <div class="page__bd" style="height: 100%;">
+      <div class="weui-tab">
+        <div class="weui-tab__panel">
+          <i class="add"></i>
+        </div>
+        <div>
+          <div class="z-index:1;">
+            <img src="/public/img/倒计时.png" style="width: 100vw;height: 50vw;float: left;position: fixed;" />
+          </div>
+          <div style="width: 50px;height: 50vw;z-index:1;">
+            <i style="position: fixed;color:white;font-size: 20vw;margin-top: 18vw;margin-left: 19vw;">
+              &nbsp0 9 5
+            </i>
+          </div>
+        </div>
+        <div class="usernum">
+          <div class="uhead">
+            九月二十五日 · 周五
+            <i ></i>
+          </div>
+          <div class="ubody">
+            <div class="todaynum">
+              <b class="subjective">99</b>
+              <br>
+              <small>今日刷题</small>
+            </div>
+            <div class="todaynum">
+              <b class="subjective">99</b>
+              <br>
+              <small>今日问答</small>
+            </div>
+            <div class="todaynum">
+              <b class="subjective">99</b>
+              <br>
+              <small>今日排名</small>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+        <br>
+        <div style="background:rgb(250,250,250);">
+          <div class="lesson">
+            <i class="jsjwl lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              计算机网络
+            </small>
+          </div>
+          <div class="lesson">
+            <i class="zcyl lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              计算机组成原理
+            </small>
+          </div>
+          <div class="lesson">
+            <i class="sjjg lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              数据结构
+            </small>
+          </div>
+          <div class="lesson">
+            <i class="zz lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              考研政治
+            </small>
+          </div>
+          <div class="lesson">
+            <i class="os lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              操作系统
+            </small>
+          </div>
+          <div class="lesson">
+            <i class="zonghe lesson_icon subjective"></i>
+            <br>
+            <b>0/999</b>
+            <br>
+            <small>
+              408综合
+            </small>
+          </div>
+        </div>
+        <br><br><br><br>
+        <div class="weui-tabbar " style="bottom:0;position:fixed;width: 100vw;background-color: white;">
+          <div class="weui-tabbar__item">
+            <div style="display: inline-block; position: relative;">
+              <i class="iconorder_fill subjective" style="font-size: 30px;"></i>
+              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
+            </div>
+          </div>
+          <div class="weui-tabbar__item">
+            <div style="display: inline-block; position: relative;">
+              <i class="iconinteractive" style="font-size: 30px;"></i>
+              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
+            </div>
+          </div>
+          <div class="weui-tabbar__item">
+            <div style="display: inline-block; position: relative;">
+              <i class="iconpeople" style="font-size: 30px;"></i>
+              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
