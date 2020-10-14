@@ -25,4 +25,8 @@ module.exports = [
     name: 'topics',
     title: '题库',
   },
+  {
+    name:'dati',
+    title:'答题'
+  }
 ];
