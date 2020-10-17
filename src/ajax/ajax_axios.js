@@ -35,6 +35,8 @@ function ajax(method, url, params, errMsg = '网络或服务器异常，请重�
     }
     const ajaxId = getAjaxId();
     ajaxDebugger('', `${method}(${ajaxId}) 发送请求`, url);
+    console.log(ajaxParams);
+    console.log(url);
     ajaxMethod(url, ajaxParams).then((res) => {
       const body = res.data;
       const { code, data, errMsg } = body;

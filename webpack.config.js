@@ -116,8 +116,7 @@ module.exports = {
     compress: true,
     openPage: '/page/index/index.html',
     disableHostCheck: true,
-    // proxy: devProxy,
-    proxy: {
+    proxy:{
       '/': {
         target: 'http://www.ti01.cn:7071/',
         changeOrigin: true

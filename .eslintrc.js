@@ -21,7 +21,7 @@ module.exports = {
     'no-tabs': 2, // 不允许使用tab
     'no-spaced-func': 2, // 函数调用 小括号和函数名无空格
     'space-before-function-paren': [2, { anonymous: 'always', named: 'never', asyncArrow: 'always', }], // 函数定义和括号间无空格
-    'brace-style': [ 2, '1tbs', { allowSingleLine: true }], // 大括号风格
+    'brace-style': [2, '1tbs', { allowSingleLine: true }], // 大括号风格
     'space-before-blocks': 2, // 大括号（块）前空格
     'rest-spread-spacing': [2, 'never'], // 扩展符前无空格
     'no-multi-spaces': 2, // 禁止多个空格
