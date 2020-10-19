@@ -1,0 +1,74 @@
+# 20200812 by Gresstant
+
+stages:
+  - build
+  - commit
+
+variables:
+  GIT_FOLDER: ti01
+
+build:
+  stage: build
+  image: node
+  only:
+    - master
+    - dev01
+  script:
+    - npm install
+    - npm run build
+    - cd build
+    - tar -zcvf ../packed.tar.gz *
+    - mv ../packed.tar.gz packed.tar.gz
+  artifacts:
+    paths:
+      - build/packed.tar.gz
+
+update-master-branch:
+  stage: commit
+  image:
+    name: alpine/git
+    entrypoint: [""]
+  only:
+    - master
+  dependencies:
+    - build
+  script:
+    - git clone "$GIT_REMOTE_URL"
+    - git checkout master
+    - cd $GIT_FOLDER
+    - mkdir src/main/resources/static || true
+    - mv ../build/packed.tar.gz src/main/resources/static
+    - cd src/main/resources/static
+    - tar -zxvf packed.tar.gz
+    - rm -f packed.tar.gz
+    - git add .
+    - cd ../../../..
+    - git config user.email "cibot@sinceweb.xin"
+    - git config user.name "CI Bot"
+    - git commit -m "(Front-end CI auto-update)"
+    - git push origin master
+
+update-dev01-branch:
+  stage: commit
+  image:
+    name: alpine/git
+    entrypoint: [""]
+  only:
+    - dev01
+  dependencies:
+    - build
+  script:
+    - git clone "$GIT_REMOTE_URL"
+    - git checkout dev01
+    - cd $GIT_FOLDER
+    - mkdir src/main/resources/static || true
+    - mv ../build/packed.tar.gz src/main/resources/static
+    - cd src/main/resources/static
+    - tar -zxvf packed.tar.gz
+    - rm -f packed.tar.gz
+    - git add .
+    - cd ../../../..
+    - git config user.email "cibot@sinceweb.xin"
+    - git config user.name "CI Bot"
+    - git commit -m "(Front-end CI auto-update)"
+    - git push origin dev01
