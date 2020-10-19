@@ -3,20 +3,22 @@ import { post } from './ajax_axios.js';
 
 // 测试api接口文档的完成情况
 // 1.添加一个题目
-
-export const addTopic = (title,
-    type,
-    choice,
-    answer,
-    lesson,
-    part) => {
-    return get('/topic/add', {
+let title = 'TCP协议属于网络层',
+    type = 1,
+    choice = ['对', '错'],
+    answer = '1',
+    lesson = '计算机网络',
+    part = '传输层';
+export const addTopic = (file) => {
+    console.log(file);
+    return post('/topic/add', {
         title,
         type,
         choice,
         answer,
         lesson,
         part,
+        file
     })
 }
 // 2.修改一个题目
@@ -24,7 +26,7 @@ export const modifyTopic = () => {
     return post('/topic/modify', {
         answer: '2',
         choice: ['对', '错'],
-        id: 6,
+        id: 7,
         lesson: '数学',
         part: '整数加法',
         status: 1,
@@ -34,7 +36,7 @@ export const modifyTopic = () => {
 }
 // 3.删除一个题目
 export const deleteTopic = () => {
-    return post('/topic/delete', { id: '14' });
+    return post('/topic/delete', { id: '36' });
 }
 // 4.根据类型搜索题目
 export const findByType = () => {
@@ -42,7 +44,7 @@ export const findByType = () => {
 }
 // 5.搜索某个时间戳之后的题目
 export const findByUptime = () => {
-    return post('/topic/findByUptime', { uptime: '1600356441928' });
+    return post('/topic/findByUptime', { uptime: '1602905635479' });
 }
 // 6.根据科目搜索题目
 export const findByLesson = () => {

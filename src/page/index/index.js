@@ -7,6 +7,19 @@ import umbrella from 'umbrella-storage';
 import message from 'antd/lib/message';
 import { getUser, doLogin, getIndex } from '~/ajax';
 import { debug1 } from '~/util/debug';
+import { addTopic } from '~/ajax/testApi';
+// 测试上传图片
+let upfile = document.querySelector('.upfile'),
+  btn = document.querySelector('.btn');
+btn.onclick = function () {
+  console.log('点击了');
+  addTopic(upfile.files[0]).then(res => {
+    console.log('添加一个题目');
+    console.log(res);
+  })
+}
+
+
 debug1('hello');
 umbrella.setLocalStorage('app', { appId: '123' });
 console.log('这是页面index heelo world');
