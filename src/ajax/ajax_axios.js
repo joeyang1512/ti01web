@@ -3,13 +3,14 @@ import { ajaxDebugger } from '~/util/debug';
 import message from 'antd/lib/message';
 import { host } from './config';
 
+
 /**
  * 用来生成一个不重复的自增值
  */
 const getAjaxId = (function () {
   let id = 0;
   return () => id++;
-})() 
+})()
 
 /**
  * 
@@ -26,8 +27,13 @@ function ajax(method, url, params, errMsg = '网络或服务器异常，请重�
       ajaxMethod = axios[method];
       ajaxParams = { params };
     } else if (method === 'post') {
+      let formData = new FormData();
+      for (let key in params) {
+        formData.append(key, params[key]);
+      }
       ajaxMethod = axios[method];
-      ajaxParams = params;
+      ajaxParams = formData;
+
     } else {
       // 不支持的请求
       ajaxDebugger('不支持的请求');
@@ -35,6 +41,8 @@ function ajax(method, url, params, errMsg = '网络或服务器异常，请重�
     }
     const ajaxId = getAjaxId();
     ajaxDebugger('', `${method}(${ajaxId}) 发送请求`, url);
+
+
     ajaxMethod(url, ajaxParams).then((res) => {
       const body = res.data;
       const { code, data, errMsg } = body;
@@ -64,7 +72,7 @@ function ajax(method, url, params, errMsg = '网络或服务器异常，请重�
  */
 function isGlobalErrCode(code) {
   // TODO 这里还需要补全一下
-  return (code == 11 ) ? true : false;
+  return (code == 11) ? true : false;
 }
 export { ajax };
 export const get = (url, params, errMsg) => {

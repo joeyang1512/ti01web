@@ -6,3 +6,4 @@ import { post } from './ajax_axios.js';
 export const getTopic = () => {
     return post('/topic/findAll');
 }
+
