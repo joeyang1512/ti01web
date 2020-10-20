@@ -28,4 +28,12 @@ module.exports = [{
     name: 'forum',
     title: '社区',
   },
+  {
+    name: 'forum_detail',
+    title: '知乎',
+  },
+  {
+    name: 'search',
+    title: '搜索',
+  },
 ];
