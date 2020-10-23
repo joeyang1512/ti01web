@@ -134,11 +134,13 @@ function getIsLikeQ(params) {
     getIsLike(id).then(res => {
         if (res.code == '0') {
             isLike = true;
+            $('#likeNum').text('点赞 ' + setNum(detail.gnum));
             $('.footer .likeBtn').addClass('isLike'); // 添加点赞后的样式
-        } else if (res.code == '-1') {
+        } else {
             isLike = false;
             $('.footer .likeBtn').removeClass('isLike'); // 删除点赞后的样式
         }
+        $('#likeNum').text('点赞 ' + setNum(detail.gnum));
     })
 }
 
@@ -166,7 +168,6 @@ $('.footer .likeBtn').click(function () {
         deleteLike(id).then(res => {
             if (res.code == '0') {
                 detail.gnum--;
-                $('#likeNum').text('点赞 ' + setNum(detail.gnum));
                 getIsLikeQ();
             }
         })
@@ -174,7 +175,6 @@ $('.footer .likeBtn').click(function () {
         likeQes(id).then((res) => {
             if (res.code == '0') {
                 detail.gnum++;
-                $('#likeNum').text('点赞 ' + setNum(detail.gnum));
                 getIsLikeQ();
             }
         })
