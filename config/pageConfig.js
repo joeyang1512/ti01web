@@ -4,7 +4,8 @@
  * @member {string[]} chunks?
  */
 
-module.exports = [{
+module.exports = [
+  {
     name: 'index',
     title: '首页',
   },
@@ -39,5 +40,9 @@ module.exports = [{
   {
     name: 'search_result',
     title: '搜索结果',
+  },
+  {
+    name: 'issueQ',
+    title: '发布题目',
   }
 ];

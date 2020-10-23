@@ -118,7 +118,7 @@ module.exports = {
     disableHostCheck: true,
     proxy:{
       '/': {
-        target: 'http://www.ti01.cn:7071/',
+        target: 'http://www.ti01.cn/',
         changeOrigin: true
       }
     }
