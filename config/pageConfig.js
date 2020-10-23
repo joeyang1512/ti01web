@@ -36,4 +36,8 @@ module.exports = [{
     name: 'search',
     title: '搜索',
   },
+  {
+    name: 'search_result',
+    title: '搜索结果',
+  }
 ];

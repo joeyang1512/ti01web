@@ -7,3 +7,10 @@
 a{
   text-decoration: none; /* 去除a标签默认下划线 */
 }
+
+/* 高亮搜索词 */
+em{
+  color: #f25d8e;
+  font-style: normal;
+  font-weight: 400;
+}

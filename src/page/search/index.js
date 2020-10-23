@@ -27,6 +27,7 @@ clearAllBtn.onclick = function () {
 }
 // 通过判断isEmpty 确定是否显示清空按钮以及无历史记录tip
 let noneHistory = document.getElementById('none');
+
 function isEmptyHistory() {
     if (isEmpty) {
         clearAllBtn.style.display = 'none';
@@ -70,6 +71,8 @@ searchInput.onkeydown = function (e) {
         }
         isEmptyHistory();
         mapSearchArr();
+        // 跳转到搜索结果页
+        window.location.href = '/page/search_result/index.html?word=' + searchInput.value;
     }
 }
 // 渲染历史搜索记录
@@ -78,16 +81,23 @@ function mapSearchArr() {
     if (searchArr != null) {
         for (let i = 0; i < searchArr.length; i++) {
             $('#history_list').append(`<div class="list_item history_list_item" id='sos'> 
-                            <i class="icontime icon"></i> 
-                            <p class="content">` + searchArr[i].value + `</p>
-                            <i class="iconclose icon" id="clearBtn"></i>
-                        </div>`);
+                                            <i class="icontime icon"></i> 
+                                            <p class="content">` + searchArr[i].value + `</p>
+                                            <i class="iconclose icon" id="clearBtn"></i>
+                                        </div>`);
+        }
+    }
+    let list = document.getElementsByClassName('history_list_item');
+    for (let j = 0; j < list.length; j++) {
+        list[j].onclick = function () {
+            window.location.href = '/page/search_result/index.html?word=' + searchArr[j].value;
         }
     }
 }
 
 // 删除选中的历史记录
 $('#history_list').on('click', '#clearBtn', (e) => {
+    e.stopPropagation(); 
     let index = $(e.target.parentNode).index();
     for (let i = 0; i < searchArr.length; i++) {
         if (index == i) {
