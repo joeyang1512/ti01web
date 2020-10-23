@@ -41,7 +41,7 @@ export {
     isPicEmpty
 };
 
-//数字过滤器 大于1w +万字 大于1000w +千万
+// 数字过滤器 大于1w +万字 大于1000w +千万
 let setNum = function (val) {
     if (!val) return 0;
     let num = val;
