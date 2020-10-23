@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="/public/css/since-icon.css" />
+    <link rel="stylesheet" href="/public/css/sinceui.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div style="height: 50px;">
+        <header class="header">
+            <label class="searchBox">
+                <i class="iconreturn icon" id="backBtn"></i>
+                <a href="/page/search/index.html">
+                    <span>有问题，上森思~</span>
+                    <i class="iconsearch icon" id="backBtn"></i>
+                </a>
+            </label>
+        </header>
+    </div>
+    <main class="main" id="main">
+        <div class="top_box">
+            <div class="card">
+                <div class="uimg"></div>
+                <div class="userInfo">
+                    <div class="uname">--</div>
+                    <!-- 用户个签 todo -->
+                    <!-- <div class="udesc">--</div> -->
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="questionImg">
+                    <img id="qimage" src="" alt="">
+                </div>
+                <div class="textarea">
+                    --
+                </div>
+                <div class="foot">
+                    <p class="time">发布于 --</p>
+                    <p class="type">--</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="comment">
+            <h4 class="title">评论</h4>
+            <div class="replayBox">
+                <div class="uimg">
+                    <img src="/public/img/default.jpg" alt="">
+                </div>
+                <div class="textareaBox">
+                    <textarea id="textarea" placeholder="请输入评论"></textarea>
+                </div>
+                <div class="submit">
+                   <i class="iconadd icon"></i>
+                </div>
+            </div>
+            <div class="list">
+            </div>
+        </div>
+    </main>
+    <div style="height: 50px;">
+        <footer class="footer">
+            <div class="left">
+                <!-- isLike点赞后的样式 -->
+                <div class="likeBtn">
+                    <i class="iconpraise_fill icon"></i>
+                    <span id="likeNum">点赞 --</span>
+                </div>
+            </div>
+            <div class="right">
+                <!-- isCollect收藏后的样式 -->
+                <div class="collectionBtn">
+                    <!-- iconlike_fill收藏后的样式 -->
+                    <i class="iconlike icon"></i>
+                    <span>收藏</span>
+                </div>
+                <div class="commentBtn">
+                    <i class="iconinteractive icon"></i>
+                    <span id="commentNum">评论 --</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

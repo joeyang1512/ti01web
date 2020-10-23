@@ -45,6 +45,10 @@ i, .iconfont {
   content: "\eac2";
 }
 
+.icontime:before {
+  content: "\e628";
+}
+
 .iconactivity_fill:before {
   content: "\e6e2";
 }

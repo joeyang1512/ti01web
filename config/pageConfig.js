@@ -26,7 +26,23 @@ module.exports = [
     title: '题库',
   },
   {
+    name: 'forum',
+    title: '社区',
+  },
+  {
+    name: 'forum_detail',
+    title: '知乎',
+  },
+  {
+    name: 'search',
+    title: '搜索',
+  },
+  {
+    name: 'search_result',
+    title: '搜索结果',
+  },
+  {
     name: 'issueQ',
-    title: '发布题目'
+    title: '发布题目',
   }
 ];

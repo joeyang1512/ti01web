@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="/public/css/since-icon.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <label class="searchBox">
+            <i class="iconreturn icon" id="backBtn"></i>
+            <input type="search" value="" id="searchInput" autocomplete="off" placeholder="有问题，上森思~">
+        </label>
+    </header>
+    <main class="main">
+        <div class="hotBox">
+            <h5 class="title">热搜榜</h5>
+            <div class="list">
+                <div class="list_item">
+                    <span class="num">1</span>
+                    <div class="content">
+                        <div class="title">上海野生动物园饲养员实施作业时,不幸身亡</div>
+                        <div class="desc">类似情况应如何防范</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">2</span>
+                    <div class="content">
+                        <div class="title">湖北高院副院长张忠斌自杀身亡</div>
+                        <div class="desc">警方已排除刑事案件</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">3</span>
+                    <div class="content">
+                        <div class="title">我国将禁止生产含汞体温计</div>
+                        <div class="desc">自 2026 年起实施</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">4</span>
+                    <div class="content">
+                        <div class="title">林俊杰新专辑《幸存者·如你》</div>
+                        <div class="desc">你听了吗？</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">5</span>
+                    <div class="content">
+                        <div class="title">酸汤子中毒唯一幸存者去世</div>
+                        <div class="desc">9 名中毒者全部死亡</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">6</span>
+                    <div class="content">
+                        <div class="title">日本核废水或将排放入海</div>
+                        <div class="desc">对此你怎么看？</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">7</span>
+                    <div class="content">
+                        <div class="title">女孩地铁站玩手机摔倒</div>
+                        <div class="desc">直接被抬上 120</div>
+                    </div>
+                </div>
+                <div class="list_item">
+                    <span class="num">8</span>
+                    <div class="content">
+                        <div class="title">优胜教育疑似暴雷跑路</div>
+                        <div class="desc">拖欠上千万教师工资</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="history">
+            <div class="head">
+                <h5 class="title">历史搜索</h5>
+                <div class="clearBtn">清空</div>
+            </div>
+            <div class="list" id="history_list">
+            </div>
+            <div class="none" id="none">没有历史记录</div>
+        </div>
+    </main>
+</body>
+
+</html>

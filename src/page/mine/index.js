@@ -1,5 +1,4 @@
 import './index.less';
-// fjsjfskldjfsjdfklj
 import { sinceListener } from '~/util/sinceui';
 sinceListener('report');
 sinceListener('rank');

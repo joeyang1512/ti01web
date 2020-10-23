@@ -1,0 +1,163 @@
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    font-size: 20px;
+    color: #333;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: #F1F1F1;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+}
+
+.headerBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(18, 18, 18, .16);
+    box-shadow: 0 1px 3px 0 rgba(23, 81, 153, .05);
+    background-clip: content-box;
+
+    .header,
+    .logo,
+    .searchBox,
+    .addBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo {
+        width: 40px;
+        height: 50px;
+
+        i {
+            font-size: 28px;
+            color: #a0a0a0;
+        }
+    }
+
+    .searchBox {
+        flex: 1;
+        border-radius: 16px;
+        height: 30px;
+        width: 100%;
+        background-color: hsla(0, 0%, 92.2%, .72);
+        color: #999;
+        font-size: 15px;
+
+        .icon {
+            color: #a0a0a0;
+        }
+
+    }
+
+    .addBox {
+        width: 40px;
+        height: 50px;
+
+        .icon {
+            font-size: 28px;
+            color: #0084ff;
+        }
+    }
+}
+
+.list-item {
+    padding: 5px 10px 10px;
+    margin: 7px 0;
+    border-bottom: 1px solid rgba(18, 18, 18, .16);
+    background-color: #fff;
+
+    .item-head {
+        font-weight: 600;
+
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            color: #666;
+            font-size: 14px;
+
+            .userImg {
+                width: 25px;
+                height: 25px;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                border-radius: 50%;
+            }
+
+            .userName {
+                flex: 1;
+                padding-left: 5px;
+            }
+        }
+
+    }
+
+    .item-content {
+        font-size: 14px;
+        color: #222;
+        line-height: 22px;
+        margin-bottom: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
+
+    .item-foot {
+        font-size: 14px;
+        color: #999;
+
+        .count {
+            padding: 0 10px;
+        }
+    }
+
+    &:nth-child(n+2):last-child {
+        margin: 0;
+    }
+}
+
+.empty {
+    padding: 20px 0;
+    color: #999;
+    text-align: center;
+    font-size: 14px;
+
+    .empty_img {
+        width: 40%;
+        margin-bottom: 10px;
+    }
+}
+
+.scroll_top {
+    position: fixed;
+    right: 7px;
+    bottom: 20px;
+    z-index: 15;
+    display: none;
+
+    img {
+        width: 55px;
+        height: 55px;
+        display: block;
+    }
+}
