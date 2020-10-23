@@ -11,6 +11,7 @@ import {
 from '../../../public/js/filters';
 
 let word = getQueryVariable('word');
+console.log(word);
 let resArr = []; // 问题搜索结果数组
 getResQes();
 // 将返回的所有结果渲染到页面上
@@ -33,9 +34,9 @@ function mapALLquestion() {
                                 </div>`);
     }
     $('#all_list').append(`<div class='empty'>
-                        <img class='empty_img' src='/public/img/empty.png'></img>
-                        <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
-                    </div>`)
+                                <img class='empty_img' src='/public/img/empty.png'></img>
+                                <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
+                            </div>`)
     let list = document.getElementsByClassName('list-item');
     for (let j = 0; j < list.length; j++) {
         list[j].onclick = function () {
