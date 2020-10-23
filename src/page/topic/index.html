@@ -6,8 +6,12 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
   <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css">
+  <link rel="stylesheet" href="/public/css/since-icon.css" />
   <style>
     /* coded by yangyang */
+    html{
+      
+    }
     .button_sp_area {
       text-align: center;
     }
@@ -18,8 +22,8 @@
     /* 导航 */
     .yx-header {
       height: 44px;
-      border-bottom: 1px solid #e1e1e1;
-      position: relative;
+      /* border-bottom: 1px solid #e1e1e1; */
+      /* position: relative; */
       text-align: center;
       background-color: #efefef;
     }
@@ -31,13 +35,13 @@
       top: 0;
       width: 40px;
       height: 44px;
+      line-height: 44px;
     }
 
     .yx-header-icon-back span {
       width: 20px;
       height: 20px;
-      margin: 12px 0 0 10px;
-      background: url(../../../public/images/icon-back.png) no-repeat;
+      margin: 0 0 0 10px;
       background-size: 20px;
       display: block;
     }
@@ -51,8 +55,8 @@
     .yx-header-icon-star span {
       width: 20px;
       height: 20px;
-      margin: 12px 0 0 10px;
-      background: url(../../../public/images/center-icon-sc.png) no-repeat;
+      margin: 0 0 0 10px;
+      /* line-height: 22px; */
       background-size: 20px;
       display: block;
     }
@@ -77,11 +81,13 @@
     .title:nth-child(2){
       border-top:  #000 1px solid;
       border-bottom:  #000 1px solid;
-    }
-    .title:nth-child(3){
-      border:  #000 1px solid;
+      border-right: #000 1px solid;
       border-radius: 0 4px 4px 0;
     }
+    /* .title:nth-child(3){
+      border:  #000 1px solid;
+      border-radius: 0 4px 4px 0;
+    } */
 
     /* footer */
     .weui-footer {
@@ -108,15 +114,12 @@
     }
     .yx_topic_star{
       left: 10px;
-      width: 20px;
-      height: 20px;
-      background: url(../../../public/images/icon-collection.png) no-repeat;
+
+      /* background: url(../../../public/images/icon-collection.png) no-repeat; */
       background-size: 20px;
       display: block;
     }
-    .yx_topic_star::after{
-      content: 'star';
-    }
+
   </style>
 </head>
 
@@ -124,9 +127,10 @@
   <div class="weui_tab">
     <!-- header -->
     <div class="yx-header">
-      <div class="yx-header-icon-back"><span></span></div>
+      <!-- <div><span></span></div> -->
+      <p  class="yx-header-icon-back"><span><i class="iconreturn" style="font-size: 20px;"></i></span></i></p>
       <div class="yx-header-title">
-        <span class="title checkedTitle">答题</span><span class="title">背题</span><span class="title">视频</span>
+        <span class="title checkedTitle">答题</span><span class="title">背题</span><!-- <span class="title">视频</span> -->
       </div>
       <p class="yx-header-icon-star">设置</p>
     </div>
@@ -183,7 +187,7 @@
       <div class="button_sp_area">
         <!-- <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_warn">标记</a> -->
         <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">上一页</a>
-        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_warn">解&nbsp;析</a>
+        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_warn">确&nbsp;认</a>
         <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">下一页</a>
         
       </div>
@@ -192,8 +196,7 @@
     </div>
     <!-- footer -->
     <div class="weui-footer">
-      <p class="yx_topic_star" style="margin-left: 10px;"><span style="padding: 12px;"></span></p>
-      <!-- <p >收藏</p> -->
+      <p class="yx_topic_star"><i class="iconlike" style="font-size: 20px;"></i><i style="font-size: 14px;padding-bottom: 2pxs;">&nbsp;收藏</i></p>
       <p style="padding-left: 30px;">正确:<span>9</span></p>
       <p style="padding-right: 30px;">错误:<span>1</span></p>
       <p class="yx_topic_list"></p>
