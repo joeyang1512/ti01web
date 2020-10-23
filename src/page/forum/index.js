@@ -128,3 +128,7 @@ let scrollToTop = function () {
 }
 
 $('#rocket').click(scrollToTop);
+
+$('.iconadd').click(() => {
+    window.location.href = '/page/issueQ/index.html';
+});

@@ -32,15 +32,6 @@ export const getComment = (id) => {
     });
 }
 
-// add 问题的评论
-export const addComment = (word, id, img) => {
-    return post('/answer/add', {
-        aword: word,
-        qid: id,
-        file: img
-    });
-}
-
 // 收藏该问题
 export const collectQes = (id) => {
     return post('/question/snum', {

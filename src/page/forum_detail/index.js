@@ -3,7 +3,6 @@ import {
     getDetail,
     likeQes,
     getComment,
-    addComment,
     collectQes,
     getIsLike,
     getIsCollect,
@@ -18,11 +17,6 @@ import {
     getQueryVariable
 }
 from '../../../public/js/filters'
-
-import {
-    autoTextarea
-}
-from '../../../public/js/autoTextArea'
 
 let id = getQueryVariable('id');
 let detail = [];
@@ -109,6 +103,7 @@ function addCommentList() {
                                                 <span class="time">` + formatDate(new Date(Number(commentList[i].uptime)), 'yyyy-MM-dd') + `</span>
                                             </div>
                                             <div class="replay">` + commentList[i].aword + `</div>
+                                            <div class="">s</div>
                                         </div>
                                     </div>`);
     }
@@ -130,7 +125,7 @@ function toBigImg() {
 // 判断当前用户是否已经点赞
 let isLike = false;
 
-function getIsLikeQ(params) {
+function getIsLikeQ() {
     getIsLike(id).then(res => {
         if (res.code == '0') {
             isLike = true;
@@ -147,7 +142,7 @@ function getIsLikeQ(params) {
 // 判断当前用户是否已经收藏
 let isCollect = false;
 
-function getIsCollectQ(params) {
+function getIsCollectQ() {
     getIsCollect(id).then(res => {
         if (res.code == '0') {
             isCollect = true;
@@ -203,21 +198,7 @@ $('#backBtn').click(function () {
     window.history.back();
 });
 
-autoTextarea(document.getElementById('textarea'), 0, 90);
-
-// 添加评论方法
-function addComments(word, img) {
-    addComment(word, id, img).then(() => {
-        getComments();
-    })
-}
-
 // 点击按钮添加评论
 $('.submit').click(() => {
-    let word = $('#textarea').val().replace(/\n/g, '<br/>');
-    let img = '';
-    if (word != '') {
-        addComments(word, img);
-        $('#textarea').val('')
-    }
+    console.log('submit');
 })

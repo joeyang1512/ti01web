@@ -28,9 +28,6 @@ body {
     width: 100%;
     height: 50px;
     background-color: #fff;
-    border-bottom: 1px solid rgba(18, 18, 18, .16);
-    box-shadow: 0 1px 3px 0 rgba(23, 81, 153, .05);
-    background-clip: content-box;
 
     .header,
     .logo,
@@ -72,15 +69,14 @@ body {
 
         .icon {
             font-size: 28px;
-            color: #0084ff;
+            color: rgba(237, 27, 36, .75);
         }
     }
 }
 
 .list-item {
-    padding: 5px 10px 10px;
-    margin: 7px 0;
-    border-bottom: 1px solid rgba(18, 18, 18, .16);
+    padding: 10px 10px 10px;
+    margin-bottom: 6px;
     background-color: #fff;
 
     .item-head {
@@ -90,7 +86,7 @@ body {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
             color: #666;
             font-size: 14px;
 
@@ -104,7 +100,13 @@ body {
 
             .userName {
                 flex: 1;
-                padding-left: 5px;
+                padding-left: 10px;
+            }
+ 
+            .type {
+                font-weight: 500;
+                color: #777;
+                font-size: 12px;
             }
         }
 
@@ -114,7 +116,7 @@ body {
         font-size: 14px;
         color: #222;
         line-height: 22px;
-        margin-bottom: 4px;
+        margin-bottom: 10px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

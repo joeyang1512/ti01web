@@ -65,3 +65,8 @@ function getResQes() {
 $('#backBtn').click(function () {
     window.location.href = '/page/forum/index.html?';
 });
+
+$('.iconadd').click(() => {
+    window.location.href = '/page/issueQ/index.html';
+});
+

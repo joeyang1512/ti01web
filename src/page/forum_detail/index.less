@@ -27,7 +27,6 @@ body {
     display: flex;
     align-items: center;
     background-color: #fff;
-    border-bottom: 1px solid rgba(18, 18, 18, .16);
     justify-content: center;
 
     .searchBox {
@@ -107,17 +106,17 @@ body {
 
         .isCollect {
             .icon {
-                color: #FFAA61;
+                color: rgba(237, 27, 36, .75);
             }
         }
     }
 
     .likeBtn {
-        background-color: rgba(64, 158, 255, 0.25);
+        background-color:rgba(237, 27, 36, .25);
         padding: 0 15px;
         height: 35px;
         border-radius: 25px;
-        color: #0084FF;
+        color: rgba(237, 27, 36, .55);
         font-size: 14px;
         display: flex;
         align-items: center;
@@ -125,13 +124,13 @@ body {
         transition: all .25s;
 
         .icon {
-            color: #0084FF;
+            color: rgba(237, 27, 36, .55);
             margin-right: 5px;
         }
     }
 
     .isLike {
-        background-color: #0084FF;
+        background-color: rgba(237, 27, 36, .75);
         color: #fff;
 
         .icon {
@@ -141,7 +140,7 @@ body {
 }
 
 .top_box {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     background-color: #fff;
 
     .card {
@@ -185,7 +184,7 @@ body {
 
 .content {
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     background-color: #fff;
 
     .card {
@@ -226,64 +225,41 @@ body {
     padding: 10px;
     background-color: #fff;
 
-    .title {
-        margin-bottom: 10px;
-    }
-
-    .replayBox {
-        display: flex;
-
-        .uimg {
-            margin-right: 10px;
-            display: flex;
-            min-height: 32px;
-            height: 100%;
-            align-items: center;
-
-            img {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                display: block;
-            }
-
-        }
-
-        .submit {
-            margin-left: 10px;
-            display: flex;
-            align-items: center;
-
-            .icon{
-                font-size: 24px;
-                width: 25px;
-                height: 25px;
-                background-color: #0084FF;
-                border-radius: 50%;
-                color: #fff;
-            }
-        }
-    }
-
-    .textareaBox {
-        flex: 1;
+    .head {
+        position: relative;
         display: flex;
         align-items: center;
-        background-color: #EAEAEA;
-        border-radius: 10px;
-    }
+        justify-content: space-between;
 
-    #textarea {
-        flex: 1;
-        display: block;
-        outline: none;
-        background: none;
-        border: none;
-        font-size: 14px;
-        overflow: hidden !important;
-        height: 22px;
-        margin: 5px 10px;
-        line-height: 22px;
+        .submit {
+            text-align: center;
+            height: 25px;
+            line-height: 25px;
+            width: 70px;
+            background-color: rgba(237, 27, 36, .75);
+            color: #fff;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        span {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            -webkit-transform: translateY(-50%) translateX(-10px);
+            transform: translateY(-50%) translateX(-10px);
+            width: 4px;
+            height: 12px;
+            display: inline-block;
+
+            &::before {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(237, 27, 36, .75);
+            }
+        }
     }
 
     .list {
@@ -344,7 +320,6 @@ body {
         }
     }
 }
-
 
 /*使图片在浏览器中居中显示*/
 .bigImg {
