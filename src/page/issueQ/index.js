@@ -11,6 +11,8 @@ let next = document.querySelector('.next'), // 发布
     uploaderInput = document.getElementById('uploaderInput'), // 上传按键
     uploaderInputMParent = document.querySelector('.weui-uploader__bd'), // uploaderInputMParent的爷爷
     uploaderInputParent = document.querySelector('.weui-uploader__input-box'), // uploaderInputMParent的父亲
+    words = document.getElementById('words'),
+    cancel = document.querySelector('.cancel'),
     file = null,
     flag = true; // 存储图片对象
 let title = document.querySelector('.weui-media-box__title'),
@@ -18,6 +20,16 @@ let title = document.querySelector('.weui-media-box__title'),
     img = document.querySelector('.weui-media-box__thumb'),
     toastContent = document.querySelector('.weui-toast__content'),
     issueTitle = document.querySelector('.issue');// 评论内容
+
+// 监听输入字数
+body.oninput = function () {
+    words.innerText = body.value.length;
+}
+
+// 取消返回原本页面
+cancel.onclick = function () {
+    window.history.back(-1);
+}
 
 // 上传图片
 uploaderInput.onchange = function () {
@@ -40,7 +52,6 @@ uploaderInput.onchange = function () {
 
 // id = 33;
 // 通过是否有id来判断是发布评论还是发布问题
-console.log(id);
 if (id === 'false') {// 问题
     pinglun.style.display = 'none';
 
@@ -60,7 +71,16 @@ if (id === 'false') {// 问题
             let type = type1.value,
                 word = body.value;
             addQuestion({ word, file, type }).then(res => {
-                console.log(res);
+                if (res.code === '0') {
+                    window.history.back(-1);
+                } else {
+                    toastContent.innerText = '发布失败原因待查🤔';
+                    toast.style.display = 'block';
+                    setTimeout(() => {
+                        toast.style.display = 'none';
+                    }, 1000);
+                    return;
+                }
             })
         }
         flag = false;
@@ -68,7 +88,6 @@ if (id === 'false') {// 问题
 
 
 } else {// 评论
-    console.log(id);
     kemu.style.display = 'none';
     issueTitle.innerText = '评论';
     searchQustion(id).then(res => {
@@ -90,7 +109,16 @@ if (id === 'false') {// 问题
         if (flag) {
             let aword = body.value;
             answerQustion(aword, id, file).then(res => {
-                console.log(res);
+                if (res.code === '0') {
+                    window.history.back(-1);
+                } else {
+                    toastContent.innerText = '发布失败原因待查🤔';
+                    toast.style.display = 'block';
+                    setTimeout(() => {
+                        toast.style.display = 'none';
+                    }, 1000);
+                    return;
+                }
             })
         }
         flag = false;

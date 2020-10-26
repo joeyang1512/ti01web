@@ -1,6 +1,6 @@
 import './index.less';
 import {
-    getSearchResult
+    getSearchResult,
 } from '~/ajax/search_result';
 
 import {
