@@ -108,8 +108,8 @@ function addCommentList() {
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
-                                            <div style="display:` + (commentList[i].image ? 'block' : 'none') + `;">
-                                                <img class="reImg" src="` + commentList[i].image + `" />
+                                            <div style="display:` + (commentList[i].aimage ? 'block' : 'none') + `;">
+                                                <img class="reImg" src="` + commentList[i].aimage + `" />
                                             </div>
                                             <div class="replay">` + commentList[i].aword + `</div>
                                             <div class="up">
