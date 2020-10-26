@@ -1,15 +1,15 @@
 const process = require('process');
 const path = require('path');
 const rootPath = process.cwd();
-
+const jumphost = 'http://localhost:8081/page/';
 // 读取页面配置
 const pageConfig = require(path.resolve(rootPath, 'config/pageConfig'));
 const fs = require('fs');
 
 const pageOutputDir = path.resolve(rootPath, 'src/page');
-
+const jumpOutputDir = path.resolve(rootPath, 'src/util/jumpTo.js');
 console.log('输出目录', pageOutputDir);
-
+// console.log(page);
 const htmlTemplate = `<!doctype html>
 <html>
   <head>
@@ -19,6 +19,15 @@ const htmlTemplate = `<!doctype html>
   <body>
   </body>
 </html>`;
+
+function jumpTo(name) {
+  let url = `export const `+ name +`Url = host + '`+ name +`/index.html';
+export const to`+ name +` = () => {
+      window.location.href = `+ name +`Url;
+  }
+`
+  return url;
+};
 
 
 function writefile(filePath, data = '') {
@@ -55,8 +64,23 @@ function findOrGenPageDir(page) {
   // js
   const jsfilePath = path.resolve(pageDirPath, 'index.js');
   writefile(jsfilePath);
+  // util
+ 
 }
 
 for ( let page of pageConfig ) {
   findOrGenPageDir(page);
 }
+
+function writeJump() {
+  let data = `const host = '${jumphost}';
+`;
+  let urlElement = '';
+  for ( let page of pageConfig ) {
+    urlElement = jumpTo(page.name);
+    data = data + urlElement;
+  }
+  // console.log(data);
+  fs.writeFileSync(jumpOutputDir, data);
+}
+writeJump();

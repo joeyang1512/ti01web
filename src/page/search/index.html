@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="/public/css/since-icon.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <label class="searchBox">
+            <i class="iconreturn icon" id="backBtn"></i>
+            <input type="search" value="" id="searchInput" autocomplete="off" placeholder="有问题，上森思~">
+        </label>
+    </header>
+    <main class="main">
+        <div class="hotBox">
+            <h5 class="title">热搜榜</h5>
+            <div class="list" id="hot_list">
+            </div>
+        </div>
+        <div class="history">
+            <div class="head">
+                <h5 class="title">历史搜索</h5>
+                <div class="clearBtn">清空</div>
+            </div>
+            <div class="list" id="history_list">
+            </div>
+            <div class="none" id="none">没有历史记录</div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -23,6 +23,23 @@
       </div>
     </div>
 
+    <!-- 评论跳转过来的  问题展示 -->
+    <div class="weui-panel weui-panel_access" id="pinglun">
+      <!-- <div class="weui-panel__hd">问题</div> -->
+      <div class="weui-panel__bd">
+          <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+              <div class="weui-media-box__hd">
+                  <img class="weui-media-box__thumb"  alt="">
+              </div>
+              <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title"></h4>
+                  <p class="weui-media-box__desc"></p>
+              </div>
+          </a>
+      </div>
+  </div>
+
+  <!-- 科目选择 -->
     <div class="weui-cells">
       <div class="weui-cell weui-cell_select">
           <div class="weui-cell__bd">
@@ -39,15 +56,16 @@
       </div>
     </div>
 
+    <!-- 评论内容 -->
     <div class="weui-cells weui-cells_form">
       <div class="weui-cell">
         <div class="weui-cell__bd">
           <textarea class="weui-textarea" placeholder="请输入问题内容" rows="6"></textarea>
-          <div class="weui-textarea-counter"><span>0</span>/200</div>
+          <div class="weui-textarea-counter"><span id="words">0</span>/500</div>
         </div>
       </div>
     </div>
-
+<!-- 图片上传 -->
     <div class="weui-uploader">
       <div class="weui-uploader__hd">
         <p class="weui-uploader__title">图片上传</p>
@@ -58,7 +76,7 @@
           <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" />
         </div>
         <ul class="weui-uploader__files" id="uploaderFiles" >
-          <li class="weui-uploader__file" style=""></li>
+          <li class="weui-uploader__file" ></li>
         </ul>
       </div>
     </div>
@@ -68,16 +86,11 @@
         <p class="weui-toast__content">科目内容不能为空</p>
       </div>
     </div>
-
-
-
-    
-
   </div>
 
 
 
-
+<!-- 底部版权 -->
   <div class="weui-footer weui-footer_fixed-bottom">
     <p class="weui-footer__links">
       <a href="javascript:home();" class="weui-footer__link">森思</a>
