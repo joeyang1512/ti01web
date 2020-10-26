@@ -9,7 +9,10 @@ import {
     setNum,
 }
 from '../../../public/js/filters';
-
+import { sinceListener } from '~/util/sinceui';
+sinceListener('community');
+sinceListener('mine');
+sinceListener('topic');
 let allArr = []; // 问题数组
 getALLQes();
 
