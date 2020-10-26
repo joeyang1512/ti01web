@@ -6,5 +6,5 @@ import {
 
 
 export const getSearchHot = () => {
-    return get('/question/findHotByUptime');
+    return post('/soso/findHotSoso');
 }
