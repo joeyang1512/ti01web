@@ -1,3 +1,4 @@
+const host = 'http://localhost:8081/page/';
 export const indexUrl = host + 'index/index.html';
 export const toindex = () => {
       window.location.href = indexUrl;

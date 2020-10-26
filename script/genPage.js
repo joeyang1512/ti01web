@@ -1,7 +1,7 @@
 const process = require('process');
 const path = require('path');
 const rootPath = process.cwd();
-
+const jumphost = 'http://localhost:8081/page/';
 // 读取页面配置
 const pageConfig = require(path.resolve(rootPath, 'config/pageConfig'));
 const fs = require('fs');
@@ -73,7 +73,8 @@ for ( let page of pageConfig ) {
 }
 
 function writeJump() {
-  let data = '';
+  let data = `const host = '${jumphost}';
+`;
   let urlElement = '';
   for ( let page of pageConfig ) {
     urlElement = jumpTo(page.name);
