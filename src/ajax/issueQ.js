@@ -11,6 +11,6 @@ export const searchQustion = (id) => {
     return get('/question/findById', { id });
 }
 // 评论一个问题
-export const answerQustion = (word, qid, file) => {
-    return post('/answer/add', { word, qid, file });
+export const answerQustion = (aword, qid, file) => {
+    return post('/answer/add', { aword, qid, file });
 }

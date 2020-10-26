@@ -40,6 +40,7 @@ uploaderInput.onchange = function () {
 
 // id = 33;
 // 通过是否有id来判断是发布评论还是发布问题
+console.log(id);
 if (id === 'false') {// 问题
     pinglun.style.display = 'none';
 
@@ -67,9 +68,10 @@ if (id === 'false') {// 问题
 
 
 } else {// 评论
+    console.log(id);
     kemu.style.display = 'none';
     issueTitle.innerText = '评论';
-    searchQustion(33).then(res => {
+    searchQustion(id).then(res => {
         title.innerText = res.data.type;
         desc.innerText = res.data.word;
         img.src = res.data.qimage;
@@ -86,8 +88,8 @@ if (id === 'false') {// 问题
             return;
         }
         if (flag) {
-            let word = body.value;
-            answerQustion(word, id, file).then(res => {
+            let aword = body.value;
+            answerQustion(aword, id, file).then(res => {
                 console.log(res);
             })
         }

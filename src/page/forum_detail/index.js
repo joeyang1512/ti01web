@@ -16,7 +16,7 @@ import {
     setNum,
     getQueryVariable
 }
-from '../../../public/js/filters'
+    from '../../../public/js/filters'
 
 let id = getQueryVariable('id');
 let detail = [];
@@ -200,5 +200,6 @@ $('#backBtn').click(function () {
 
 // 点击按钮添加评论
 $('.submit').click(() => {
+    window.location.href = '../issueQ/index.html?id=' + id;
     console.log('submit');
 })
