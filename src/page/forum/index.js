@@ -10,8 +10,9 @@ import {
 }
 from '../../../public/js/filters';
 import { sinceListener } from '~/util/sinceui';
+import { mineUrl } from '../../util/jumpTo'
 sinceListener('community');
-sinceListener('mine');
+sinceListener('mine', mineUrl);
 sinceListener('topic');
 let allArr = []; // 问题数组
 getALLQes();
