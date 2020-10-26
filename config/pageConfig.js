@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     name: 'forum_detail',
-    title: '知乎',
+    title: '详情',
   },
   {
     name: 'search',

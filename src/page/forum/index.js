@@ -9,7 +9,10 @@ import {
     setNum,
 }
 from '../../../public/js/filters';
-
+import { sinceListener } from '~/util/sinceui';
+sinceListener('community');
+sinceListener('mine');
+sinceListener('topic');
 let allArr = []; // 问题数组
 getALLQes();
 
@@ -24,7 +27,11 @@ function mapALLquestion() {
                                             <span class="type">` + allArr[i].type + `</span>
                                         </div>
                                     </div> 
-                                    <div class="item-content">` + allArr[i].word + `</div>
+                                    <div class="item-content">
+                                        <p>` + allArr[i].word + `</p>
+                                        <div class="qimg" style="display:` + (allArr[i].qimage ? 'block' : 'none') + `
+                                        ;background-image:url('` + allArr[i].qimage + `');"></div>
+                                    </div>
                                     <div class="item-foot">
                                         <span class="like">` + setNum(allArr[i].gnum) + ` 点赞</span>
                                         <span class="count">·</span>
