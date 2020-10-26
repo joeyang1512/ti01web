@@ -85,6 +85,7 @@ body {
 
         .collectionBtn,
         .commentBtn {
+            position: relative;
             margin: 0 10px;
             display: flex;
             flex-direction: column;
@@ -104,15 +105,50 @@ body {
             }
         }
 
+        #star {
+            fill: #8590A6;
+            transition: all .25s;
+        }
+
+        .round,
+        .round::before,
+        .round::after {
+            position: absolute;
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            display: block;
+            background-color: transparent;
+            transform: translateY(-10px) scale(0);
+            box-shadow: 0 -18px 0 #F9A525;
+        }
+
+        .round {
+
+            &::after {
+                content: '';
+                transform: rotate(45deg) translateY(0px);
+            }
+
+            &::before {
+                content: '';
+                transform: rotate(-45deg) translateY(0px);
+            }
+        }
+
         .isCollect {
-            .icon {
-                color: rgba(237, 27, 36, .75);
+            #star {
+                fill: #F9A525;
+            }
+
+            .round {
+                animation: 1s collection ease-in-out forwards .15s;
             }
         }
     }
 
     .likeBtn {
-        background-color:rgba(237, 27, 36, .25);
+        background-color: rgba(237, 27, 36, .25);
         padding: 0 15px;
         height: 35px;
         border-radius: 25px;
@@ -298,11 +334,40 @@ body {
                 color: #8590a6;
             }
 
+            .reImg{
+                display: block;
+                width: 50%;
+            }
+
             .replay {
                 font-size: 15px;
                 line-height: 1.4;
+                word-break: break-word;
             }
 
+            .up,
+            .up-action {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                color: #8590a6;
+
+                .iconpraise {
+                    font-size: 18px;
+                    margin-right: 5px;
+                    color: #8590a6;
+                }
+
+                .iconpraise_fill {
+                    font-size: 18px;
+                    margin-right: 5px;
+                    color: rgba(237, 27, 36, 0.75);
+                }
+
+                span {
+                    font-size: 13px;
+                }
+            }
 
         }
     }
@@ -328,7 +393,7 @@ body {
     left: 50%;
     /*图片向左移动自身宽度的50%, 向上移动自身高度的50%。*/
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 80%;
 }
 
 /*遮罩层*/
@@ -338,12 +403,29 @@ body {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
     z-index: 1000;
-    top: 0;
+    bottom: 0;
     left: 0;
 }
 
 /*禁止滚动*/
 .none-scroll {
     overflow: hidden;
-    height: 100%;
+}
+
+// 收藏动画1
+@keyframes collection {
+    0% {
+        transform: translateY(-10px) scale(0.5);
+        opacity: .8;
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1);
+        opacity: .8;
+    }
+
+    100% {
+        transform: translateY(-10px) scale(1.1);
+        opacity: 0;
+    }
 }

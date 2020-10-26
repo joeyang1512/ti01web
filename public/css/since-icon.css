@@ -29,7 +29,6 @@ i,
 .paihangbang:before {
   content: "\e732";
 }
-
 .iconactivity:before {
   content: "\e6de";
 }
@@ -264,4 +263,12 @@ i,
 
 .iconpraise:before {
   content: "\e71b";
+}
+
+.iconcollection_fill:before {
+  content: "\e6ef";
+}
+
+.iconcollection:before {
+  content: "\e6f0";
 }

@@ -25,6 +25,13 @@ export const likeQes = (id) => {
     });
 }
 
+// 点赞 回答
+export const likeAns = (id) => {
+    return post('/answer/addgnum', {
+        id: id
+    });
+}
+
 // 获取 问题的评论
 export const getComment = (id) => {
     return post('/answer/findByQid', {

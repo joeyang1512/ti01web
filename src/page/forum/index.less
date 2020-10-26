@@ -38,18 +38,32 @@ body {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         white-space: nowrap;
+        margin: 0 10px;
 
         .tab {
-            padding: 0 10px;
+            position: relative;
+            margin: 0 10px;
             font-size: 14px;
             color: #666;
             transition: all .2s;
+            &:first-child{
+                margin-left: 0px;
+            }
+            &:last-child{
+                margin-right: 0px;
+            }
         }
 
         .active {
-            color: #000;
-            font-size: 15px;
-            font-weight: 600;
+            &::after {
+                content: '';
+                display: block;
+                height: 2px;
+                border-radius: 5px;
+                width: 100%;
+                position: absolute;
+                background-color: rgba(237, 27, 36, .75);
+            }
         }
 
         &::-webkit-scrollbar {
@@ -131,7 +145,7 @@ body {
                 flex: 1;
                 padding-left: 10px;
             }
- 
+
             .type {
                 font-weight: 500;
                 color: #777;
@@ -146,11 +160,26 @@ body {
         color: #222;
         line-height: 22px;
         margin-bottom: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
+        display: flex;
+        justify-content: space-between;
+
+        p{
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        .qimg{
+            margin-left: 10px;
+            width: 30%;
+            height: 88px;
+            border-radius: 5px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     }
 
     .item-foot {
