@@ -1,5 +1,35 @@
 import './index.less';
 
+import {
+    getSearchHot
+} from '~/ajax/search';
+
+let hotArr = []; // 热搜数据
+getSearchHot().then(res => {
+    if (res.code == '0') {
+        hotArr = res.data.slice(0, 8);
+        mapALLquestion();
+    }
+});
+
+// 将返回的所有结果渲染到页面上
+function mapALLquestion() {
+    for (let i = 0; i < hotArr.length; i++) {
+        $('#hot_list').append(`<div class="list_item">
+                                    <span class="num">` + (i + 1) + `</span>
+                                    <div class="content">
+                                        <div class="title">` + hotArr[i].word + `</div>
+                                        <div class="desc">` + hotArr[i].type + `</div>
+                                    </div>
+                                </div>`);
+    }
+    $('#hot_list .list_item').each(function (i) {
+        $(this).click(() => {
+            window.location.href = '/page/forum_detail/index.html?id=' + hotArr[i].id;
+        })
+    })
+}
+
 let searchArr = []; // 本地保存的历史搜索记录 存放的数组
 let isEmpty = true; // flag 判断是否显示清空按钮
 window.onload = function () {
@@ -97,7 +127,7 @@ function mapSearchArr() {
 
 // 删除选中的历史记录
 $('#history_list').on('click', '#clearBtn', (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     let index = $(e.target.parentNode).index();
     for (let i = 0; i < searchArr.length; i++) {
         if (index == i) {

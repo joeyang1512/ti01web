@@ -24,7 +24,11 @@ function mapALLquestion() {
                                             <span class="type">` + allArr[i].type + `</span>
                                         </div>
                                     </div> 
-                                    <div class="item-content">` + allArr[i].word + `</div>
+                                    <div class="item-content">
+                                        <p>` + allArr[i].word + `</p>
+                                        <div class="qimg" style="display:` + (allArr[i].qimage ? 'block' : 'none') + `
+                                        ;background-image:url('` + allArr[i].qimage + `');"></div>
+                                    </div>
                                     <div class="item-foot">
                                         <span class="like">` + setNum(allArr[i].gnum) + ` 点赞</span>
                                         <span class="count">·</span>

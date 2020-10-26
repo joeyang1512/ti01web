@@ -8,13 +8,15 @@ import {
     getIsCollect,
     deleteLike,
     deleteCollect,
+    likeAns
 } from '~/ajax/forum_detail'
 
 import {
     formatDate,
     isPicEmpty,
     setNum,
-    getQueryVariable
+    getQueryVariable,
+    compareDate
 }
 from '../../../public/js/filters'
 
@@ -57,7 +59,7 @@ function addDtailHtml() {
     // 添加用户名
     $('.top_box .uname').text(detail.name);
 
-    // 添加用户个签 // 此功能 以后再接入
+    // 添加用户个签或者等级 // 此功能 以后再接入
     // $('.top_box .udesc').text(detail.desc);
 
     // 添加问题图片
@@ -79,7 +81,6 @@ function addDtailHtml() {
     // 点击问题图片 放大
     $('#qimage').click(function () {
         let imgsrc = $(this).attr('src');
-        console.log(imgsrc);
         let opacityBottom = '<div class="opacityBottom" style = "display:none"><img class="bigImg" src="' + imgsrc + '"></div>';
         $(document.body).append(opacityBottom);
         toBigImg(); // 变大函数
@@ -88,6 +89,8 @@ function addDtailHtml() {
     $('#likeNum').text('点赞 ' + setNum(detail.gnum));
     $('#commentNum').text('评论 ' + setNum(detail.cnum));
 }
+let compare = compareDate;
+
 
 // 添加 评论列表
 function addCommentList() {
@@ -100,12 +103,51 @@ function addCommentList() {
                                         <div class="replayerInfo">
                                             <div class="replayer">
                                                 <span class="name">` + commentList[i].name + `</span>
-                                                <span class="time">` + formatDate(new Date(Number(commentList[i].uptime)), 'yyyy-MM-dd') + `</span>
+                                                <span class="time">` + (compare(Number(commentList[i].uptime)) ? formatDate(new Date(Number(commentList[i].uptime)), 'hh:mm') :
+            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) < 30 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) + '天前' :
+            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
+            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
+                                            </div>
+                                            <div style="display:` + (commentList[i].image ? 'block' : 'none') + `;">
+                                                <img class="reImg" src="` + commentList[i].image + `" />
                                             </div>
                                             <div class="replay">` + commentList[i].aword + `</div>
-                                            <div class="">s</div>
+                                            <div class="up">
+                                                <div class='up-action'>
+                                                    <i class="iconpraise icon up-icon"></i>
+                                                    <span class="up-num">` + commentList[i].gnum + `</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>`);
+    }
+    let list = document.getElementsByClassName('up-icon');
+    let nums = document.getElementsByClassName('up-num');
+    for (let j = 0; j < list.length; j++) {
+        commentList[j].isLike = false;
+        list[j].onclick = function () {
+            if (!commentList[j].isLike) {
+                likeAns(commentList[j].id).then((res) => {
+                    if (res.code == '0') {
+                        commentList[j].gnum++;
+                        $(nums[j]).text(setNum(commentList[j].gnum));
+                        commentList[j].isLike = true;
+                        $(this).removeClass('iconpraise').addClass('iconpraise_fill'); // 移除收藏后的样式
+                    }
+                })
+            }
+        }
+    }
+
+    // 点击评论区的图片 放大
+    let imgList = document.getElementsByClassName('reImg');
+    for (let i = 0; i < imgList.length; i++) {
+        imgList[i].onclick = function () {
+            let imgsrc = $(this).attr('src');
+            let opacityBottom = '<div class="opacityBottom" style = "display:none"><img class="bigImg" src="' + imgsrc + '"></div>';
+            $(document.body).append(opacityBottom);
+            toBigImg(); // 变大函数
+        }
     }
 }
 
@@ -146,12 +188,10 @@ function getIsCollectQ() {
     getIsCollect(id).then(res => {
         if (res.code == '0') {
             isCollect = true;
-            $('.collectionBtn').addClass('isCollect');
-            $('.iconlike').removeClass('iconlike').addClass('iconlike_fill'); // 添加收藏后的样式
+            $('.collectionBtn').addClass('isCollect'); // 添加收藏后的样式
         } else if (res.code == '1') {
             isCollect = false;
-            $('.collectionBtn').removeClass('isCollect');
-            $('.iconlike_fill').removeClass('iconlike_fill').addClass('iconlike'); // 移除收藏后的样式
+            $('.collectionBtn').removeClass('isCollect'); // 移除收藏后的样式
         }
     })
 }
@@ -201,4 +241,13 @@ $('#backBtn').click(function () {
 // 点击按钮添加评论
 $('.submit').click(() => {
     console.log('submit');
-})
+});
+
+// 点击右下角评论 滚动到讨论区
+$('.commentBtn').click(() => {
+    const el = document.getElementsByClassName('comment')[0];
+    window.scrollTo({
+        behavior: 'smooth',
+        top: el.offsetTop - 50
+    });
+});
