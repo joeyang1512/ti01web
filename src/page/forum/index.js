@@ -10,10 +10,10 @@ import {
 }
 from '../../../public/js/filters';
 import { sinceListener } from '~/util/sinceui';
-import { mineUrl } from '../../util/jumpTo'
-sinceListener('community');
+import { mineUrl, topicsUrl, forumUrl } from '../../util/jumpTo'
+sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
-sinceListener('topic');
+sinceListener('topics', topicsUrl);
 let allArr = []; // 问题数组
 getALLQes();
 
