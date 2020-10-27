@@ -9,15 +9,13 @@ import {
     setNum,
 }
 from '../../../public/js/filters';
-
-import {
-    sinceListener
-} from '~/util/sinceui';
-sinceListener('qesBank', '/page/topics/index.html');
-sinceListener('userCenter', '/page/mine/index.html');
-
-let arr = []; // 问题数组
-getRec();
+import { sinceListener } from '~/util/sinceui';
+import { mineUrl, topicsUrl, forumUrl } from '../../util/jumpTo'
+sinceListener('forum', forumUrl);
+sinceListener('mine', mineUrl);
+sinceListener('topics', topicsUrl);
+let allArr = []; // 问题数组
+getALLQes();
 
 // 将返回的所有结果渲染到页面上
 function mapALLquestion() {

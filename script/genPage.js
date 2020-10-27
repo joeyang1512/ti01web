@@ -1,7 +1,7 @@
 const process = require('process');
 const path = require('path');
 const rootPath = process.cwd();
-const jumphost = 'http://localhost:8081/page/';
+const jumphost = '/';
 // 读取页面配置
 const pageConfig = require(path.resolve(rootPath, 'config/pageConfig'));
 const fs = require('fs');
@@ -21,7 +21,7 @@ const htmlTemplate = `<!doctype html>
 </html>`;
 
 function jumpTo(name) {
-  let url = `export const `+ name +`Url = host + '`+ name +`/index.html';
+  let url = `export const `+ name +`Url = host + 'to/`+ name +`';
 export const to`+ name +` = () => {
       window.location.href = `+ name +`Url;
   }
