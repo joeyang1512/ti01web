@@ -39,3 +39,11 @@ export const issueQUrl = host + 'issueQ/index.html';
 export const toissueQ = () => {
       window.location.href = issueQUrl;
   }
+export const clockInUrl = host + 'clockIn/index.html';
+export const toclockIn = () => {
+      window.location.href = clockInUrl;
+  }
+export const pictureToQUrl = host + 'pictureToQ/index.html';
+export const topictureToQ = () => {
+      window.location.href = pictureToQUrl;
+  }
