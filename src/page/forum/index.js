@@ -14,9 +14,9 @@ import { mineUrl, topicsUrl, forumUrl } from '../../util/jumpTo'
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
 sinceListener('topics', topicsUrl);
-let allArr = []; // 问题数组
-getALLQes();
 
+let arr = []; // 问题数组
+getRec();
 // 将返回的所有结果渲染到页面上
 function mapALLquestion() {
     for (let i = 0; i < arr.length; i++) {

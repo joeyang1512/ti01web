@@ -1,6 +1,7 @@
 export { sinceListener };
 function sinceListener(id, link) {
     let dom = document.getElementById(id);
+    if (dom == null || dom == undefined) return;
     dom.addEventListener('click', function () {
         dom.style.backgroundColor = '#eee';
         setTimeout(() => {
