@@ -75,7 +75,7 @@ export const deleteCollect = (id) => {
 
 // 取消收藏 该问题
 export const getUserInfos = (id) => {
-    return post('/user/findbyopenid', {
+    return post('/user/findByOpenid', {
         openid: id
     });
 }
