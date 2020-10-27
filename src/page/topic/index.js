@@ -1,6 +1,9 @@
 import { getTopic } from '~/ajax/topic'
 // import { addTopic } from '~/ajax/testApi';
-
+import { forumUrl, mineUrl, topicsUrl } from '~/util/jumpTo'
+sinceListener('topics', topicsUrl);
+sinceListener('forum', forumUrl);
+sinceListener('mine', mineUrl);
 const titles = document.querySelector('.yx-header-title');
 let lastChecked = document.querySelectorAll('.checkedTitle')[0];
 

@@ -14,3 +14,7 @@ export const getTypequestion = (type) => {
         type: type
     });
 }
+
+export const getRecommend = () => {
+    return get('/question/findHotByUptime');
+}

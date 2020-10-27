@@ -1,6 +1,6 @@
 import './index.less';
 import {
-    getAllquestion,
+    getRecommend,
     getTypequestion
 } from '~/ajax/forum';
 
@@ -10,33 +10,33 @@ import {
 }
 from '../../../public/js/filters';
 import { sinceListener } from '~/util/sinceui';
-import { mineUrl } from '../../util/jumpTo'
-sinceListener('community');
+import { mineUrl, topicsUrl, forumUrl } from '../../util/jumpTo'
+sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
-sinceListener('topic');
-let allArr = []; // 问题数组
-getALLQes();
+sinceListener('topics', topicsUrl);
 
+let arr = []; // 问题数组
+getRec();
 // 将返回的所有结果渲染到页面上
 function mapALLquestion() {
-    for (let i = 0; i < allArr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         $('#all_list').append(`<div class="list-item"> 
                                     <div class="item-head">
                                         <div class="info">
-                                            <div class="userImg" style="background-image: url('` + isPicEmpty(allArr[i].image) + `');" ></div>
-                                            <span class="userName">` + allArr[i].name + `</span>
-                                            <span class="type">` + allArr[i].type + `</span>
+                                            <div class="userImg" style="background-image: url('` + isPicEmpty(arr[i].image) + `');" ></div>
+                                            <span class="userName">` + arr[i].name + `</span>
+                                            <span class="type">` + arr[i].type + `</span>
                                         </div>
                                     </div> 
                                     <div class="item-content">
-                                        <p>` + allArr[i].word + `</p>
-                                        <div class="qimg" style="display:` + (allArr[i].qimage ? 'block' : 'none') + `
-                                        ;background-image:url('` + allArr[i].qimage + `');"></div>
+                                        <p>` + arr[i].word + `</p>
+                                        <div class="qimg" style="display:` + (arr[i].qimage ? 'block' : 'none') + `
+                                        ;background-image:url('` + arr[i].qimage + `');"></div>
                                     </div>
                                     <div class="item-foot">
-                                        <span class="like">` + setNum(allArr[i].gnum) + ` 点赞</span>
+                                        <span class="like">` + setNum(arr[i].gnum) + ` 点赞</span>
                                         <span class="count">·</span>
-                                        <span class="comment">` + setNum(allArr[i].cnum) + ` 评论</span>
+                                        <span class="comment">` + setNum(arr[i].cnum) + ` 评论</span>
                                     </div>
                                 </div>`);
     }
@@ -44,10 +44,15 @@ function mapALLquestion() {
                         <img class='empty_img' src='/public/img/empty.png'></img>
                         <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
                     </div>`)
+    $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
+                                <p>Copyright &copy; 2014
+                                -
+                                ` + new Date().getFullYear() + `
+                            </p>`)
     let list = document.getElementsByClassName('list-item');
     for (let j = 0; j < list.length; j++) {
         list[j].onclick = function () {
-            window.location.href = '/page/forum_detail/index.html?id=' + allArr[j].id;
+            window.location.href = '/page/forum_detail/index.html?id=' + arr[j].id;
         }
     }
 }
@@ -68,10 +73,11 @@ for (let i = 0; i < tabList.length; i++) {
 // 根据类型获取问题
 function getQesByType(type) {
     $('#all_list').empty();
-    if (type != '全部') {
+    $('#inter-footer').empty();
+    if (type != '推荐') {
         getTypequestion(type).then((res) => {
             if (res.data != null) {
-                allArr = res.data;
+                arr = res.data;
                 mapALLquestion();
             } else {
                 $('#all_list').append(`<div class='empty'>
@@ -81,15 +87,15 @@ function getQesByType(type) {
             }
         })
     } else {
-        getALLQes()
+        getRec()
     }
 }
 
-// 获取所有问题
-function getALLQes() {
-    getAllquestion().then((res) => {
+// 获取推荐
+function getRec() {
+    getRecommend().then((res) => {
         if (res.code == 0) {
-            allArr = res.data;
+            arr = res.data;
             mapALLquestion();
         }
     });

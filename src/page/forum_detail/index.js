@@ -8,7 +8,8 @@ import {
     getIsCollect,
     deleteLike,
     deleteCollect,
-    likeAns
+    likeAns,
+    getUserInfos
 } from '~/ajax/forum_detail'
 
 import {
@@ -18,7 +19,7 @@ import {
     getQueryVariable,
     compareDate
 }
-    from '../../../public/js/filters'
+from '../../../public/js/filters'
 
 let id = getQueryVariable('id');
 let detail = [];
@@ -27,9 +28,17 @@ let commentList = [];
 getDetail(id).then((res) => {
     if (res.code == '0') {
         detail = res.data;
+        getUserInfo(detail.openid);
         addDtailHtml();
     }
 });
+
+// 获取发布问题用户的信息
+function getUserInfo(id) {
+    getUserInfos(id).then(res => {
+        console.log(res);
+    })
+}
 
 // 获取该问题的评论列表
 function getComments() {
@@ -109,7 +118,7 @@ function addCommentList() {
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
                                             <div style="display:` + (commentList[i].aimage ? 'block' : 'none') + `;">
-                                                <img class="reImg" src="` + commentList[i].aimage + `" />
+                                                <img class="reImg" src="` + isPicEmpty(commentList[i].aimage) + `" />
                                             </div>
                                             <div class="replay">` + commentList[i].aword + `</div>
                                             <div class="up">

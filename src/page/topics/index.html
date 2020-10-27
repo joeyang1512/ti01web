@@ -29,22 +29,22 @@
           </div>
         </div>
         <div class="usernum">
-          <div class="uhead">
+          <div class="uhead subjectiveb">
             九月二十五日 · 周五
-            <i ></i>
+            <i></i>
           </div>
           <div class="ubody">
-            <div class="todaynum">
+            <div class="todaynum" id="todayTopic">
               <b class="subjective">99</b>
               <br>
               <small>今日刷题</small>
             </div>
-            <div class="todaynum">
+            <div class="todaynum" id="todayQuestion">
               <b class="subjective">99</b>
               <br>
               <small>今日问答</small>
             </div>
-            <div class="todaynum">
+            <div class="todaynum" id="todayRank">
               <b class="subjective">99</b>
               <br>
               <small>今日排名</small>
@@ -55,7 +55,7 @@
         </div>
         <br>
         <div style="background:rgb(250,250,250);">
-          <div class="lesson">
+          <div class="lesson" id="net">
             <i class="jsjwl lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -64,7 +64,7 @@
               计算机网络
             </small>
           </div>
-          <div class="lesson">
+          <div class="lesson" id="cpu">
             <i class="zcyl lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -73,7 +73,7 @@
               计算机组成原理
             </small>
           </div>
-          <div class="lesson">
+          <div class="lesson" id="link">
             <i class="sjjg lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -82,7 +82,7 @@
               数据结构
             </small>
           </div>
-          <div class="lesson">
+          <div class="lesson" id="china">
             <i class="zz lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -91,7 +91,7 @@
               考研政治
             </small>
           </div>
-          <div class="lesson">
+          <div class="lesson" id="os">
             <i class="os lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -100,7 +100,7 @@
               操作系统
             </small>
           </div>
-          <div class="lesson">
+          <div class="lesson" id="all">
             <i class="zonghe lesson_icon subjective"></i>
             <br>
             <b>0/999</b>
@@ -110,29 +110,24 @@
             </small>
           </div>
         </div>
-        <br><br><br><br>
-        <div class="weui-tabbar " style="bottom:0;position:fixed;width: 100vw;background-color: white;">
-          <div class="weui-tabbar__item">
-            <div style="display: inline-block; position: relative;">
-              <i class="iconorder_fill subjective" style="font-size: 30px;"></i>
-              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
-            </div>
-          </div>
-          <div class="weui-tabbar__item">
-            <div style="display: inline-block; position: relative;">
-              <i class="iconinteractive" style="font-size: 30px;"></i>
-              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
-            </div>
-          </div>
-          <div class="weui-tabbar__item">
-            <div style="display: inline-block; position: relative;">
-              <i class="iconpeople" style="font-size: 30px;"></i>
-              <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+    <footer class="footerBox">
+      <div class="footerBtn">
+        <div class="btn active" id="topics">
+          <i class="iconorder_fill icon"></i>
+          <span>题库</span>
+        </div>
+        <div class="btn" id="forum">
+          <i class="iconinteractive icon"></i>
+          <span>社区</span>
+        </div>
+        <div class="btn" id="mine">
+          <i class="iconpeople icon"></i>
+          <span>个人</span>
+        </div>
+      </div>
+    </footer>
 </body>
 
 </html>
