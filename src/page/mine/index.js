@@ -10,3 +10,5 @@ sinceListener('about');
 sinceListener('shoreup');
 sinceListener('answer');
 sinceListener('gain');
+sinceListener('qesBank', '/page/topics/index.html');
+sinceListener('forum', '/page/forum/index.html');
