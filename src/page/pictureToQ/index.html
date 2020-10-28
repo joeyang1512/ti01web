@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
+<link rel="stylesheet" href="/public/css/since-icon.css" />
+<link rel="stylesheet" href="../../../public/css/since-icon.css">
+
+<body>
+
+  <div class="weui-tab">
+    <!-- body -->
+    <div class="weui-panel weui-panel_access">
+      <div class="weui-panel__hd">
+        <i class="iconreturn icon" id="backBtn"></i>
+        <i>拍照搜题</i>
+      </div>
+      <div class="weui-panel__bd" class="body">
+        <div class="container">
+          <label for="fileSelect">
+            <i class="iconcamera_fill camera" style="font-size: 80px;"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- 题目详情 -->
+    <!-- <div class="weui-cells__title">单选列表项</div>
+    <div class="weui-cells weui-cells_radio">
+      <label class="weui-cell weui-check__label" for="x11">
+        <div class="weui-cell__bd">
+          <p>cell standard</p>
+        </div>
+        <div class="weui-cell__ft">
+          <input type="radio" class="weui-check" name="radio1" id="x11">
+          <span class="weui-icon-checked"></span>
+        </div>
+      </label>
+      <label class="weui-cell weui-check__label" for="x12">
+
+        <div class="weui-cell__bd">
+          <p>cell standardcell standardcell standardcell standardcell standard</p>
+        </div>
+        <div class="weui-cell__ft">
+          <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+          <span class="weui-icon-checked"></span>
+        </div>
+      </label>
+      <img src="../../../public/img/1.jpg" alt="" class="img">
+    </div> -->
+    <input type="file" accept="image/*" id="fileSelect" style="display: none;" multiple>
+    <!-- footer -->
+    <div class="footer">
+      <i class="iconcamera_fill" id="camera"></i>
+      <i class="iconactivity" id="topic"></i>
+    </div>
+
+    <!-- 弹窗 -->
+    <div id="toast" style="display: none;">
+      <div class="weui-toast">
+        <p class="weui-toast__content">请先拍照搜题目</p>
+      </div>
+    </div>
+</body </html>
