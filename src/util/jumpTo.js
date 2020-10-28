@@ -42,4 +42,13 @@ export const toissueQ = () => {
 export const ourUrl = host + 'to/our';
 export const toour = () => {
       window.location.href = ourUrl;
+}
+export const clockInUrl = host + 'clockIn/index.html';
+export const toclockIn = () => {
+      window.location.href = clockInUrl;
+  }
+export const pictureToQUrl = host + 'pictureToQ/index.html';
+export const topictureToQ = () => {
+      window.location.href = pictureToQUrl;
+
   }
