@@ -16,7 +16,7 @@ module.exports = {
     // 'no-console': 0,
     'no-unreachable': 2, // 禁止不可达代码
     'no-multiple-empty-lines': 2, // 最多2连续空行
-    'eol-last': 2, // 文件必须以空行结束
+    // 'eol-last': 2, // 文件必须以空行结束
     'no-var': 2, // 不允许使用var
     'no-tabs': 2, // 不允许使用tab
     'no-spaced-func': 2, // 函数调用 小括号和函数名无空格
