@@ -33,14 +33,14 @@ function setUserInfo(_data) {
         console.log(res);
         if (res.code == '0') {
             // console.log(res.data.size());
-            document.getElementById('shoreup').innerHTML = res.data.size();
+            document.getElementById('shoreup').innerHTML = res.data.length;
         } 
     });
     getUserQues().then((res) => {
         console.log(res);
         if (res.code == '0') {
             // console.log(res.data.size());
-            document.getElementById('question').innerHTML = res.data.size();
+            document.getElementById('question').innerHTML = res.data.length;
         } 
     });
   }
