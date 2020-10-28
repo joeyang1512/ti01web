@@ -44,5 +44,9 @@ module.exports = [
   {
     name: 'issueQ',
     title: '发布题目',
+  },
+  {
+    name: 'our',
+    title: '关于我们',
   }
 ];

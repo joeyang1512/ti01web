@@ -39,3 +39,7 @@ export const issueQUrl = host + 'to/issueQ';
 export const toissueQ = () => {
       window.location.href = issueQUrl;
   }
+export const ourUrl = host + 'to/our';
+export const toour = () => {
+      window.location.href = ourUrl;
+  }
