@@ -47,6 +47,10 @@ module.exports = [
 
   },
   {
+    name: 'mineQes',
+    title: '问答',
+  },
+  {
     name: 'our',
     title: '关于我们',
 

@@ -8,8 +8,7 @@ import {
     getIsCollect,
     deleteLike,
     deleteCollect,
-    likeAns,
-    getUserInfos
+    likeAns
 } from '~/ajax/forum_detail'
 
 import {
@@ -23,22 +22,15 @@ from '../../../public/js/filters'
 
 let id = getQueryVariable('id');
 let detail = [];
+let userInfo = [];
 let commentList = [];
 // 获取数据
 getDetail(id).then((res) => {
     if (res.code == '0') {
         detail = res.data;
-        getUserInfo(detail.openid);
         addDtailHtml();
     }
 });
-
-// 获取发布问题用户的信息
-function getUserInfo(id) {
-    getUserInfos(id).then(res => {
-        console.log(res);
-    })
-}
 
 // 获取该问题的评论列表
 function getComments() {
@@ -66,16 +58,39 @@ function addDtailHtml() {
     })
 
     // 添加用户名
+    // oIaLN5_r8bz-guPhHQgfO3nAVQk4
     $('.top_box .uname').text(detail.name);
+    if (detail.openid == 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
+        $('.top_box .level').addClass('lv9')
+    } else {
+        if (detail.level == 0) {
+            $('.top_box .level').addClass('lv0');
+        } else if (detail.level < 10) {
+            $('.top_box .level').addClass('lv1');
+        } else if (detail.level < 100) {
+            $('.top_box .level').addClass('lv2');
+        } else if (detail.level < 500) {
+            $('.top_box .level').addClass('lv3');
+        } else if (detail.level < 1000) {
+            $('.top_box .level').addClass('lv4');
+        } else if (detail.level < 2000) {
+            $('.top_box .level').addClass('lv5');
+        } else if (detail.level >= 2000) {
+            $('.top_box .level').addClass('lv6');
+        } else {
+            $('.top_box .level').addClass('lv0');
+        }
+    }
 
-    // 添加用户个签或者等级 // 此功能 以后再接入
+    // 添加用户个签 // 此功能 以后再接入
     // $('.top_box .udesc').text(detail.desc);
 
     // 添加问题图片
     if (detail.qimage) {
         $('.content #qimage').attr('src', detail.qimage);
-    } else {
-        $('.content .card .questionImg').css('marginBottom', 0);
+        $('.content .questionImg').css({
+            display: 'flex'
+        });
     }
 
     // 添加问题内容
@@ -111,16 +126,19 @@ function addCommentList() {
                                         </div>
                                         <div class="replayerInfo">
                                             <div class="replayer">
-                                                <span class="name">` + commentList[i].name + `</span>
+                                                <div style="display:flex;align-items:center;">
+                                                    <span class="name">` + commentList[i].name + `</span>
+                                                    <span class="level"></span>
+                                                </div>
                                                 <span class="time">` + (compare(Number(commentList[i].uptime)) ? formatDate(new Date(Number(commentList[i].uptime)), 'hh:mm') :
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) < 30 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) + '天前' :
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
             Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
+                                            <div class="replay">` + commentList[i].aword + `</div>
                                             <div style="display:` + (commentList[i].aimage ? 'block' : 'none') + `;">
                                                 <img class="reImg" src="` + isPicEmpty(commentList[i].aimage) + `" />
                                             </div>
-                                            <div class="replay">` + commentList[i].aword + `</div>
                                             <div class="up">
                                                 <div class='up-action'>
                                                     <i class="iconpraise icon up-icon"></i>
@@ -129,6 +147,27 @@ function addCommentList() {
                                             </div>
                                         </div>
                                     </div>`);
+        if (commentList[i].openid === 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
+            $('.replayer .level').addClass('lv9');
+        } else {
+            if (commentList[i].level == 0) {
+                $('.replayer .level').addClass('lv0');
+            } else if (commentList[i].level < 10) {
+                $('.replayer .level').addClass('lv1');
+            } else if (commentList[i].level < 100) {
+                $('.replayer .level').addClass('lv2');
+            } else if (commentList[i].level < 500) {
+                $('.replayer .level').addClass('lv3');
+            } else if (commentList[i].level < 1000) {
+                $('.replayer .level').addClass('lv4');
+            } else if (commentList[i].level < 2000) {
+                $('.replayer .level').addClass('lv5');
+            } else if (commentList[i].level >= 2000) {
+                $('.replayer .level').addClass('lv6');
+            } else {
+                $('.replayer .level').addClass('lv0');
+            }
+        }
     }
     let list = document.getElementsByClassName('up-icon');
     let nums = document.getElementsByClassName('up-num');
@@ -244,7 +283,7 @@ $('.collectionBtn').click(function () {
 
 // 后退按钮
 $('#backBtn').click(function () {
-    window.history.back();
+    window.location.href = '/page/forum/index.html';
 });
 
 // 点击按钮添加评论
