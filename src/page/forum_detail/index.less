@@ -198,6 +198,7 @@ body {
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             flex: 1;
 
             .uname,
@@ -211,11 +212,13 @@ body {
 
             .uname {
                 color: #444444;
+                height: 21px;
+                line-height: 20px;
             }
 
             .udesc {
-                font-size: 14px;
-                color: #646464;
+                font-size: 12px;
+                color: #999;
             }
         }
     }
@@ -338,7 +341,8 @@ body {
                 font-size: 13px;
                 color: #8590a6;
             }
-            .name{
+
+            .name {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -442,4 +446,19 @@ body {
         opacity: 0;
     }
 }
+// 专属头像框
+.hzhPerson {
+    position: relative;
 
+    &::after {
+        content: '';
+        position: absolute;
+        top: -13px;
+        left: -12px;
+        width: 65px;
+        height: 65px;
+        z-index: 9999;
+        background: url(//ftp.qnets.cn/since/hzh.png) no-repeat center center;
+        background-size: 100% 100%;
+    }
+}

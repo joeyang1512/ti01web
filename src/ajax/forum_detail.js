@@ -32,6 +32,13 @@ export const likeAns = (id) => {
     });
 }
 
+// 取消点赞 回答
+export const unlikeAns = (id) => {
+    return post('/answerh/delete', {
+        aid: id
+    });
+}
+
 // 获取 问题的评论
 export const getComment = (id) => {
     return post('/answer/findByQid', {
