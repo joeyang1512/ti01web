@@ -44,9 +44,23 @@ module.exports = [
   {
     name: 'issueQ',
     title: '发布题目',
+
   },
   {
     name: 'mineQes',
     title: '问答',
+  },
+  {
+    name: 'our',
+    title: '关于我们',
+
+  }, 
+  {
+    name: 'clockIn',
+    title: '打卡'
+  },
+  {
+    name:'pictureToQ',
+    title:'拍照搜题'
   }
 ];
