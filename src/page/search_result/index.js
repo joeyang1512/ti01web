@@ -25,7 +25,11 @@ function mapALLquestion() {
                                             <span class="type">` + resArr[i].type + `</span>
                                         </div>
                                     </div> 
-                                    <div class="item-content">` + resArr[i].word + `</div>
+                                    <div class="item-content">
+                                        <p>` + resArr[i].word + `</p>
+                                        <div class="qimg" style="display:` + (resArr[i].qimage ? 'block' : 'none') + `
+                                        ;background-image:url('` + resArr[i].qimage + `');"></div>
+                                    </div>
                                     <div class="item-foot">
                                         <span class="like">` + setNum(resArr[i].gnum) + ` 点赞</span>
                                         <span class="count">·</span>
@@ -34,9 +38,14 @@ function mapALLquestion() {
                                 </div>`);
     }
     $('#all_list').append(`<div class='empty'>
-                                <img class='empty_img' src='/public/img/empty.png'></img>
-                                <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
-                            </div>`)
+                        <img class='empty_img' src='/public/img/empty.png'></img>
+                        <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
+                    </div>`)
+    $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
+                                <p>Copyright &copy; 2014
+                                -
+                                ` + new Date().getFullYear() + `
+                            </p>`)
     let list = document.getElementsByClassName('list-item');
     for (let j = 0; j < list.length; j++) {
         list[j].onclick = function () {
@@ -57,6 +66,11 @@ function getResQes() {
                                         <img class='empty_img' src='/public/img/empty.png'></img>
                                         <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
                                     </div>`)
+            $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
+                                            <p>Copyright &copy; 2014
+                                            -
+                                            ` + new Date().getFullYear() + `
+                                        </p>`)
         }
     });
 }
@@ -69,4 +83,3 @@ $('#backBtn').click(function () {
 $('.iconadd').click(() => {
     window.location.href = '/page/issueQ/index.html';
 });
-

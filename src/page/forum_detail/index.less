@@ -196,6 +196,9 @@ body {
             margin-left: 10px;
             font-size: 16px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
 
             .uname,
             .udesc {
@@ -230,6 +233,7 @@ body {
 
             img {
                 width: 100%;
+                height: 100%;
                 border-radius: 5px;
             }
         }
@@ -315,6 +319,7 @@ body {
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
+                display: block;
             }
         }
 
@@ -333,8 +338,15 @@ body {
                 font-size: 13px;
                 color: #8590a6;
             }
+            .name{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
 
-            .reImg{
+            .reImg {
                 display: block;
                 width: 50%;
             }
@@ -343,6 +355,7 @@ body {
                 font-size: 15px;
                 line-height: 1.4;
                 word-break: break-word;
+                margin-bottom: 5px;
             }
 
             .up,
@@ -393,7 +406,7 @@ body {
     left: 50%;
     /*图片向左移动自身宽度的50%, 向上移动自身高度的50%。*/
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 100%;
 }
 
 /*遮罩层*/
@@ -429,3 +442,4 @@ body {
         opacity: 0;
     }
 }
+
