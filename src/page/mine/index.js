@@ -13,7 +13,7 @@ sinceListener('about', ourUrl);
 sinceListener('shoreup', mineQesUrl + '?id=1');
 sinceListener('answer', mineQesUrl + '?id=2');
 sinceListener('gain');
-sinceListener('qesBank', pictureToQUrl);
+sinceListener('pictureToQ', pictureToQUrl);
 
 findLoginUser().then((res) => {
     if (res.code == '0') {
