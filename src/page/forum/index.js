@@ -9,14 +9,31 @@ import {
     setNum,
 }
 from '../../../public/js/filters';
-import { sinceListener } from '~/util/sinceui';
-import { mineUrl, topicsUrl, forumUrl } from '../../util/jumpTo'
+import {
+    sinceListener
+} from '~/util/sinceui';
+import {
+    mineUrl,
+    topicsUrl,
+    forumUrl
+} from '../../util/jumpTo'
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
 sinceListener('topics', topicsUrl);
 
 let arr = []; // 问题数组
-getRec();
+let tabList = document.getElementsByClassName('tab');
+let tabVal = JSON.parse(sessionStorage.getItem('tabs'));
+if (tabVal.text == null) {
+    getRec();
+} else {
+    for (let i = 0; i < tabList.length; i++) {
+        tabList[i].className = 'tab';
+    }
+    tabList[tabVal.index].className = 'tab active'
+    getQesByType(tabVal.text);
+}
+
 // 将返回的所有结果渲染到页面上
 function mapALLquestion() {
     for (let i = 0; i < arr.length; i++) {
@@ -57,14 +74,16 @@ function mapALLquestion() {
     }
 }
 
-
-let tabList = document.getElementsByClassName('tab');
 for (let i = 0; i < tabList.length; i++) {
     tabList[i].index = i;
     tabList[i].onclick = function () {
         for (let i = 0; i < tabList.length; i++) {
             tabList[i].className = 'tab';
         }
+        sessionStorage.setItem('tabs', JSON.stringify({
+            text: this.innerText,
+            index: i
+        }));
         this.className = 'tab active'
         getQesByType(this.innerText);
     }
@@ -81,9 +100,14 @@ function getQesByType(type) {
                 mapALLquestion();
             } else {
                 $('#all_list').append(`<div class='empty'>
-                        <img class='empty_img' src='/public/img/empty.png'></img>
-                        <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
-                    </div>`)
+                                            <img class='empty_img' src='/public/img/empty.png'></img>
+                                            <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
+                                        </div>`)
+                $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
+                                                <p>Copyright &copy; 2014
+                                                -
+                                                ` + new Date().getFullYear() + `
+                                            </p>`)
             }
         })
     } else {

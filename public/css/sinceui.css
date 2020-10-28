@@ -1,19 +1,76 @@
 .subjective {
-  color:rgba(237,27,36, 0.75);
+  color: rgba(237, 27, 36, 0.75);
 }
-*{
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* 去除a标签在移动端点击时的高亮 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* 去除a标签在移动端点击时的高亮 */
 }
-a{
-  text-decoration: none; /* 去除a标签默认下划线 */
+
+a {
+  text-decoration: none;
+  /* 去除a标签默认下划线 */
 }
 
 /* 高亮搜索词 */
-em{
+em {
   color: #f25d8e;
   font-style: normal;
   font-weight: 400;
 }
+
 .subjectiveb {
-  background-color:rgba(237,27,36, 0.75);
+  background-color: rgba(237, 27, 36, 0.75);
+}
+
+/* 等级相关 */
+.level {
+  margin: 0 10px;
+  flex: 1;
+  max-width: 28px;
+  min-width: 28px;
+  height: 16px;
+  background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/asserts/sprite-690be8a6ea.png);
+  display: inline-block;
+  line-height: 16px;
+}
+
+.lv9 {
+  background-position: -261px -490px !important;
+}
+
+.lv8 {
+  background-position: -377px -536px;
+}
+
+.lv7 {
+  background-position: -319px -490px;
+}
+
+.lv6 {
+  background-position: -377px -490px;
+}
+
+.lv5 {
+  background-position: -261px -536px;
+}
+
+.lv4 {
+  background-position: -319px -536px;
+}
+
+.lv3 {
+  background-position: -365px -438px;
+}
+
+.lv2 {
+  background-position: -148px -139px;
+}
+
+.lv1 {
+  background-position: -148px -185px;
+}
+
+.lv0 {
+  background-position: -148px -231px;
 }

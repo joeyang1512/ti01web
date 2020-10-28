@@ -145,5 +145,5 @@ $('#history_list').on('click', '#clearBtn', (e) => {
 
 let backBtn = document.getElementById('backBtn');
 backBtn.onclick = function () {
-    window.history.back();
+    window.location.href = document.referrer;
 }
