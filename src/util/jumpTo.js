@@ -39,6 +39,10 @@ export const issueQUrl = host + 'to/issueQ';
 export const toissueQ = () => {
       window.location.href = issueQUrl;
   }
+export const mineQesUrl = host + 'to/mineQes';
+export const tomineQes = () => {
+      window.location.href = mineQesUrl;
+  }
 export const ourUrl = host + 'to/our';
 export const toour = () => {
       window.location.href = ourUrl;

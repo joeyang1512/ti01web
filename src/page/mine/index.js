@@ -1,20 +1,19 @@
 import './index.less';
 import { sinceListener } from '~/util/sinceui';
-import { forumUrl, mineUrl, topicsUrl } from '~/util/jumpTo';
+import { forumUrl, mineUrl, topicsUrl, ourUrl, pictureToQUrl, mineQesUrl, clockInUrl } from '~/util/jumpTo';
 import { findLoginUser } from '~/ajax/user';
 import { getShoreup } from '~/ajax/shoreup';
 import { getUserQues } from '~/ajax/question';
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl)
 sinceListener('mine', mineUrl);
-sinceListener('report');
+sinceListener('report', clockInUrl);
 sinceListener('rank');
-sinceListener('about');
-sinceListener('shoreup');
-sinceListener('answer');
+sinceListener('about', ourUrl);
+sinceListener('shoreup', mineQesUrl + '?id=1');
+sinceListener('answer', mineQesUrl + '?id=2');
 sinceListener('gain');
-sinceListener('qesBank', '/page/topics/index.html');
-sinceListener('forum', '/page/forum/index.html');
+sinceListener('qesBank', pictureToQUrl);
 
 findLoginUser().then((res) => {
     if (res.code == '0') {

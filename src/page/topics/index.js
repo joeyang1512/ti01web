@@ -1,5 +1,5 @@
 import './index.less';
-import { forumUrl, mineUrl, topicsUrl } from '~/util/jumpTo';
+import { forumUrl, mineUrl, topicsUrl, mineQesUrl } from '~/util/jumpTo';
 import { sinceListener } from '~/util/sinceui';
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
@@ -10,3 +10,4 @@ sinceListener('link');
 sinceListener('china');
 sinceListener('os');
 sinceListener('all');
+sinceListener('todayTopic', mineQesUrl + '?id=2')
