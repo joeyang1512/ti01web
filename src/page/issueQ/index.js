@@ -1,7 +1,8 @@
 import './index.less';
-import { addQuestion, searchQustion, answerQustion } from '~/ajax/issueQ.js';
+import { addQuestion, searchQustion, answerQustion, answer, ask } from '~/ajax/issueQ.js';
 import { getQueryVariable } from '../../../public/js/filters';
 import { loading, toastTip } from '../../util/sinceui'
+
 let pinglun = document.getElementById('pinglun');// 评论模块
 let kemu = document.querySelector('.weui-cells');// 选择科目模块
 let id = decodeURI(getQueryVariable('id'));// 接受url传来的id
@@ -20,7 +21,7 @@ let title = document.querySelector('.weui-media-box__title'),
     img = document.querySelector('.weui-media-box__thumb'),
     issueTitle = document.querySelector('.issue');// 评论内容
 
-let load = loading('加载中');
+let load = loading('上传中');
 
 // 监听输入字数
 body.oninput = function () {
@@ -29,7 +30,8 @@ body.oninput = function () {
 
 // 取消返回原本页面
 cancel.onclick = function () {
-    load(false);// 隐藏加载loading
+    
+    // load(false);// 隐藏加载loading
     window.history.back(-1);
 }
 
@@ -77,10 +79,13 @@ if (id === 'false') {// 问题
             let type = type1.value,
                 word = body.value;
             addQuestion({ word, file, type }).then(res => {
-                console.log(res);
+                // console.log(res);
                 if (res.code === '0') {
-                    loading(false);// 隐藏加载loading
-                    window.history.back(-1);
+                    ask().then(res => {
+                        console.log(res);
+                    })
+                    load(false);// 隐藏加载loading
+                    // window.history.back(-1);
                 } else {
                     toastTip(true, res.errMsg);
                     setTimeout(() => {
@@ -98,9 +103,10 @@ if (id === 'false') {// 问题
     kemu.style.display = 'none';
     issueTitle.innerText = '评论';
     searchQustion(id).then(res => {
-        title.innerText = res.data.type;
-        desc.innerText = res.data.word;
-        img.src = res.data.qimage;
+        console.log(res);
+        title.innerText = res.data.question.name;
+        desc.innerText = res.data.question.word;
+        img.src = res.data.question.qimage;
     });
     // 点击发布评论
     next.onclick = function () {
@@ -121,6 +127,9 @@ if (id === 'false') {// 问题
             answerQustion(aword, id, file).then(res => {
 
                 if (res.code === '0') {
+                    answer().then(res => {// 发送回答加经验
+                        console.log(res);
+                    })
                     loading(false);// 隐藏加载loading
                     window.history.back(-1);
                 } else {
