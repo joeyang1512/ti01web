@@ -86,3 +86,16 @@ let compareDate = (timestamp, day = 0) => {
 export {
     compareDate
 }
+
+// 文字过滤 防止评论恶意xss攻击
+let encode = function (str) { // 转义过滤
+    if (!str || str.length === 0) return '';
+    str = str.replace(/>/gm, '&gt;');
+    str = str.replace(/</gm, '&lt;');
+    str = str.replace(/"/gm, '&quot;');
+    str = str.replace(/'/gm, '&apos;');
+    return str;
+}
+export {
+    encode
+}

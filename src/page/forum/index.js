@@ -7,6 +7,7 @@ import {
 import {
     isPicEmpty,
     setNum,
+    encode
 }
 from '../../../public/js/filters';
 import {
@@ -46,7 +47,7 @@ function mapALLquestion() {
                                         </div>
                                     </div> 
                                     <div class="item-content">
-                                        <p>` + arr[i].word + `</p>
+                                        <p>` + encode(arr[i].word) + `</p>
                                         <div class="qimg" style="display:` + (arr[i].qimage ? 'block' : 'none') + `
                                         ;background-image:url('` + arr[i].qimage + `');"></div>
                                     </div>

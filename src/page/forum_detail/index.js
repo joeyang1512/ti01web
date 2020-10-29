@@ -17,10 +17,10 @@ import {
     isPicEmpty,
     setNum,
     getQueryVariable,
-    compareDate
+    compareDate,
+    encode
 }
 from '../../../public/js/filters'
-
 let id = getQueryVariable('id');
 let detail = [];
 let commentList = [];
@@ -107,7 +107,7 @@ function addDtailHtml() {
     }
 
     // 添加问题内容
-    $('.content .textarea').html(detail.question.word);
+    $('.content .textarea').html(encode(detail.question.word));
 
     // 添加时间
     $('.foot .time').text('发布于 ' + formatDate(new Date(Number(detail.question.uptime)), 'yyyy-MM-dd'));
@@ -149,7 +149,7 @@ function addCommentList() {
             Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
             Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
-                                            <div class="replay">` + commentList[i].answer.aword + `</div>
+                                            <div class="replay">` + encode(commentList[i].answer.aword) + `</div>
                                             <div style="display:` + (commentList[i].answer.aimage ? 'block' : 'none') + `;">
                                                 <img class="reImg" src="` + isPicEmpty(commentList[i].answer.aimage) + `" />
                                             </div>
@@ -196,8 +196,6 @@ function addCommentList() {
             $(levelList[i]).text('Lv6');
         }
     }
-
-    console.log(levelList);
 
     let list = document.getElementsByClassName('up-icon');
     let nums = document.getElementsByClassName('up-num');
