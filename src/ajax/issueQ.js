@@ -14,3 +14,11 @@ export const searchQustion = (id) => {
 export const answerQustion = (aword, qid, file) => {
     return post('/answer/add', { aword, qid, file });
 }
+// 首次提问问题
+export const ask = () => {
+    return post('/gain/ask');
+}
+// 首次回答问题
+export const answer = () => {
+    return post('gain/answer');
+}
