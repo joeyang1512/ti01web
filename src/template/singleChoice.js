@@ -1,9 +1,10 @@
 
 function single(Element, data, index) {
-    console.log(typeof data[index].choice);
-    console.log(data[index].choice);
-    // data[index].choice = JSON.parse(data[index].choice);
-    data[index].choice = ['你居然会相信那个小滑头来接你', '我知道有一天它会在一个', '万众瞩目的情况下出现', '身披金甲圣衣脚踏七色云彩来娶我'];
+    // console.log(typeof data[index].choice);
+    // console.log(data[index].choice);
+    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join('').replace(/\'/g, '').split('');
+    // console.log(data[index].choice);
+    // data[index].choice = ['你居然会相信那个小滑头来接你', '我知道有一天它会在一个', '万众瞩目的情况下出现', '身披金甲圣衣脚踏七色云彩来娶我'];
     let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none'];
     let src = data[index].image ? `src=${data[index].image}` : '';
     arr[data[index].answer] = 'checked';
