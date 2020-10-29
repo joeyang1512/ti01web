@@ -33,7 +33,7 @@ function setUserInfo(_data) {
         console.log(res);
         if (res.code == '0') {
             // console.log(res.data.size());
-            document.getElementById('shoreup').innerHTML = res.data.length;
+            document.getElementById('shoreupnum').innerHTML = res.data.length;
         } 
     });
     getUserQues().then((res) => {
