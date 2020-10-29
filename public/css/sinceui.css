@@ -24,53 +24,57 @@ em {
 }
 
 /* 等级相关 */
-.level {
+.level { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 10px;
-  flex: 1;
   max-width: 28px;
   min-width: 28px;
-  height: 16px;
-  background-image: url(//s1.hdslb.com/bfs/static/jinkela/search/asserts/sprite-690be8a6ea.png);
-  display: inline-block;
-  line-height: 16px;
-}
-
-.lv9 {
-  background-position: -261px -490px !important;
-}
-
-.lv8 {
-  background-position: -377px -536px;
-}
-
-.lv7 {
-  background-position: -319px -490px;
+  height: 15px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 6px;
 }
 
 .lv6 {
-  background-position: -377px -490px;
+  background-color: #F30004;
 }
 
 .lv5 {
-  background-position: -261px -536px;
+  background-color: #FD6E06;
 }
 
 .lv4 {
-  background-position: -319px -536px;
+  background-color: #FFB478;
 }
 
 .lv3 {
-  background-position: -365px -438px;
+  background-color: #93D2E6;
 }
 
 .lv2 {
-  background-position: -148px -139px;
+  background-color: #95E0B9;
 }
 
 .lv1 {
-  background-position: -148px -185px;
+  background-color: #BEBEBE;
 }
 
 .lv0 {
-  background-position: -148px -231px;
+  background-color: #BFBFBF;
+}
+
+.vip{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  max-width: 46px;
+  min-width: 46px;
+  height: 15px;
+  background-color: #fb7299;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 2px;
 }
