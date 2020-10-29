@@ -122,6 +122,7 @@ topic.onclick = function () {
 backBtn.onclick = function () {
   if (!flag) {
     topic.click();
+    flag = true;
     return;
   }
   window.history.back(-1);
