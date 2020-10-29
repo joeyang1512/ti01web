@@ -64,4 +64,4 @@ function toastTip(tip) {
             document.body.removeChild(dv);
         }
     }
-}
+};
