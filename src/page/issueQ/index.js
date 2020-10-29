@@ -3,6 +3,7 @@ import { addQuestion, searchQustion, answerQustion, answer, ask } from '~/ajax/i
 import { getQueryVariable } from '../../../public/js/filters';
 import { loading, toastTip } from '../../util/sinceui'
 
+
 let pinglun = document.getElementById('pinglun');// 评论模块
 let kemu = document.querySelector('.weui-cells');// 选择科目模块
 let id = decodeURI(getQueryVariable('id'));// 接受url传来的id
@@ -85,7 +86,7 @@ if (id === 'false') {// 问题
                         console.log(res);
                     })
                     load(false);// 隐藏加载loading
-                    // window.history.back(-1);
+                    window.history.back(-1);
                 } else {
                     toastTip(true, res.errMsg);
                     setTimeout(() => {
@@ -103,7 +104,7 @@ if (id === 'false') {// 问题
     kemu.style.display = 'none';
     issueTitle.innerText = '评论';
     searchQustion(id).then(res => {
-        console.log(res);
+        // console.log(res);
         title.innerText = res.data.question.name;
         desc.innerText = res.data.question.word;
         img.src = res.data.question.qimage;
@@ -120,17 +121,18 @@ if (id === 'false') {// 问题
             return;
         }
 
-        loading(true);// 显示加载loading
+        load(true);// 显示加载loading
 
         if (flag) {
             let aword = body.value;
+            console.log(aword, id, file);
             answerQustion(aword, id, file).then(res => {
-
+                console.log(res);
                 if (res.code === '0') {
                     answer().then(res => {// 发送回答加经验
                         console.log(res);
                     })
-                    loading(false);// 隐藏加载loading
+                    load(false);// 隐藏加载loading
                     window.history.back(-1);
                 } else {
                     toastTip(true, res.errMsg);
