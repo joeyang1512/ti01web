@@ -13,7 +13,7 @@ sinceListener('about', ourUrl);
 sinceListener('shoreup', mineQesUrl + '?id=1');
 sinceListener('answer', mineQesUrl + '?id=2');
 sinceListener('gain');
-sinceListener('qesBank', pictureToQUrl);
+sinceListener('pictureToQ', pictureToQUrl);
 
 findLoginUser().then((res) => {
     if (res.code == '0') {
@@ -33,14 +33,14 @@ function setUserInfo(_data) {
         console.log(res);
         if (res.code == '0') {
             // console.log(res.data.size());
-            document.getElementById('shoreup').innerHTML = res.data.size();
+            document.getElementById('shoreup').innerHTML = res.data.length;
         } 
     });
     getUserQues().then((res) => {
         console.log(res);
         if (res.code == '0') {
             // console.log(res.data.size());
-            document.getElementById('question').innerHTML = res.data.size();
+            document.getElementById('question').innerHTML = res.data.length;
         } 
     });
   }

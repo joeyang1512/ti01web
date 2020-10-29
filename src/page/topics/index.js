@@ -10,4 +10,4 @@ sinceListener('link');
 sinceListener('china');
 sinceListener('os');
 sinceListener('all');
-sinceListener('todayTopic', mineQesUrl + '?id=2')
+sinceListener('todayQuestion', mineQesUrl + '?id=3')

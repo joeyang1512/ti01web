@@ -8,7 +8,8 @@ import {
     getIsCollect,
     deleteLike,
     deleteCollect,
-    likeAns
+    likeAns,
+    unlikeAns
 } from '~/ajax/forum_detail'
 
 import {
@@ -22,7 +23,6 @@ from '../../../public/js/filters'
 
 let id = getQueryVariable('id');
 let detail = [];
-let userInfo = [];
 let commentList = [];
 // 获取数据
 getDetail(id).then((res) => {
@@ -54,53 +54,69 @@ getComments();
 function addDtailHtml() {
     // 添加用户头像
     $('.top_box .uimg').css({
-        'backgroundImage': 'url(' + isPicEmpty(detail.image) + ')'
+        'backgroundImage': 'url(' + isPicEmpty(detail.question.image) + ')'
     })
+    
 
     // 添加用户名
-    // oIaLN5_r8bz-guPhHQgfO3nAVQk4
-    $('.top_box .uname').text(detail.name);
-    if (detail.openid == 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
-        $('.top_box .level').addClass('lv9')
-    } else {
-        if (detail.level == 0) {
-            $('.top_box .level').addClass('lv0');
-        } else if (detail.level < 10) {
-            $('.top_box .level').addClass('lv1');
-        } else if (detail.level < 100) {
-            $('.top_box .level').addClass('lv2');
-        } else if (detail.level < 500) {
-            $('.top_box .level').addClass('lv3');
-        } else if (detail.level < 1000) {
-            $('.top_box .level').addClass('lv4');
-        } else if (detail.level < 2000) {
-            $('.top_box .level').addClass('lv5');
-        } else if (detail.level >= 2000) {
-            $('.top_box .level').addClass('lv6');
-        } else {
-            $('.top_box .level').addClass('lv0');
-        }
+    $('.top_box .uname').text(detail.question.name);
+    if (detail.question.openid == 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
+        $('.top_box .uimg').addClass('hzhPerson');
+        $('.top_box .uname').css({
+            color: 'rgb(251, 114, 153)'
+        })
+        $('.top_box .vip').css({
+            display: 'flex'
+        });
+        $('.top_box .udesc').text('森思内部员工');
     }
 
+    if (detail.level == 0) {
+        $('.top_box .level').addClass('lv0');
+        $('.top_box .level').text('Lv0');
+    } else if (detail.level < 10) {
+        $('.top_box .level').addClass('lv1');
+        $('.top_box .level').text('Lv1');
+    } else if (detail.level < 100) {
+        $('.top_box .level').addClass('lv2');
+        $('.top_box .level').text('Lv2');
+    } else if (detail.level < 500) {
+        $('.top_box .level').addClass('lv3');
+        $('.top_box .level').text('Lv3');
+    } else if (detail.level < 1000) {
+        $('.top_box .level').addClass('lv4');
+        $('.top_box .level').text('Lv4');
+    } else if (detail.level < 2000) {
+        $('.top_box .level').addClass('lv5');
+        $('.top_box .level').text('Lv5');
+    } else if (detail.level >= 2000) {
+        $('.top_box .level').addClass('lv6');
+        $('.top_box .level').text('Lv6');
+    } else {
+        $('.top_box .level').addClass('lv0');
+        $('.top_box .level').text('Lv0');
+    }
+
+
     // 添加用户个签 // 此功能 以后再接入
-    // $('.top_box .udesc').text(detail.desc);
+    // $('.top_box .udesc').text(detail.question.desc);
 
     // 添加问题图片
-    if (detail.qimage) {
-        $('.content #qimage').attr('src', detail.qimage);
+    if (detail.question.qimage) {
+        $('.content #qimage').attr('src', detail.question.qimage);
         $('.content .questionImg').css({
             display: 'flex'
         });
     }
 
     // 添加问题内容
-    $('.content .textarea').html(detail.word);
+    $('.content .textarea').html(detail.question.word);
 
     // 添加时间
-    $('.foot .time').text('发布于 ' + formatDate(new Date(Number(detail.uptime)), 'yyyy-MM-dd'));
+    $('.foot .time').text('发布于 ' + formatDate(new Date(Number(detail.question.uptime)), 'yyyy-MM-dd'));
 
     // 添加科目
-    $('.foot .type').text(detail.type);
+    $('.foot .type').text(detail.question.type);
 
     // 点击问题图片 放大
     $('#qimage').click(function () {
@@ -110,8 +126,8 @@ function addDtailHtml() {
         toBigImg(); // 变大函数
     })
 
-    $('#likeNum').text('点赞 ' + setNum(detail.gnum));
-    $('#commentNum').text('评论 ' + setNum(detail.cnum));
+    $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
+    $('#commentNum').text('评论 ' + setNum(detail.question.cnum));
 }
 let compare = compareDate;
 
@@ -122,65 +138,80 @@ function addCommentList() {
     for (let i = 0; i < commentList.length; i++) {
         $('.comment .list').append(`<div class="list-item">
                                         <div class="replayerImg">
-                                            <img src="` + isPicEmpty(commentList[i].image) + `" alt="">
+                                            <img src="` + isPicEmpty(commentList[i].answer.image) + `" alt="">
                                         </div>
                                         <div class="replayerInfo">
                                             <div class="replayer">
                                                 <div style="display:flex;align-items:center;">
-                                                    <span class="name">` + commentList[i].name + `</span>
+                                                    <span class="name">` + commentList[i].answer.name + `</span>
                                                     <span class="level"></span>
+                                                    <span class="vip">大会员</span>
                                                 </div>
-                                                <span class="time">` + (compare(Number(commentList[i].uptime)) ? formatDate(new Date(Number(commentList[i].uptime)), 'hh:mm') :
-            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) < 30 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24)) + '天前' :
-            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
-            Math.ceil((new Date().getTime() - commentList[i].uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
+                                                <span class="time">` + (compare(Number(commentList[i].answer.uptime)) ? formatDate(new Date(Number(commentList[i].answer.uptime)), 'hh:mm') :
+            Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24)) < 30 ? Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24)) + '天前' :
+            Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
+            Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
-                                            <div class="replay">` + commentList[i].aword + `</div>
-                                            <div style="display:` + (commentList[i].aimage ? 'block' : 'none') + `;">
-                                                <img class="reImg" src="` + isPicEmpty(commentList[i].aimage) + `" />
+                                            <div class="replay">` + commentList[i].answer.aword + `</div>
+                                            <div style="display:` + (commentList[i].answer.aimage ? 'block' : 'none') + `;">
+                                                <img class="reImg" src="` + isPicEmpty(commentList[i].answer.aimage) + `" />
                                             </div>
                                             <div class="up">
                                                 <div class='up-action'>
                                                     <i class="iconpraise icon up-icon"></i>
-                                                    <span class="up-num">` + commentList[i].gnum + `</span>
+                                                    <span class="up-num">` + commentList[i].answer.gnum + `</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>`);
-        if (commentList[i].openid === 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
-            $('.replayer .level').addClass('lv9');
-        } else {
-            if (commentList[i].level == 0) {
-                $('.replayer .level').addClass('lv0');
-            } else if (commentList[i].level < 10) {
-                $('.replayer .level').addClass('lv1');
-            } else if (commentList[i].level < 100) {
-                $('.replayer .level').addClass('lv2');
-            } else if (commentList[i].level < 500) {
-                $('.replayer .level').addClass('lv3');
-            } else if (commentList[i].level < 1000) {
-                $('.replayer .level').addClass('lv4');
-            } else if (commentList[i].level < 2000) {
-                $('.replayer .level').addClass('lv5');
-            } else if (commentList[i].level >= 2000) {
-                $('.replayer .level').addClass('lv6');
-            } else {
-                $('.replayer .level').addClass('lv0');
-            }
+        if (commentList[i].answer.openid === 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
+            $('.replayer .name').css({
+                color: 'rgb(251, 114, 153)'
+            })
+            $('.replayer .vip').css({
+                display: 'flex'
+            })
         }
+
+        if (commentList[i].level == 0) {
+            $('.replayer .level').addClass('lv0');
+        } else if (commentList[i].level < 10) {
+            $('.replayer .level').addClass('lv1');
+        } else if (commentList[i].level < 100) {
+            $('.replayer .level').addClass('lv2');
+        } else if (commentList[i].level < 500) {
+            $('.replayer .level').addClass('lv3');
+        } else if (commentList[i].level < 1000) {
+            $('.replayer .level').addClass('lv4');
+        } else if (commentList[i].level < 2000) {
+            $('.replayer .level').addClass('lv5');
+        } else if (commentList[i].level >= 2000) {
+            $('.replayer .level').addClass('lv6');
+        } else {
+            $('.replayer .level').addClass('lv0');
+        }
+
     }
     let list = document.getElementsByClassName('up-icon');
     let nums = document.getElementsByClassName('up-num');
     for (let j = 0; j < list.length; j++) {
-        commentList[j].isLike = false;
         list[j].onclick = function () {
-            if (!commentList[j].isLike) {
-                likeAns(commentList[j].id).then((res) => {
+            if (commentList[j].flag == -1) {
+                likeAns(commentList[j].answer.id).then((res) => {
                     if (res.code == '0') {
-                        commentList[j].gnum++;
-                        $(nums[j]).text(setNum(commentList[j].gnum));
-                        commentList[j].isLike = true;
-                        $(this).removeClass('iconpraise').addClass('iconpraise_fill'); // 移除收藏后的样式
+                        commentList[j].answer.gnum++;
+                        $(nums[j]).text(setNum(commentList[j].answer.gnum));
+                        commentList[j].flag = 0;
+                        $(this).removeClass('iconpraise').addClass('iconpraise_fill');
+                    }
+                })
+            } else {
+                unlikeAns(commentList[j].answer.id).then(res => {
+                    if (res.code == '0') {
+                        commentList[j].answer.gnum--;
+                        $(nums[j]).text(setNum(commentList[j].answer.gnum));
+                        commentList[j].flag = -1;
+                        $(this).removeClass('iconpraise_fill').addClass('iconpraise');
                     }
                 })
             }
@@ -219,13 +250,13 @@ function getIsLikeQ() {
     getIsLike(id).then(res => {
         if (res.code == '0') {
             isLike = true;
-            $('#likeNum').text('点赞 ' + setNum(detail.gnum));
+            $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
             $('.footer .likeBtn').addClass('isLike'); // 添加点赞后的样式
         } else {
             isLike = false;
             $('.footer .likeBtn').removeClass('isLike'); // 删除点赞后的样式
         }
-        $('#likeNum').text('点赞 ' + setNum(detail.gnum));
+        $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
     })
 }
 
