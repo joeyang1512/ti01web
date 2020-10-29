@@ -56,7 +56,7 @@ function addDtailHtml() {
     $('.top_box .uimg').css({
         'backgroundImage': 'url(' + isPicEmpty(detail.question.image) + ')'
     })
-    
+
 
     // 添加用户名
     $('.top_box .uname').text(detail.question.name);
@@ -89,12 +89,9 @@ function addDtailHtml() {
     } else if (detail.level < 2000) {
         $('.top_box .level').addClass('lv5');
         $('.top_box .level').text('Lv5');
-    } else if (detail.level >= 2000) {
+    } else {
         $('.top_box .level').addClass('lv6');
         $('.top_box .level').text('Lv6');
-    } else {
-        $('.top_box .level').addClass('lv0');
-        $('.top_box .level').text('Lv0');
     }
 
 
@@ -175,26 +172,36 @@ function addCommentList() {
 
         if (commentList[i].level == 0) {
             $('.replayer .level').addClass('lv0');
+            $('.replayer .level').text('Lv0');
         } else if (commentList[i].level < 10) {
             $('.replayer .level').addClass('lv1');
+            $('.replayer .level').text('Lv1');
         } else if (commentList[i].level < 100) {
             $('.replayer .level').addClass('lv2');
+            $('.replayer .level').text('Lv2');
         } else if (commentList[i].level < 500) {
             $('.replayer .level').addClass('lv3');
+            $('.replayer .level').text('Lv3');
         } else if (commentList[i].level < 1000) {
             $('.replayer .level').addClass('lv4');
+            $('.replayer .level').text('Lv4');
         } else if (commentList[i].level < 2000) {
             $('.replayer .level').addClass('lv5');
-        } else if (commentList[i].level >= 2000) {
-            $('.replayer .level').addClass('lv6');
+            $('.replayer .level').text('Lv5');
         } else {
-            $('.replayer .level').addClass('lv0');
+            $('.replayer .level').addClass('lv6');
+            $('.replayer .level').text('Lv6');
         }
 
     }
     let list = document.getElementsByClassName('up-icon');
     let nums = document.getElementsByClassName('up-num');
     for (let j = 0; j < list.length; j++) {
+        if (commentList[j].flag == -1) {
+            $(list[j]).removeClass('iconpraise_fill').addClass('iconpraise');
+        } else {
+            $(list[j]).removeClass('iconpraise').addClass('iconpraise_fill');
+        }
         list[j].onclick = function () {
             if (commentList[j].flag == -1) {
                 likeAns(commentList[j].answer.id).then((res) => {
@@ -250,7 +257,6 @@ function getIsLikeQ() {
     getIsLike(id).then(res => {
         if (res.code == '0') {
             isLike = true;
-            $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
             $('.footer .likeBtn').addClass('isLike'); // 添加点赞后的样式
         } else {
             isLike = false;
@@ -281,14 +287,14 @@ $('.footer .likeBtn').click(function () {
     if (isLike == true) {
         deleteLike(id).then(res => {
             if (res.code == '0') {
-                detail.gnum--;
+                detail.question.gnum--;
                 getIsLikeQ();
             }
         })
     } else {
         likeQes(id).then((res) => {
             if (res.code == '0') {
-                detail.gnum++;
+                detail.question.gnum++;
                 getIsLikeQ();
             }
         })
