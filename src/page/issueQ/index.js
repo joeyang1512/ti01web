@@ -124,9 +124,9 @@ if (id === 'false') {// 问题
         load(true);// 显示加载loading
 
         if (flag) {
-            let aword = body.value;
-            console.log(aword, id, file);
-            answerQustion(aword, id, file).then(res => {
+            let word = body.value;
+            // console.log(word, id, file);
+            answerQustion(word, id, file).then(res => {
                 console.log(res);
                 if (res.code === '0') {
                     answer().then(res => {// 发送回答加经验
