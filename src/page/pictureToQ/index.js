@@ -1,6 +1,8 @@
 import './index.less';
 import { getByFile } from '../../ajax/pictureToQ';
-import { loading } from '../../util/sinceui'
+import { loading, toastTip } from '../../util/sinceui';
+import { single } from '../../template/singleChoice';
+import { multiple } from '../../template/multipleChoice'
 let file = null;
 let input = document.querySelector('#fileSelect');
 let timus = null;
@@ -17,12 +19,17 @@ input.onchange = function () {
   file = input.files[0];
   console.log(file);
   getByFile(file).then(res => {
+    console.log(res);
     toast(false);
     if (res.code == 0) {
       timus = res.data;
       changePage(res.data);
     } else {
-
+      let toast = toastTip(res.errMsg);
+      toast(true);
+      setTimeout(() => {
+        toast(false);
+      }, 700);
     }
 
   });
@@ -74,7 +81,13 @@ topic.onclick = function () {
   listOfTi.forEach((item, index) => {
     item.onclick = function () {
       flag = false;
-      let src = '', str = '';
+      if (timus[index].type === 1) {
+        single(body, timus, index);
+      } else {
+        multiple(body, timus, index);
+      }
+
+      /* let src = '', str = '';
       timus[index].image ? 'src=' + timus[index].image : null;
       let arr = ['none', 'none'];
       arr[timus[index].answer] = 'checked';
@@ -101,7 +114,7 @@ topic.onclick = function () {
               </label>
               <img src="../../../public/img/1.jpg" alt="" class="img">
             </div>`
-      body.innerHTML = str;
+      body.innerHTML = str; */
     }
   })
 }

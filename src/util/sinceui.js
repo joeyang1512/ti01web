@@ -26,10 +26,10 @@ function loading(tip) {
     let dv = document.createElement('div');
     dv.innerHTML =
         `<div id="loadingToast" >
-    <div class="weui-mask_transparent" style="width: 100vw;height: 100vh;position: absolute; top: 0;z-index: 999;"></div>
-    <div class="weui-toast" >
+    <div class="weui-mask_transparent" style="width: 100vw;height: 100vh;position: absolute; top: 0;z-index: 999;opacity:0.5;background-color:#eee"></div>
+    <div class="weui-toast" style="height:120px;">
         <i class="weui-loading weui-icon_toast" ></i>
-        <p class="weui-toast__content">搜索中</p>
+        <p class="weui-toast__content">${tip}</p>
     </div>
   </div>`;
     return (flag) => {
@@ -38,7 +38,7 @@ function loading(tip) {
             document.body.appendChild(dv);
         } else {
             document.body.removeChild(dv);
-        }    
+        }
     }
 }
 
