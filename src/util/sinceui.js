@@ -29,7 +29,7 @@ function loading(tip) {
     <div class="weui-mask_transparent" style="width: 100vw;height: 100vh;position: absolute; top: 0;z-index: 999;"></div>
     <div class="weui-toast" >
         <i class="weui-loading weui-icon_toast" ></i>
-        <p class="weui-toast__content">搜索中</p>
+        <p class="weui-toast__content">${tip}</p>
     </div>
   </div>`;
     return (flag) => {
