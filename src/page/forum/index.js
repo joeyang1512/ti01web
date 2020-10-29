@@ -24,7 +24,7 @@ sinceListener('topics', topicsUrl);
 let arr = []; // 问题数组
 let tabList = document.getElementsByClassName('tab');
 let tabVal = JSON.parse(sessionStorage.getItem('tabs'));
-if (tabVal.text == null) {
+if (tabVal == null) {
     getRec();
 } else {
     for (let i = 0; i < tabList.length; i++) {

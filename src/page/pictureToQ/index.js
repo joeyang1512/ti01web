@@ -1,5 +1,6 @@
 import './index.less';
 import { getByFile } from '../../ajax/pictureToQ';
+import { loading } from '../../util/sinceui'
 let file = null;
 let input = document.querySelector('#fileSelect');
 let timus = null;
@@ -10,21 +11,28 @@ let timu = document.querySelector('.body');
 let str = '';
 let flag = true;
 input.onchange = function () {
-    console.log('onchange')
-    file = input.files[0];
-    console.log(file);
-    getByFile(file).then(res => {
-        console.log(res)
-        timus = res.data;
-        changePage(res.data);
-    });
+  let toast = loading('搜索中');
+  toast(true);
+  console.log('onchange')
+  file = input.files[0];
+  console.log(file);
+  getByFile(file).then(res => {
+    toast(false);
+    if (res.code == 0) {
+      timus = res.data;
+      changePage(res.data);
+    } else {
+
+    }
+
+  });
 };
 
 function changePage(data) {
-    for (let i = 0; i < data.length; i++) {
-        let flag = Boolean(data[i].img),
-            imgSrc = flag ? 'src=' + data[i].img : null;
-        str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id}>
+  for (let i = 0; i < data.length; i++) {
+    let flag = Boolean(data[i].img),
+      imgSrc = flag ? 'src=' + data[i].img : null;
+    str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id}>
 
         <div class="weui-media-box__bd">
           <h4 class="weui-media-box__title">${data[i].title}</h4>
@@ -34,43 +42,43 @@ function changePage(data) {
           <img class="weui-media-box__thumb" alt="" ${imgSrc}>
         </div>
       </a>`
-    }
-    body.innerHTML = str;
-    camera.className = 'iconcamera';
-    topic.className = 'iconactivity_fill';
-    topic.click();
+  }
+  body.innerHTML = str;
+  camera.className = 'iconcamera';
+  topic.className = 'iconactivity_fill';
+  topic.click();
 }
 camera.onclick = function () {
-    body.innerHTML = `<div class="container">
+  body.innerHTML = `<div class="container">
     <label for="fileSelect">
       <i class="iconcamera_fill camera" style="font-size: 80px;"></i>
     </label>
   </div>`;
-    camera.className = 'iconcamera_fill';
-    topic.className = 'iconactivity';
+  camera.className = 'iconcamera_fill';
+  topic.className = 'iconactivity';
 }
 topic.onclick = function () {
-    if (!str) {
-        let toast = document.getElementById('toast');
-        toast.style.display = 'block';
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 1000);
+  if (!str) {
+    let toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 1000);
 
-    }
-    body.innerHTML = str;
-    camera.className = 'iconcamera';
-    topic.className = 'iconactivity_fill';
+  }
+  body.innerHTML = str;
+  camera.className = 'iconcamera';
+  topic.className = 'iconactivity_fill';
 
-    let listOfTi = document.querySelectorAll('.listOfTi');
-    listOfTi.forEach((item, index) => {
-        item.onclick = function () {
-            flag = false;
-            let src = '', str = '';
-            timus[index].image ? 'src=' + timus[index].image : null;
-            let arr = ['none', 'none'];
-            arr[timus[index].answer] = 'checked';
-            str = `<div class="weui-cells__title">${timus[index].title}</div>
+  let listOfTi = document.querySelectorAll('.listOfTi');
+  listOfTi.forEach((item, index) => {
+    item.onclick = function () {
+      flag = false;
+      let src = '', str = '';
+      timus[index].image ? 'src=' + timus[index].image : null;
+      let arr = ['none', 'none'];
+      arr[timus[index].answer] = 'checked';
+      str = `<div class="weui-cells__title">${timus[index].title}</div>
             <div class="weui-cells weui-cells_radio">
               <label class="weui-cell weui-check__label" for="x11">
                 <div class="weui-cell__bd">
@@ -93,15 +101,15 @@ topic.onclick = function () {
               </label>
               <img src="../../../public/img/1.jpg" alt="" class="img">
             </div>`
-            body.innerHTML = str;
-        }
-    })
+      body.innerHTML = str;
+    }
+  })
 }
 
 backBtn.onclick = function () {
-    if (!flag) {
-        topic.click();
-        return;
-    }
-    window.history.back(-1);
+  if (!flag) {
+    topic.click();
+    return;
+  }
+  window.history.back(-1);
 }
