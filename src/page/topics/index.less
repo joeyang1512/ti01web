@@ -90,16 +90,30 @@ body {
   }
 }
 .itemContainer{
+  overflow: hidden;
   color: #fff;
   font-size: 18vw;
   z-index: 999;
-  position: absolute;
+  position: fixed;
   top: 18.5vw;
-  left: 26.2vw;
+  width: 100vw;
+  text-align: center;
+  .item0{
+    position: fixed;
+    left: 26.2vw;
+  }
   .item1{
-    margin-left: 1.4vw;
+    // position: absolute;
+    // left: 0;
+    // right: 0;
+    // left: 44vw;
+    padding-right: 1vw;
   }
   .item2{
-    margin-left: 2.3vw;
+    // margin-left: 2.3vw;
+    // float: right;
+    // right: 0;
+    position: fixed;
+    right: 27.7vw;
   }
 }
