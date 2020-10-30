@@ -1,6 +1,7 @@
 import './index.less';
 import { forumUrl, mineUrl, topicsUrl, mineQesUrl } from '~/util/jumpTo';
 import { sinceListener } from '~/util/sinceui';
+import { getQesByTime } from '~/ajax/mineQes';
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
@@ -10,7 +11,7 @@ sinceListener('link');
 sinceListener('china');
 sinceListener('os');
 sinceListener('all');
-sinceListener('todayQuestion', mineQesUrl + '?id=3');
+sinceListener('todayQuestion', mineQesUrl + '?id=3', 'rgb(255, 245, 245)');
 
 // ================ 动态显示天数=================
 let baiwei = document.querySelector('.item0'),
@@ -35,3 +36,10 @@ function changeDays() {
 }
 changeDays();
 // ================ 动态显示天数=================
+const uptime = new Date(new Date().toLocaleDateString()).getTime();
+getQesByTime(uptime).then((res) => {
+  console.log(res);
+  if (res.code == 0) {
+    document.getElementById('todayQuestionNum').innerHTML = res.data.length;
+  }
+});
