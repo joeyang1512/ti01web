@@ -20,5 +20,5 @@ export const ask = () => {
 }
 // 首次回答问题
 export const answer = () => {
-    return post('gain/answer');
+    return post('/gain/answer');
 }

@@ -15,7 +15,7 @@
   <div class="weui-tab">
 
     <div class="weui-navbar">
-      <div class="header">
+      <div class="header" style="background-color: #fff;">
         <span class="cancel">取消</span>
         <b class="issue">问题</b>
 
@@ -24,27 +24,27 @@
     </div>
 
     <!-- 评论跳转过来的  问题展示 -->
-    <div class="weui-panel weui-panel_access" id="pinglun">
+    <div class="weui-panel weui-panel_access" id="pinglun" style="display:none;">
       <!-- <div class="weui-panel__hd">问题</div> -->
       <div class="weui-panel__bd">
           <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-            <div class="weui-media-box__hd" >
-              <img class="weui-media-box__thumb"  alt=""  >
-            </div>
+            
               <div class="weui-media-box__bd">
                   <h4 class="weui-media-box__title"></h4>
                   <p class="weui-media-box__desc"></p>
               </div>
-              
+              <div class="weui-media-box__hd" >
+                <img class="weui-media-box__thumb"  alt=""  >
+              </div>
           </a>
       </div>
   </div>
 
   <!-- 科目选择 -->
-    <div class="weui-cells">
+    <div class="weui-cells" style="display:none;">
       <div class="weui-cell weui-cell_select">
           <div class="weui-cell__bd">
-              <select class="weui-select" name="select1">
+              <select class="weui-select" name="select1" style="color: #333;">
                 <option selected="" value="">请选择科目</option>
                   <option value="408综合">408综合</option>
                   <option value="计算机网络">计算机网络</option>
@@ -73,7 +73,7 @@
       </div>
       <div class="weui-uploader__bd">
         
-        <div class="weui-uploader__input-box">
+        <div class="weui-uploader__input-box" style="background-color:  rgb(237, 237, 237);">
           <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" />
         </div>
         <ul class="weui-uploader__files" id="uploaderFiles" >

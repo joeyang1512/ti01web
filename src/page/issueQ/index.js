@@ -58,7 +58,7 @@ uploaderInput.onchange = function () {
 // id = 33;
 // 通过是否有id来判断是发布评论还是发布问题
 if (id === 'false') {// 问题
-    pinglun.style.display = 'none';
+    kemu.style.display = 'block';
 
 
     // 点击发布问题
@@ -101,7 +101,7 @@ if (id === 'false') {// 问题
 
 
 } else {// 评论
-    kemu.style.display = 'none';
+    pinglun.style.display = 'block';
     issueTitle.innerText = '评论';
     searchQustion(id).then(res => {
         // console.log(res);
