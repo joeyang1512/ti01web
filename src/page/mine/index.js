@@ -1,6 +1,6 @@
 import './index.less';
 import { sinceListener } from '~/util/sinceui';
-import { forumUrl, mineUrl, topicsUrl, ourUrl, pictureToQUrl, mineQesUrl, clockInUrl } from '~/util/jumpTo';
+import { forumUrl, mineUrl, topicsUrl, ourUrl, pictureToQUrl, mineQesUrl, clockInUrl, gainUrl } from '~/util/jumpTo';
 import { findLoginUser } from '~/ajax/user';
 import { getShoreup } from '~/ajax/shoreup';
 import { getUserQues } from '~/ajax/question';
@@ -12,7 +12,7 @@ sinceListener('rank');
 sinceListener('about', ourUrl);
 sinceListener('shoreup', mineQesUrl + '?id=1');
 sinceListener('answer', mineQesUrl + '?id=2');
-sinceListener('gain');
+sinceListener('gain', gainUrl);
 sinceListener('pictureToQ', pictureToQUrl);
 
 findLoginUser().then((res) => {

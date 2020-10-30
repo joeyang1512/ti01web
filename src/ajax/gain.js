@@ -5,7 +5,7 @@ import {
 } from './ajax_axios';
   
   
-export const doLogin = (userName, password) => {
-  return post('./login', { userName, password } );
+export const userGain = () => {
+  return get('/gain/findByOpenid');
 }
   
