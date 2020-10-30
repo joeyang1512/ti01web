@@ -62,5 +62,9 @@ module.exports = [
   {
     name:'pictureToQ',
     title:'拍照搜题'
+  },
+  {
+    name:'gain',
+    title:'我的经验'
   }
 ];

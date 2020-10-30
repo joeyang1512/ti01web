@@ -1,11 +1,22 @@
 export { sinceListener, loading, toastTip };
-function sinceListener(id, link) {
+/* 
+  给dom添加点击效果。
+  id为dom id
+  link为点击后跳转的页面可以为空。
+  color为点击后的颜色
+*/
+function sinceListener(id, link, color) {
     let dom = document.getElementById(id);
     if (dom == null || dom == undefined) return;
     dom.addEventListener('click', function () {
         dom.style.backgroundColor = '#eee';
         setTimeout(() => {
-            dom.style.backgroundColor = '#fff';
+            if (color == null) {
+                dom.style.backgroundColor = '#fff';
+            } else {
+                dom.style.backgroundColor = color;
+            }
+            
         }, 100);
         if (link != null) {
             setTimeout(() => {

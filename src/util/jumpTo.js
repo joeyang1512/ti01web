@@ -55,3 +55,7 @@ export const pictureToQUrl = host + 'to/pictureToQ';
 export const topictureToQ = () => {
       window.location.href = pictureToQUrl;
   }
+export const gainUrl = host + 'to/gain';
+export const togain = () => {
+      window.location.href = gainUrl;
+  }
