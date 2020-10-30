@@ -17,10 +17,10 @@ import {
     isPicEmpty,
     setNum,
     getQueryVariable,
-    compareDate
+    compareDate,
+    encode
 }
 from '../../../public/js/filters'
-
 let id = getQueryVariable('id');
 let detail = [];
 let commentList = [];
@@ -107,7 +107,7 @@ function addDtailHtml() {
     }
 
     // 添加问题内容
-    $('.content .textarea').html(detail.question.word);
+    $('.content .textarea').html(encode(detail.question.word));
 
     // 添加时间
     $('.foot .time').text('发布于 ' + formatDate(new Date(Number(detail.question.uptime)), 'yyyy-MM-dd'));
@@ -141,7 +141,7 @@ function addCommentList() {
                                             <div class="replayer">
                                                 <div style="display:flex;align-items:center;">
                                                     <span class="name">` + commentList[i].answer.name + `</span>
-                                                    <span class="level"></span>
+                                                    <span class="level commentLevel"></span>
                                                     <span class="vip">大会员</span>
                                                 </div>
                                                 <span class="time">` + (compare(Number(commentList[i].answer.uptime)) ? formatDate(new Date(Number(commentList[i].answer.uptime)), 'hh:mm') :
@@ -149,7 +149,7 @@ function addCommentList() {
             Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) < 12 ? Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30)) + '个月前' :
             Math.ceil((new Date().getTime() - commentList[i].answer.uptime) / (1000 * 60 * 60 * 24 * 30 * 12)) + '年前') + `</span>
                                             </div>
-                                            <div class="replay">` + commentList[i].answer.aword + `</div>
+                                            <div class="replay">` + encode(commentList[i].answer.aword) + `</div>
                                             <div style="display:` + (commentList[i].answer.aimage ? 'block' : 'none') + `;">
                                                 <img class="reImg" src="` + isPicEmpty(commentList[i].answer.aimage) + `" />
                                             </div>
@@ -161,6 +161,9 @@ function addCommentList() {
                                             </div>
                                         </div>
                                     </div>`);
+    }
+    let levelList = document.getElementsByClassName('commentLevel');
+    for (let i = 0; i < levelList.length; i++) {
         if (commentList[i].answer.openid === 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
             $('.replayer .name').css({
                 color: 'rgb(251, 114, 153)'
@@ -171,29 +174,29 @@ function addCommentList() {
         }
 
         if (commentList[i].level == 0) {
-            $('.replayer .level').addClass('lv0');
-            $('.replayer .level').text('Lv0');
+            $(levelList[i]).addClass('lv0');
+            $(levelList[i]).text('Lv0');
         } else if (commentList[i].level < 10) {
-            $('.replayer .level').addClass('lv1');
-            $('.replayer .level').text('Lv1');
+            $(levelList[i]).addClass('lv1');
+            $(levelList[i]).text('Lv1');
         } else if (commentList[i].level < 100) {
-            $('.replayer .level').addClass('lv2');
-            $('.replayer .level').text('Lv2');
+            $(levelList[i]).addClass('lv2');
+            $(levelList[i]).text('Lv2');
         } else if (commentList[i].level < 500) {
-            $('.replayer .level').addClass('lv3');
-            $('.replayer .level').text('Lv3');
+            $(levelList[i]).addClass('lv3');
+            $(levelList[i]).text('Lv3');
         } else if (commentList[i].level < 1000) {
-            $('.replayer .level').addClass('lv4');
-            $('.replayer .level').text('Lv4');
+            $(levelList[i]).addClass('lv4');
+            $(levelList[i]).text('Lv4');
         } else if (commentList[i].level < 2000) {
-            $('.replayer .level').addClass('lv5');
-            $('.replayer .level').text('Lv5');
+            $(levelList[i]).addClass('lv5');
+            $(levelList[i]).text('Lv5');
         } else {
-            $('.replayer .level').addClass('lv6');
-            $('.replayer .level').text('Lv6');
+            $(levelList[i]).addClass('lv6');
+            $(levelList[i]).text('Lv6');
         }
-
     }
+
     let list = document.getElementsByClassName('up-icon');
     let nums = document.getElementsByClassName('up-num');
     for (let j = 0; j < list.length; j++) {
@@ -258,11 +261,13 @@ function getIsLikeQ() {
         if (res.code == '0') {
             isLike = true;
             $('.footer .likeBtn').addClass('isLike'); // 添加点赞后的样式
+            $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
         } else {
             isLike = false;
             $('.footer .likeBtn').removeClass('isLike'); // 删除点赞后的样式
+            $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
         }
-        $('#likeNum').text('点赞 ' + setNum(detail.question.gnum));
+
     })
 }
 
