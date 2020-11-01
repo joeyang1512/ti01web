@@ -72,7 +72,7 @@ function register() {
         target = target.tagName === 'DIV' ? target : parentNode;
         switch (target.id) {
             case 'cpu':
-                window.location.href = '../topic/index.html?lesson=cup'
+                window.location.href = '../topic/index.html?lesson=cpu'
                 break;
             case 'link':
                 window.location.href = '../topic/index.html?lesson=link'
