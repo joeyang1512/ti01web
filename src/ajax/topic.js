@@ -6,4 +6,15 @@ import { post } from './ajax_axios.js';
 export const getTopic = () => {
     return post('/topic/findAll');
 }
+export const addTopic = (title, type, choice, answer, lesson, part, file) => {
+    return post('/topic/add', {
+        title,
+        type,
+        choice,
+        answer,
+        lesson,
+        part,
+        file
+    });
+}
 
