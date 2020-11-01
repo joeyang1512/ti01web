@@ -29,6 +29,8 @@ getDetail(id).then((res) => {
     if (res.code == '0') {
         detail = res.data;
         addDtailHtml();
+        getIsLikeQ();
+        getIsCollectQ();
     }
 });
 
@@ -161,77 +163,71 @@ function addCommentList() {
                                             </div>
                                         </div>
                                     </div>`);
+
     }
-    let levelList = document.getElementsByClassName('commentLevel');
-    for (let i = 0; i < levelList.length; i++) {
+
+    let allList = document.getElementsByClassName('list-item');
+    for (let i = 0; i < allList.length; i++) {
         if (commentList[i].answer.openid === 'oIaLN5_r8bz-guPhHQgfO3nAVQk4') {
-            $('.replayer .name').css({
-                color: 'rgb(251, 114, 153)'
-            })
-            $('.replayer .vip').css({
+            $(allList[i]).find('.vip').css({
                 display: 'flex'
-            })
+            });
+            $(allList[i]).find('.name').css({
+                color: '#fb7299'
+            });
         }
-
         if (commentList[i].level == 0) {
-            $(levelList[i]).addClass('lv0');
-            $(levelList[i]).text('Lv0');
+            $(allList[i]).find('.level').addClass('lv0');
+            $(allList[i]).find('.level').text('Lv0');
         } else if (commentList[i].level < 10) {
-            $(levelList[i]).addClass('lv1');
-            $(levelList[i]).text('Lv1');
+            $(allList[i]).find('.level').addClass('lv1');
+            $(allList[i]).find('.level').text('Lv1');
         } else if (commentList[i].level < 100) {
-            $(levelList[i]).addClass('lv2');
-            $(levelList[i]).text('Lv2');
+            $(allList[i]).find('.level').addClass('lv2');
+            $(allList[i]).find('.level').text('Lv2');
         } else if (commentList[i].level < 500) {
-            $(levelList[i]).addClass('lv3');
-            $(levelList[i]).text('Lv3');
+            $(allList[i]).find('.level').addClass('lv3');
+            $(allList[i]).find('.level').text('Lv3');
         } else if (commentList[i].level < 1000) {
-            $(levelList[i]).addClass('lv4');
-            $(levelList[i]).text('Lv4');
+            $(allList[i]).find('.level').addClass('lv4');
+            $(allList[i]).find('.level').text('Lv4');
         } else if (commentList[i].level < 2000) {
-            $(levelList[i]).addClass('lv5');
-            $(levelList[i]).text('Lv5');
+            $(allList[i]).find('.level').addClass('lv5');
+            $(allList[i]).find('.level').text('Lv5');
         } else {
-            $(levelList[i]).addClass('lv6');
-            $(levelList[i]).text('Lv6');
+            $(allList[i]).find('.level').addClass('lv6');
+            $(allList[i]).find('.level').text('Lv6');
         }
-    }
 
-    let list = document.getElementsByClassName('up-icon');
-    let nums = document.getElementsByClassName('up-num');
-    for (let j = 0; j < list.length; j++) {
-        if (commentList[j].flag == -1) {
-            $(list[j]).removeClass('iconpraise_fill').addClass('iconpraise');
+        if (commentList[i].flag == -1) {
+            $(allList[i]).find('.up-icon').removeClass('iconpraise_fill').addClass('iconpraise');
         } else {
-            $(list[j]).removeClass('iconpraise').addClass('iconpraise_fill');
+            $(allList[i]).find('.up-icon').removeClass('iconpraise').addClass('iconpraise_fill');
         }
-        list[j].onclick = function () {
-            if (commentList[j].flag == -1) {
-                likeAns(commentList[j].answer.id).then((res) => {
+        $(allList[i]).find('.up-icon')[0].onclick = function () {
+            if (commentList[i].flag == -1) {
+                likeAns(commentList[i].answer.id).then((res) => {
                     if (res.code == '0') {
-                        commentList[j].answer.gnum++;
-                        $(nums[j]).text(setNum(commentList[j].answer.gnum));
-                        commentList[j].flag = 0;
-                        $(this).removeClass('iconpraise').addClass('iconpraise_fill');
+                        commentList[i].answer.gnum++;
+                        $(allList[i]).find('.up-num').text(setNum(commentList[i].answer.gnum));
+                        commentList[i].flag = 0;
+                        $(allList[i]).find('.up-icon').removeClass('iconpraise').addClass('iconpraise_fill');
                     }
                 })
             } else {
-                unlikeAns(commentList[j].answer.id).then(res => {
+                unlikeAns(commentList[i].answer.id).then(res => {
                     if (res.code == '0') {
-                        commentList[j].answer.gnum--;
-                        $(nums[j]).text(setNum(commentList[j].answer.gnum));
-                        commentList[j].flag = -1;
-                        $(this).removeClass('iconpraise_fill').addClass('iconpraise');
+                        commentList[i].answer.gnum--;
+                        $(allList[i]).find('.up-num').text(setNum(commentList[i].answer.gnum));
+                        commentList[i].flag = -1;
+                        $(allList[i]).find('.up-icon').removeClass('iconpraise_fill').addClass('iconpraise');
                     }
                 })
             }
         }
-    }
 
-    // 点击评论区的图片 放大
-    let imgList = document.getElementsByClassName('reImg');
-    for (let i = 0; i < imgList.length; i++) {
-        imgList[i].onclick = function () {
+        // 点击评论区的图片 放大
+        $(allList[i]).find('.reImg')[0].onclick = function () {
             let imgsrc = $(this).attr('src');
             let opacityBottom = '<div class="opacityBottom" style = "display:none"><img class="bigImg" src="' + imgsrc + '"></div>';
             $(document.body).append(opacityBottom);
@@ -285,8 +281,7 @@ function getIsCollectQ() {
         }
     })
 }
-getIsLikeQ();
-getIsCollectQ();
+
 // 点赞问题
 $('.footer .likeBtn').click(function () {
     if (isLike == true) {
