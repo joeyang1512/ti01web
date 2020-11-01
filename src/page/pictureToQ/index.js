@@ -42,7 +42,7 @@ function changePage(data) {
     str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id}>
 
         <div class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">${data[i].title}</h4>
+          <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
           <p class="weui-media-box__desc">${data[i].lesson}</p>
         </div>
         <div class="weui-media-box__hd">
@@ -56,6 +56,7 @@ function changePage(data) {
   topic.click();
 }
 camera.onclick = function () {
+  str = '';
   body.innerHTML = `<div class="container">
     <label for="fileSelect">
       <i class="iconcamera_fill camera" style="font-size: 80px;"></i>
