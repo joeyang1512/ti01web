@@ -26,6 +26,9 @@ function uploadType() {
     if (lesson != '' && part != '') {
         addTopic(title, type, choice, answer, lesson, part).then((res) => {
             if (res.code == 0) {
+                localStorage.setItem('lesson', lesson);
+                localStorage.setItem('part', part);
+                localStorage.setItem('type', type);
                 alert('上传成功');
                 location.reload();
             }
