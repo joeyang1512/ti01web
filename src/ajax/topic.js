@@ -1,4 +1,4 @@
-import { post } from './ajax_axios.js';
+import { post, get } from './ajax_axios.js';
 /**
  * @param 
  * @returns {*|Promise|Promise<unknown>}
@@ -16,5 +16,13 @@ export const addTopic = (title, type, choice, answer, lesson, part, file) => {
         part,
         file
     });
+}
+
+export const getTopicByLesson = (lesson) => {
+    return get('/topic/findByLesson', { lesson });
+}
+// 根据科目搜索章节
+export const getTopicAllPart = (lesson) => {
+    return post('/types/findByLesson', { lesson });
 }
 
