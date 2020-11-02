@@ -29,7 +29,7 @@ function getAll() {
     getAllUserRank().then(res => {
         if (res.code == '0') {
             rank = res.data.slice(0, 20);
-            mapRank();
+            mapRank1();
         }
     })
 }
@@ -55,6 +55,23 @@ $('.tab_all').click(() => {
     }
 });
 
+// 将返回的所有结果渲染到页面上
+function mapRank1() {
+    $('.list').empty();
+    for (let i = 0; i < rank.length; i++) {
+        $('.list').append(`<div class="item">
+            <span class="index">` + (i + 1) + `</span>
+            <div class="content">
+                <div class="userImg" style="background-image: url('` + isPicEmpty(rank[i].image) + `');" ></div>
+                <span class="userName">` + rank[i].name + `</span>
+            </div>
+            <span class="time">` + rank[i].num + ` 次</span>
+        </div>`)
+    }
+    $('.list').append(`<div class='empty'>
+                            <p> 只能到这里了~ </p>
+                        </div>`);
+}
 // 将返回的所有结果渲染到页面上
 function mapRank() {
     $('.list').empty();
@@ -87,6 +104,7 @@ isDaka().then(res => {
             addDaka('132', '123').then(res => {
                 if (res.code == '0') {
                     $('.dakaBtn').addClass('active');
+                    getToday();
                 }
             })
         });
