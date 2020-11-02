@@ -14,13 +14,18 @@
 <body>
 
   <div class="weui-tab">
+    <div class="header" style="color: #333;">
+      <i class="iconreturn icon" id="backBtn"></i>
+      <i class="lessonTitle">拍照搜题</i>
+
+    </div>
     <!-- body -->
     <div class="weui-panel weui-panel_access" style="background-color: #fff;">
-      <div class="weui-panel__hd" style="color: #333;">
+      <!-- <div class="weui-panel__hd" style="color: #333;">
         <i class="iconreturn icon" id="backBtn"></i>
         <i>拍照搜题</i>
-      </div>
-      <div class="weui-panel__bd" class="body">
+      </div> -->
+      <div class="weui-panel__bd" class="body" style="margin-bottom: 15vw;margin-top: 15vw;">
         <div class="container">
           <label for="fileSelect">
             <i class="iconcamera_fill camera" style="font-size: 80px;"></i>
@@ -54,9 +59,16 @@
     </div> -->
     <input type="file" accept="image/*" id="fileSelect" style="display: none;" multiple>
     <!-- footer -->
-    <div class="footer">
-      <i class="iconcamera_fill" id="camera"></i>
-      <i class="iconactivity" id="topic"></i>
+    <div class="footer" style="background-color: #fff;">
+      <i class="iconcamera_fill" id="camera" ></i>
+      <!-- <div class="weui-footer weui-footer_fixed-bottom">
+        <p class="weui-footer__links">
+          <a href="javascript:home();" class="weui-footer__link">森思</a>
+        </p>s
+        <p class="weui-footer__text">Copyright &copy;</p>
+      </div> -->
+      <!-- <i style="color: #576b95; font-size: 14px;position: absolute;bottom: 0;z-index: 1;">森思公司</i> -->
+      <i class="iconactivity" id="topic" ></i>
     </div>
 
     <!-- 弹窗 -->
