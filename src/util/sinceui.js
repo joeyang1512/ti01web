@@ -61,7 +61,7 @@ toast(false);//关闭提示框
 */
 function toastTip(tip) {
     let str = `<div id="toast">
-    <div class="weui-toast" style="height: 60px;width: 120px;">
+    <div class="weui-toast" style="height: 60px;width: 180px;">
       <p class="weui-toast__content">${tip}</p>
     </div>
   </div>`;

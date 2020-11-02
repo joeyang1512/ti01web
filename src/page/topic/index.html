@@ -3,206 +3,46 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css">
-  <style>
-    /* coded by yangyang */
-    .button_sp_area {
-      text-align: center;
-    }
-    .button_sp_area a{
-      margin: 8px;
-    }
-    
-    /* 导航 */
-    .yx-header {
-      height: 44px;
-      border-bottom: 1px solid #e1e1e1;
-      position: relative;
-      text-align: center;
-      background-color: #efefef;
-    }
-    
-
-    .yx-header-icon-back {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 40px;
-      height: 44px;
-    }
-
-    .yx-header-icon-back span {
-      width: 20px;
-      height: 20px;
-      margin: 12px 0 0 10px;
-      background: url(../../../public/images/icon-back.png) no-repeat;
-      background-size: 20px;
-      display: block;
-    }
-    .yx-header-icon-star{
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      width: 40px;
-      height: 44px;
-    }
-    .yx-header-icon-star span {
-      width: 20px;
-      height: 20px;
-      margin: 12px 0 0 10px;
-      background: url(../../../public/images/center-icon-sc.png) no-repeat;
-      background-size: 20px;
-      display: block;
-    }
-    .yx-header-title {
-      border-radius: 2px;
-      position: relative;
-      top: 9px;
-    }
-    .title{
-      width: 18%;
-      display: inline-block;
-
-    }
-    .checkedTitle{
-      background-color: rgb(138, 133, 133);
-      color: rgb(240, 240, 240);
-    }
-    .title:nth-child(1){
-      border-radius: 4px 0 0 4px;
-      border: #000 1px solid;
-    }
-    .title:nth-child(2){
-      border-top:  #000 1px solid;
-      border-bottom:  #000 1px solid;
-    }
-    .title:nth-child(3){
-      border:  #000 1px solid;
-      border-radius: 0 4px 4px 0;
-    }
-
-    /* footer */
-    .weui-footer {
-      border-top: rgb(240, 240, 240) 1px solid;
-      /* border-top: #000 1px solid; */
-      width: 100vw;
-      height: 44px;
-      position: fixed;
-      bottom: 0;
-      display: flex;
-      background-color: #fff;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
-    .yx_topic_list{
-      position: absolute;
-      right: 60px;
-      width: 20px;
-      height: 20px;
-      background: url(../../../public/images/footer02.png) no-repeat;
-      background-size: 20px;
-      display: block;
-    }
-    .yx_topic_star{
-      left: 10px;
-      width: 20px;
-      height: 20px;
-      background: url(../../../public/images/icon-collection.png) no-repeat;
-      background-size: 20px;
-      display: block;
-    }
-    .yx_topic_star::after{
-      content: 'star';
-    }
-  </style>
 </head>
+<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
+<link rel="stylesheet" href="/public/css/since-icon.css" />
+<link rel="stylesheet" href="../../../public/css/since-icon.css">
 
 <body>
-  <div class="weui_tab">
-    <!-- header -->
-    <div class="yx-header">
-      <div class="yx-header-icon-back"><span></span></div>
-      <div class="yx-header-title">
-        <span class="title checkedTitle">答题</span><span class="title">背题</span><span class="title">视频</span>
-      </div>
-      <p class="yx-header-icon-star">设置</p>
-    </div>
 
-
-    <!-- 主题内容 -->
-    <!-- 题目 -->
-    <div class="weui_tab_bd">
-      
-      <!-- 选项 -->
-      <div class="weui_cells weui_cells_radio">
-        <p style="margin: 0 10px;">1. ajax请求的基本步骤是：第一步是哪一个？</p>
-        <label class="weui_cell weui_check_label" for="x11">
-          <div class="weui_cell_bd weui_cell_primary">
-            <p>A. 创造XMLHttpRequest实例</p>
-          </div>
-          <div class="weui_cell_ft">
-            <input type="radio" class="weui_check" name="radio1" id="x11">
-            <span class="weui_icon_checked"></span>
-          </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="x12">
-      
-          <div class="weui_cell_bd weui_cell_primary">
-            <p>B. 调用open方法</p>
-          </div>
-          <div class="weui_cell_ft">
-            <input type="radio" name="radio1" class="weui_check" id="x12" checked="checked">
-            <span class="weui_icon_checked"></span>
-          </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="x13">
-      
-          <div class="weui_cell_bd weui_cell_primary">
-            <p>C. 监听onreadystatechange事件</p>
-          </div>
-          <div class="weui_cell_ft">
-            <input type="radio" name="radio1" class="weui_check" id="x13" checked="checked">
-            <span class="weui_icon_checked"></span>
-          </div>
-        </label>
-        <label class="weui_cell weui_check_label" for="x14">
-      
-          <div class="weui_cell_bd weui_cell_primary">
-            <p>D. 调用send()方法</p>
-          </div>
-          <div class="weui_cell_ft">
-            <input type="radio" name="radio1" class="weui_check" id="x14" checked="checked">
-            <span class="weui_icon_checked"></span>
-          </div>
-        </label>
-      </div>
-      <!-- 按钮 -->
-      <div class="button_sp_area">
-        <!-- <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_warn">标记</a> -->
-        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">上一页</a>
-        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_warn">解&nbsp;析</a>
-        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">下一页</a>
-        
-      </div>
-
-
-    </div>
-    <!-- footer -->
-    <div class="weui-footer">
-      <p class="yx_topic_star" style="margin-left: 10px;"><span style="padding: 12px;"></span></p>
-      <!-- <p >收藏</p> -->
-      <p style="padding-left: 30px;">正确:<span>9</span></p>
-      <p style="padding-right: 30px;">错误:<span>1</span></p>
-      <p class="yx_topic_list"></p>
-      <p style="margin-right: 10px;"><span>2</span>/1620</p>
-    </div>
-
-    <!-- topicList：本部分主要展示全部题目（包含标注收藏的和未做的） -->
-
+  <div class="lessonSelect">
+    <!-- <div>第一章</div>
+    <div>第二章</div>
+    <div>第三章</div> -->
   </div>
+  <div class="weui-tab">
+    <div class="header" style="color: #333;">
+      <i class="iconreturn icon" id="backBtn"></i>
+      <i class="lessonTitle"></i>
+      <i class="iconzhangjiekecheng" id="lesson"></i>
+    </div>
+    <!-- body -->
+    <div class="weui-panel weui-panel_access" style="background-color: #fff;margin-top: 15vw;">
+      
+      <div class="weui-panel__bd body" style="margin-bottom: 15vw;">
+
+      </div>
+    </div>
+    
+
+    <!-- footer -->
+    <div class="footer" style="background-color: #fff;">
+      
+      <i class="iconhoutui" id="last" ></i>
+      <i class="iconcollection" id="collection"></i>
+      <i class="iconright" id="right"></i>
+      <i class="iconjiantouxiangyou" id="next" ></i>
+      
+    </div>
+
 </body>
 
 </html>
