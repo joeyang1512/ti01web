@@ -9,6 +9,10 @@ getSearchHot().then(res => {
     if (res.code == '0') {
         hotArr = res.data.slice(0, 8);
         mapALLquestion();
+    } else {
+        $('#hot_list').append(`<div class='empty'>
+                                    <p>暂时还没有热搜</p>
+                                </div>`);
     }
 });
 
