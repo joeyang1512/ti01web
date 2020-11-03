@@ -27,3 +27,6 @@ export const addDaka = (content, address) => {
         address
     });
 }
+export const gainReport = () => {
+    return post('/gain/report');
+}

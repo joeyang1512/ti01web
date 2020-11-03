@@ -4,7 +4,8 @@ import {
     getTodayUserRank,
     getAllUserRank,
     addDaka,
-    isDaka
+    isDaka, 
+    gainReport
 } from '~/ajax/clockIn'
 
 import {
@@ -105,10 +106,11 @@ isDaka().then(res => {
                 if (res.code == '0') {
                     $('.dakaBtn').addClass('active');
                     getToday();
+                    gainReport();
                 }
             })
         });
     } else {
         $('.dakaBtn').addClass('active');
     }
-})
+});
