@@ -1,14 +1,55 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport"
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
     content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
-    <link rel="stylesheet" href="../../../public/css/since-icon.css">
-  </head>
-  <body>
-    
-  </body>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="/public/css/since-icon.css" />
+  <link rel="stylesheet" href="/public/css/sinceui.css" />
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="box">
+    <header class="headerBox">
+      <div class="header">
+        <div class="logo">
+          <i class="iconreturn icon" id="backBtn"></i>
+        </div>
+        <div class="title">今日打卡</div>
+        <div class="addBox"></div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="dakaBox">
+        <div class="dakaBtn">
+          <i class="iconflashlight icon"></i>
+        </div>
+      </div>
+      <div class="listBox">
+        <div class="selected">
+          <div class="tab tab_today">
+            <span class="active">今日排名</span>
+          </div>
+          <div class="tab tab_all">
+            <span class="">总排名</span>
+          </div>
+        </div>
+        <div class="list">
+          <!-- <div class="item">
+            <span class="index">74</span>
+            <div class="content">
+              <div class="userImg" style="background-image: url('https://thirdwx.qlogo.cn/mmopen/vi_32/CpK8F54ibkpIQ0oa3dY9BqA1w3daMS55r7WQ2KK4VnqU4J8cEc9rw8cXpsSWxF1GaJAMWBPSdafEsSIJhH4qLaA/132');"></div>
+              <span class="userName">你好</span>
+            </div>
+            <span class="time">02-23</span>
+          </div> -->
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
 </html>

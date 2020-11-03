@@ -6,6 +6,18 @@ import { post, get } from './ajax_axios.js';
 export const getTopic = () => {
     return post('/topic/findAll');
 }
+export const addTopic = (title, type, choice, answer, lesson, part, file) => {
+    return post('/topic/add', {
+        title,
+        type,
+        choice,
+        answer,
+        lesson,
+        part,
+        file
+    });
+}
+
 export const getTopicByLesson = (lesson) => {
     return get('/topic/findByLesson', { lesson });
 }
@@ -13,3 +25,4 @@ export const getTopicByLesson = (lesson) => {
 export const getTopicAllPart = (lesson) => {
     return post('/types/findByLesson', { lesson });
 }
+

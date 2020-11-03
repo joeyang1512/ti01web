@@ -1,9 +1,9 @@
 import { getTopicAllPart, getTopicByLesson } from '~/ajax/topic';
 import './index.less';
 import { singleTopic } from '../../template/singleChoice';
-import { loading, toastTip } from '../../util/sinceui';
+import { loading, toastTip, EventUtil } from '../../util/sinceui';
 import { multipleTopic } from '../../template/multipleChoice';
-import { getQueryVariable } from '../../../public/js/filters'
+import { getQueryVariable } from '../../../public/js/filters';
 let body = document.querySelector('.body');
 let topics = null;
 let topicsOfPart = [];// 存储各章节的题目
@@ -158,7 +158,8 @@ function showTopic(element, data, index) {
 // ==================上一题和下一题==========================
 let last = document.getElementById('last'),
     next = document.getElementById('next');
-last.onclick = function () {
+last.onclick = toLeftTopic; 
+function toLeftTopic() {
     lastIndex--;
     if (lastIndex < 0) {
         let toast = toastTip('亲，这是第一题了哦！');
@@ -172,7 +173,8 @@ last.onclick = function () {
     showTopic(body, topics, lastIndex);
     // 讲修改后的lastIndex存进localStorage
 }
-next.onclick = function () {
+next.onclick = toRightTopic;
+function toRightTopic() {
     lastIndex++;
     if (lastIndex >= topics.length) {
         let toast = toastTip('亲，这是最后一题了哦！');
@@ -228,3 +230,6 @@ function select(type, element, data, index) {
 }
 
 // ====================================================
+
+// 滑动事件监听
+EventUtil.listenTouchDirection(body, true, false, toLeftTopic, false, toRightTopic);
