@@ -9,7 +9,7 @@ function sinceListener(id, link, color) {
     let dom = document.getElementById(id);
     if (dom == null || dom == undefined) return;
     dom.addEventListener('click', function () {
-        dom.style.backgroundColor = '#eee';
+        dom.style.backgroundColor = 'rgb(250,250,250)';
         setTimeout(() => {
             if (color == null) {
                 dom.style.backgroundColor = '#fff';
