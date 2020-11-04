@@ -19,23 +19,27 @@ sinceListener('todayRank', clockInUrl, 'rgb(255, 245, 245)');
 // ================ 页面数据初始化 =================
 init();
 function init() {
-  let shoreupNum = document.getElementById('shoreupNum');
-  let todayQuestionNum = document.getElementById('todayQuestionNum');
-  let reportRank = document.getElementById('reportRank');
-  console.log(todayBegin());
-  getQesByTime(todayBegin()).then((res) => {
-    if (res.code == codes.success) {
-      todayQuestionNum.innerText = res.data.length;
-    } else if (res.code == codes.noNum) {
-      todayQuestionNum.innerText = 0;
+    let shoreupNum = document.getElementById('shoreupNum');
+    let todayQuestionNum = document.getElementById('todayQuestionNum');
+    let reportRank = document.getElementById('reportRank');
+    // 初始化题目收藏数
+    if (localStorage.getItem('starTopic')) {
+        shoreupNum.innerText = Object.keys(JSON.parse(localStorage.getItem('starTopic'))).length
     }
-  });
-  getTodayUserRank().then((res) => {
-    console.log(res);
-    if (res.code == codes.success) {
-      reportRank.innerText = res.data;
-    } 
-  })
+    // console.log(todayBegin());
+    getQesByTime(todayBegin()).then((res) => {
+        if (res.code == codes.success) {
+            todayQuestionNum.innerText = res.data.length;
+        } else if (res.code == codes.noNum) {
+            todayQuestionNum.innerText = 0;
+        }
+    });
+    getTodayUserRank().then((res) => {
+        console.log(res);
+        if (res.code == codes.success) {
+            reportRank.innerText = res.data;
+        }
+    })
 }
 
 // ================ 动态显示天数=================
@@ -121,5 +125,9 @@ function register() {
 }
 register();
 // ===================================================
-
-
+// 进入题目收藏页面
+let todayTopic = document.getElementById('todayTopic');
+todayTopic.addEventListener('click', todayTopicFn, false);
+function todayTopicFn() {
+    window.location.href = '../topicStar/index.html';
+}

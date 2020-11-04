@@ -71,3 +71,7 @@ export const addBooleanUrl = host + 'to/addBoolean';
 export const toaddBoolean = () => {
       window.location.href = addBooleanUrl;
   }
+export const topicStarUrl = host + 'to/topicStar';
+export const totopicStar = () => {
+      window.location.href = topicStarUrl;
+  }
