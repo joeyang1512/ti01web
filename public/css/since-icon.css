@@ -132,6 +132,10 @@ i,
   content: "\e6fa";
 }
 
+.iconflashlight::before{
+  content: "\e6fc";
+}
+
 .iconprompt_fill:before {
   content: "\e71c";
 }

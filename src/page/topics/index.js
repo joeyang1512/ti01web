@@ -1,7 +1,10 @@
 import './index.less';
-import { forumUrl, mineUrl, topicsUrl, mineQesUrl } from '~/util/jumpTo';
+import { forumUrl, mineUrl, topicsUrl, mineQesUrl, clockInUrl } from '~/util/jumpTo';
 import { sinceListener } from '~/util/sinceui';
 import { getQesByTime } from '~/ajax/mineQes';
+import codes from '~/config/codeConfig';
+import { todayBegin } from '../../../public/js/filters';
+import { getTodayUserRank } from '~/ajax/clockIn';
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
@@ -12,6 +15,28 @@ sinceListener('china');
 sinceListener('os');
 sinceListener('all');
 sinceListener('todayQuestion', mineQesUrl + '?id=3', 'rgb(255, 245, 245)');
+sinceListener('todayRank', clockInUrl, 'rgb(255, 245, 245)');
+// ================ 页面数据初始化 =================
+init();
+function init() {
+  let shoreupNum = document.getElementById('shoreupNum');
+  let todayQuestionNum = document.getElementById('todayQuestionNum');
+  let reportRank = document.getElementById('reportRank');
+  console.log(todayBegin());
+  getQesByTime(todayBegin()).then((res) => {
+    if (res.code == codes.success) {
+      todayQuestionNum.innerText = res.data.length;
+    } else if (res.code == codes.noNum) {
+      todayQuestionNum.innerText = 0;
+    }
+  });
+  getTodayUserRank().then((res) => {
+    console.log(res);
+    if (res.code == codes.success) {
+      reportRank.innerText = res.data;
+    } 
+  })
+}
 
 // ================ 动态显示天数=================
 let baiwei = document.querySelector('.item0'),

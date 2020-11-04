@@ -99,3 +99,14 @@ let encode = function (str) { // 转义过滤
 export {
     encode
 }
+// 获取今日0点时间戳
+const todayBegin = () => {
+    let timestamp = Math.round(
+        new Date(new Date().toLocaleDateString()).getTime() / 1000
+      ).toString();
+    
+    return timestamp * 1000;
+}
+export {
+    todayBegin
+}

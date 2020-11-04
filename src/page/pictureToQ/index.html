@@ -6,13 +6,87 @@
   <meta name="viewport"
     content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
+  <link rel="stylesheet" href="/public/css/since-icon.css" />
+  <link rel="stylesheet" href="../../../public/css/since-icon.css">
+  <link rel="stylesheet" href="../../../public/css/cropper.css">
+  <script src="../../../public/js/jquery-2.0.2.min.js"></script>
+  <script src="../../../public/js/cropper.js"></script>
+  <style>
+    .bgco {
+        /* height: 1000px; */
+        overflow: hidden;
+        background-color: #dcdcb3;
+    }
+    
+    .box {
+        position: relative;
+        width: 100%;
+        /* margin: 100px auto; */
+    }
+    
+    .imgArea {
+        height: 159px;
+        line-height: 159px;
+        margin-top: 10px;
+        text-align: center;
+        background-color: #5d4356;
+        border-radius: 5%;
+        overflow: hidden;
+    }
+    #mark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
+        z-index: 9999;
+    }
+    
+    .ok {
+        position: fixed;
+        z-index: 9999;
+        margin: 0px auto;
+        bottom: 0;
+        list-style: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        overflow: hidden;
+        font-weight: 700;
+        color: aliceblue;
+        background-color: rgba(237, 27, 36, 0.75);
+        border: 1px  ;
+    }
+    
+    
+    #caijian {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #portrait {
+        width: 100%;
+       max-height: 100vh;
+    }
+</style>
 </head>
-<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
-<link rel="stylesheet" href="/public/css/since-icon.css" />
-<link rel="stylesheet" href="../../../public/css/since-icon.css">
+
 
 <body>
-
+  <div id="mark" style="display: none;">
+    <div class="content">
+        <div id="caijian">
+            <img id="portrait" alt="">
+        </div>
+        <div id="buttonArea">
+        </div>
+        <div class="resultArea" >
+          <div class="ok" id="cancel" style="margin-bottom:20px;margin-left: 20%;"> 取消</div> 
+          <div class="ok" id="confirm" style="margin-bottom:20px; margin-left: 60%;">确认</div>
+        </div>
+    </div>
+</div>
   <div class="weui-tab">
     <div class="header" style="color: #333;">
       <i class="iconreturn icon" id="backBtn"></i>
@@ -32,6 +106,7 @@
           </label>
         </div>
       </div>
+     
     </div>
     <!-- 题目详情 -->
     <!-- <div class="weui-cells__title">单选列表项</div>
@@ -57,7 +132,7 @@
       </label>
       <img src="../../../public/img/1.jpg" alt="" class="img">
     </div> -->
-    <input type="file" accept="image/*" id="fileSelect" style="display: none;" multiple>
+    <input type="file" accept="image/*" id="fileSelect" style="display: none;" s="showPreview(this)" multiple>
     <!-- footer -->
     <div class="footer" style="background-color: #fff;">
       <i class="iconcamera_fill" id="camera" ></i>

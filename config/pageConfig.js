@@ -66,5 +66,17 @@ module.exports = [
   {
     name:'gain',
     title:'我的经验'
-  }
+  },
+  {
+    name:'addTopic',
+    title:'添加题目'
+  },
+  {
+    name:'addType',
+    title:'添加类型'
+  },
+  {
+    name:'addBoolean',
+    title:'添加判断'
+  },
 ];

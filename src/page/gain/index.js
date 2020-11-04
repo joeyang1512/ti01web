@@ -54,7 +54,7 @@ let qes = `<div class="container" style="width: 100vw;height: 70px; border-botto
   <div style="margin-top: -8px;color:#666"><span style="font-size: 10px;">${time}</span></div>
 </div>
 <div style="float:left;width:20%; line-height: 70px;text-align: center;"">
-  <span style="font-size: 20px;">+3</span>
+  <span style="font-size: 20px;">+2</span>
 </div>
 </div>`;
 return qes;
@@ -68,7 +68,7 @@ let answer = `<div class="container" style="width: 100vw;height: 70px; border-bo
   <div style="margin-top: -8px;color:#666"><span style="font-size: 10px;">${time}</span></div>
 </div>
 <div style="float:left;width:20%; line-height: 70px;text-align: center;"">
-  <span style="font-size: 20px;">+5</span>
+  <span style="font-size: 20px;">+3</span>
 </div>
 </div>`;
 return answer;

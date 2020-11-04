@@ -59,3 +59,15 @@ export const gainUrl = host + 'to/gain';
 export const togain = () => {
       window.location.href = gainUrl;
   }
+export const addTopicUrl = host + 'to/addTopic';
+export const toaddTopic = () => {
+      window.location.href = addTopicUrl;
+  }
+export const addTypeUrl = host + 'to/addType';
+export const toaddType = () => {
+      window.location.href = addTypeUrl;
+  }
+export const addBooleanUrl = host + 'to/addBoolean';
+export const toaddBoolean = () => {
+      window.location.href = addBooleanUrl;
+  }
