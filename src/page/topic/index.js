@@ -11,18 +11,23 @@ let parts = [];// 各章节目录
 let lesson = decodeURI(getQueryVariable('lesson'));// 科目
 let lessonSelect = document.querySelector('.lessonSelect'); // 章节选择
 let lessonTitle = document.querySelector('.lessonTitle');// 题目
+let collection = document.getElementById('collection');// 收藏按钮
 // ================存取localStorage========================
 let lastIndex = 0;
 let part = localStorage.getItem('part') ? localStorage.getItem('part') : '';
-let starTopic = localStorage.getItem('starTopic') ? localStorage.getItem('starTopic') : '';
+let starTopic = localStorage.getItem('starTopic') ? JSON.parse(localStorage.getItem('starTopic')) : {}, // 所收藏的题目集合
+    topicId,
+    crrentTopic;
+console.log(starTopic);
 let historyTopic = {
-    cpu:{},
-    net:{},
-    china:{},
-    link:{},
-    os:{},
-    all:{}
-}
+    cpu: {},
+    net: {},
+    china: {},
+    link: {},
+    os: {},
+    all: {}
+};
+
 // ========================================================
 // ================获取所有章节=============================
 let obj = { cpu: '计算机组成原理', net: '计算机网络', china: '考研政治', link: '数据结构', os: '操作系统', all: '408综合', };
@@ -135,7 +140,15 @@ function topicsDivideToParts(data) {
 }
 // 展示题目
 function showTopic(element, data, index) {
+    topicId = data[index].id;
+    crrentTopic = data[index];
     // =======留白--用来判断是否已收藏============
+    let starTopicKeys = Object.keys(starTopic);
+    if (starTopicKeys.includes('' + data[index].id)) {
+        collection.className = 'iconcollection_fill';
+    } else {
+        collection.className = 'iconcollection';
+    }
     // =========================================
     if (data.length === 0) return;
     let right = document.getElementById('right');
@@ -158,7 +171,7 @@ function showTopic(element, data, index) {
 // ==================上一题和下一题==========================
 let last = document.getElementById('last'),
     next = document.getElementById('next');
-last.onclick = toLeftTopic; 
+last.onclick = toLeftTopic;
 function toLeftTopic() {
     lastIndex--;
     if (lastIndex < 0) {
@@ -231,5 +244,23 @@ function select(type, element, data, index) {
 
 // ====================================================
 
+// 收藏按钮
+collection.addEventListener('click', collectionFn, false);
+function collectionFn() {
+    console.log(this);
+    console.log('收藏')
+    if (collection.className === 'iconcollection') {
+        collection.className = 'iconcollection_fill';
+        console.log(starTopic);
+        starTopic[topicId] = crrentTopic;
+
+    } else {
+        collection.className = 'iconcollection';
+        delete starTopic[topicId];
+    }
+    localStorage.setItem('starTopic', JSON.stringify(starTopic));
+}
+
 // 滑动事件监听
-EventUtil.listenTouchDirection(body, true, false, toLeftTopic, false, toRightTopic);
+const htmlBoby = document.getElementsByTagName('body')[0];
+EventUtil.listenTouchDirection(htmlBoby, true, false, toLeftTopic, false, toRightTopic);

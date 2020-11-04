@@ -1,10 +1,14 @@
 
 function single(Element, data, index) {
+  if (!index) {
+    data[index] = data;
+  }
   // console.log(data);
   // console.log(typeof data[index].choice);
   // console.log(data[index].choice);
   if (typeof data[index].choice === 'string') {
-    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
+    // console.log(data[index].choice)
+    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join('~~~').replace(/\'/g, '').split('~~~');
   }
   // console.log(data[index].choice);
   // data[index].choice = ['你居然会相信那个小滑头来接你', '我知道有一天它会在一个', '万众瞩目的情况下出现', '身披金甲圣衣脚踏七色云彩来娶我'];
@@ -87,7 +91,7 @@ function singleTopic(Element, data, index, flag) {
   // console.log(typeof data[index].choice);
   // console.log(data[index].choice);
   if (typeof data[index].choice === 'string') {
-    data[index].choice = data[index].choice.match(/\'(.*?)\'/g).join(',').replace(/\'/g, '').split(',');
+    data[index].choice = data[index].choice.match(/\'(.*?)\'/g).join('~~~').replace(/\'/g, '').split('~~~');
   }
   // console.log(data[index].choice);
   // data[index].choice = ['你居然会相信那个小滑头来接你', '我知道有一天它会在一个', '万众瞩目的情况下出现', '身披金甲圣衣脚踏七色云彩来娶我'];
@@ -158,7 +162,7 @@ function singleTopic(Element, data, index, flag) {
     </div>
   </label>`
   ];
-  let str = `<div class="weui-cells__title">(单选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
+  let str = `<div class="weui-cells__title">${index + 1}.(单选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
     <div class="weui-cells weui-cells_radio xuanxiang">
     ${items.slice(0, data[index].choice.length).join('')}
     <img ${src} alt="" class="img" style="margin:3vw; padding-right: 50px;width: 93vw;">

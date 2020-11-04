@@ -1,6 +1,9 @@
 
 function multiple(Element, data, index) {
-  console.log(typeof data[index].choice);
+  if (!index) {
+    data[index] = data;
+  }
+  // console.log(typeof data[index].choice);
   // data[index].choice = JSON.parse(data[index].choice);
   if (typeof data[index].choice === 'string') {
     data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
@@ -83,11 +86,11 @@ function multiple(Element, data, index) {
   Element.innerHTML = str;
 };
 function multipleTopic(Element, data, index, flag) {
-    // console.log(typeof data[index].choice);
-    // data[index].choice = JSON.parse(data[index].choice);
-    if (typeof data[index].choice === 'string') {
-      data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
-    }
+  // console.log(typeof data[index].choice);
+  // data[index].choice = JSON.parse(data[index].choice);
+  if (typeof data[index].choice === 'string') {
+    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
+  }
   let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none'];
   let src = data[index].image ? `src=${data[index].image}` : '';
   if (flag) {
@@ -161,7 +164,7 @@ function multipleTopic(Element, data, index, flag) {
   </div>
 </label>`
   ];
-  let str = `<div class="weui-cells__title">(多选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
+  let str = `<div class="weui-cells__title">${index + 1}.(多选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
   <div class="weui-cells weui-cells_radio xuanxiang">
   ${items.slice(0, data[index].choice.length).join('')}
   <img ${src} alt="" class="img"  style="margin:3vw; padding-right: 50px;width: 93vw;">
