@@ -1,8 +1,9 @@
 
 function single(Element, data, index) {
-  if (!index) {
+  if (index === undefined) {
     data[index] = data;
   }
+  console.log(data);
   // console.log(data);
   // console.log(typeof data[index].choice);
   // console.log(data[index].choice);
