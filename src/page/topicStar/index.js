@@ -68,6 +68,7 @@ function backBtnFn() {
         window.history.back(-1);
         return;
     }
+    star.className = 'iconcollection_fill';
     flag = true;
     star.style.display = 'none';
     data = Object.values(starTopic);
