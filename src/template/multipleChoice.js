@@ -1,9 +1,12 @@
 
 function multiple(Element, data, index) {
-  console.log(typeof data[index].choice);
+  if (!index) {
+    data[index] = data;
+  }
+  // console.log(typeof data[index].choice);
   // data[index].choice = JSON.parse(data[index].choice);
   if (typeof data[index].choice === 'string') {
-    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
+    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join('~~~').replace(/\'/g, '').split('~~~');
   }
   let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none'];
   let src = data[index].image ? `src=${data[index].image}` : '';
@@ -76,18 +79,18 @@ function multiple(Element, data, index) {
   </label>`
   ];
   let str = `<div class="weui-cells__title">${data[index].title.replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio">
+    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <img ${src} alt="" class="img" style="margin:3vw; padding-right: 50px;width: 93vw;">
+    <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;">
     </div>`
   Element.innerHTML = str;
 };
 function multipleTopic(Element, data, index, flag) {
-    // console.log(typeof data[index].choice);
-    // data[index].choice = JSON.parse(data[index].choice);
-    if (typeof data[index].choice === 'string') {
-      data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join(',').replace(/\'/g, '').split(',');
-    }
+  // console.log(typeof data[index].choice);
+  // data[index].choice = JSON.parse(data[index].choice);
+  if (typeof data[index].choice === 'string') {
+    data[index].choice = data[index].choice.match(/(?:\')(.*?)(?:\')/g).join('~~~').replace(/\'/g, '').split('~~~');
+  }
   let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none', 'none'];
   let src = data[index].image ? `src=${data[index].image}` : '';
   if (flag) {
@@ -97,7 +100,7 @@ function multipleTopic(Element, data, index, flag) {
   }
 
   console.log(arr);
-  let items = [`<label class="weui-cell weui-cells_checkbox" for="x11">
+  let items = [`<label class="weui-cell weui-cells_checkbox" for="x11" select="1">
   <div class="weui-cell__bd">
     <p>A. ${data[index].choice[0]}</p>
   </div>
@@ -106,7 +109,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x12">
+  `<label class="weui-cell weui-check__label" for="x12" select="2">
   <div class="weui-cell__bd">
     <p>B. ${data[index].choice[1]}</p>
   </div>
@@ -115,7 +118,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x13">
+  `<label class="weui-cell weui-check__label" for="x13" select="3">
   <div class="weui-cell__bd">
     <p>C. ${data[index].choice[2]}</p>
   </div>
@@ -124,7 +127,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x14">
+  `<label class="weui-cell weui-check__label" for="x14" select="4">
   <div class="weui-cell__bd">
     <p>D. ${data[index].choice[3]}</p>
   </div>
@@ -133,7 +136,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x15">
+  `<label class="weui-cell weui-check__label" for="x15" select="5">
   <div class="weui-cell__bd">
     <p>E. ${data[index].choice[4]}</p>
   </div>
@@ -142,7 +145,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x16">
+  `<label class="weui-cell weui-check__label" for="x16" select="6">
   <div class="weui-cell__bd">
     <p>F. ${data[index].choice[5]}</p>
   </div>
@@ -151,7 +154,7 @@ function multipleTopic(Element, data, index, flag) {
     <span class="weui-icon-checked" ></span>
   </div>
 </label>`,
-  `<label class="weui-cell weui-check__label" for="x17">
+  `<label class="weui-cell weui-check__label" for="x17" select="7">
   <div class="weui-cell__bd">
     <p>G. ${data[index].choice[6]}</p>
   </div>
@@ -161,10 +164,10 @@ function multipleTopic(Element, data, index, flag) {
   </div>
 </label>`
   ];
-  let str = `<div class="weui-cells__title">(多选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
-  <div class="weui-cells weui-cells_radio xuanxiang">
+  let str = `<div class="weui-cells__title">${index + 1}.(多选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
+  <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;">
   ${items.slice(0, data[index].choice.length).join('')}
-  <img ${src} alt="" class="img"  style="margin:3vw; padding-right: 50px;width: 93vw;">
+  <img ${src} alt="" class="img"  style="margin:0 3vw; padding-right: 50px;width: 93vw;">
   </div>`
   Element.innerHTML = str;
 };

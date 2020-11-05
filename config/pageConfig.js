@@ -79,4 +79,8 @@ module.exports = [
     name:'addBoolean',
     title:'添加判断'
   },
+  {
+    name:'topicStar',
+    title:'题目收藏'
+  }
 ];
