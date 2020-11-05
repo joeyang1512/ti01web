@@ -29,7 +29,7 @@ let alreadyDid = localStorage.getItem('alreadyDid') ? JSON.parse(localStorage.ge
 let obj = { cpu: '计算机组成原理', net: '计算机网络', china: '考研政治', link: '数据结构', os: '操作系统', all: '408综合', };
 getTopicAllPart(obj[lesson]).then(res => {
     console.log(res);
-
+    init();
     for (let i = 0; i < res.data.length; i++) {
         parts.push(res.data[i].part);
     }
@@ -84,41 +84,44 @@ function bodyFn() {
 }
 
 console.log(lesson);
-switch (lesson) {
-    case 'cpu':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('计算机组成原理');
-        // console.log(topicsOfPart);
+function init() {
+    switch (lesson) {
+        case 'cpu':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('计算机组成原理');
+            // console.log(topicsOfPart);
 
-        break;
-    case 'net':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('计算机网络');
+            break;
+        case 'net':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('计算机网络');
 
-        break;
-    case 'china':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('考研政治');
+            break;
+        case 'china':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('考研政治');
 
-        break;
-    case 'link':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('数据结构');
+            break;
+        case 'link':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('数据结构');
 
-        break;
-    case 'os':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('操作系统');
+            break;
+        case 'os':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('操作系统');
 
-        break;
-    case 'all':
-        lessonTitle.innerHTML = `${part[lesson]}`;
-        loadBylesson('408综合');
+            break;
+        case 'all':
+            lessonTitle.innerHTML = `${part[lesson]}`;
+            loadBylesson('408综合');
 
-        break;
-    default:
-        break;
+            break;
+        default:
+            break;
+    }
 }
+
 // =======================================================
 
 // ================请求数据，显示题目========================
@@ -159,7 +162,9 @@ function topicsDivideToParts(data) {
     if (!currentPartTopic) {
         currentPartTopic = topicsOfPart[parts.indexOf(part[lesson])];
     }
-    console.log(topicsOfPart);
+    if (topicsOfPart.length === 0) {
+        return;
+    }
     lessonTitle.innerHTML = `${part[lesson]}(${topicsOfPart[0].length})`;
 
 }
