@@ -19,6 +19,8 @@ sinceListener('todayRank', clockInUrl, 'rgb(255, 245, 245)');
 // ================ 页面数据初始化 =================
 init();
 function init() {
+    let topicsNum = document.querySelectorAll('.lesson b');
+    console.log(topicsNum);
     let shoreupNum = document.getElementById('shoreupNum');
     let todayQuestionNum = document.getElementById('todayQuestionNum');
     let reportRank = document.getElementById('reportRank');

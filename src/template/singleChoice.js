@@ -80,7 +80,7 @@ function single(Element, data, index) {
   </label>`
   ];
   let str = `<div class="weui-cells__title">${data[index].title.replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio">
+    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff">
     ${items.slice(0, data[index].choice.length).join('')}
     <img ${src} alt="" class="img" style="margin:3vw; padding-right: 50px;width: 93vw;">
     </div>`
@@ -163,7 +163,7 @@ function singleTopic(Element, data, index, flag) {
   </label>`
   ];
   let str = `<div class="weui-cells__title">${index + 1}.(单选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio xuanxiang">
+    <div class="weui-cells weui-cells_radio xuanxiang" style="backgroudColor:#fff">
     ${items.slice(0, data[index].choice.length).join('')}
     <img ${src} alt="" class="img" style="margin:3vw; padding-right: 50px;width: 93vw;">
     </div>`

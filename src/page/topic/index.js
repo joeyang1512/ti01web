@@ -12,22 +12,23 @@ let lesson = decodeURI(getQueryVariable('lesson'));// 科目
 let lessonSelect = document.querySelector('.lessonSelect'); // 章节选择
 let lessonTitle = document.querySelector('.lessonTitle');// 题目
 let collection = document.getElementById('collection');// 收藏按钮
+let ABCD = [];
 // ================存取localStorage========================
-let lastIndex = 0;
+let lastIndex = localStorage.getItem('historyTopic') ? JSON.parse(localStorage.getItem('historyTopic'))[lesson] : 0;
 let part = localStorage.getItem('part') ? localStorage.getItem('part') : '';
 let starTopic = localStorage.getItem('starTopic') ? JSON.parse(localStorage.getItem('starTopic')) : {}, // 所收藏的题目集合
     topicId,
     crrentTopic;
 console.log(starTopic);
 let historyTopic = {
-    cpu: {},
-    net: {},
-    china: {},
-    link: {},
-    os: {},
-    all: {}
+    cpu: 0,
+    net: 0,
+    china: 0,
+    link: 0,
+    os: 0,
+    all: 0
 };
-
+let currentPartTopic;
 // ========================================================
 // ================获取所有章节=============================
 let obj = { cpu: '计算机组成原理', net: '计算机网络', china: '考研政治', link: '数据结构', os: '操作系统', all: '408综合', };
@@ -39,7 +40,8 @@ getTopicAllPart(obj[lesson]).then(res => {
     }
     topicsOfPart = new Array(parts.length);
     if (!part) {
-        lessonTitle.innerHTML = `${parts[0]}`;
+        part = parts[0];
+        lessonTitle.innerHTML = part;
     }
     lessonSelect.innerHTML = '<div>' + parts.join('</div><div>') + '</div>';
     lessonSelect.style.display = 'none';
@@ -53,30 +55,46 @@ lessonPart.onclick = function () {
 }
 
 lessonSelect.onclick = function (e) {// 确定是哪一个章节
+    e.stopPropagation();
+    e.preventDefault();
     lessonSelect.style.display = 'block';
     let target = e.target;
     if (target.className === 'lessonSelect') return;
     part = target.innerText;
     // localStorage.setItem('part', part);
     // console.log();
+    lessonTitle.innerHTML = part;
     let i = parts.indexOf(part);
+    lessonTitle.innerHTML = `${part}${topicsOfPart[i].length}`;
+    lastIndex = 0;
+    // console.log(i);
     // loadBylesson(null, part);
+    // console.log(topicsOfPart[i]);
+    currentPartTopic = topicsOfPart[i];
     if (part === '全部') {
         showTopic(body, topics, lastIndex);
     } else {
-        showTopic(body, topicsOfPart[i], lastIndex);
+        showTopic(body, currentPartTopic, lastIndex);
     }
 }
-let sectionTopic = null;
+// 点击外部消失章节选择
+document.querySelector('.weui-panel_access').addEventListener('click', bodyFn, false);
+function bodyFn() {
+    if (lessonSelect.style.display === 'block') {
+        lessonSelect.style.display = 'none';
+    }
+
+}
+
 console.log(lesson);
 switch (lesson) {
     case 'cpu':
-        console.log('zuyuan')
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('计算机组成原理');
+        console.log(topicsOfPart);
+
         break;
     case 'net':
-        console.log('jiwang')
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('计算机网络');
 
@@ -84,18 +102,22 @@ switch (lesson) {
     case 'china':
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('考研政治');
+
         break;
     case 'link':
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('数据结构');
+
         break;
     case 'os':
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('操作系统');
+
         break;
     case 'all':
         lessonTitle.innerHTML = `${part}`;
         loadBylesson('408综合');
+
         break;
     default:
         break;
@@ -117,7 +139,7 @@ function loadBylesson(lesson) {
             //     return item.part = part;
             // });
             topicsDivideToParts(topics);
-            showTopic(body, topics, lastIndex);
+            showTopic(body, currentPartTopic, lastIndex);
         } else {
             load(false);
             let toast = toastTip(res.errMsg);
@@ -136,10 +158,32 @@ function topicsDivideToParts(data) {
             return item.part === parts[i] ? item : false;
         });
     }
+
+    // if (!currentPartTopic) {
+    currentPartTopic = topicsOfPart[parts.indexOf(part)];
+    // }
+    lessonTitle.innerHTML = `${part}${topicsOfPart[0].length}`;
     console.log(topicsOfPart);
 }
 // 展示题目
 function showTopic(element, data, index) {
+    if (!data || !data.length) {
+        let toast = toastTip('尚无题目');
+        toast(true);
+        setTimeout(() => {
+            toast(false);
+        }, 1500);
+        element.innerHTML = '';
+        return;
+    }
+    if (index >= data.length) {
+        let toast = toastTip('亲，这是最后一题了哦');
+        toast(true);
+        setTimeout(() => {
+            toast(false);
+        }, 1000);
+        return;
+    }
     topicId = data[index].id;
     crrentTopic = data[index];
     // =======留白--用来判断是否已收藏============
@@ -150,7 +194,6 @@ function showTopic(element, data, index) {
         collection.className = 'iconcollection';
     }
     // =========================================
-    if (data.length === 0) return;
     let right = document.getElementById('right');
     if (data[index].type === 1) {
         right.style.display = 'none';
@@ -162,7 +205,32 @@ function showTopic(element, data, index) {
         multipleTopic(element, data, index, false);
         select(2, element, data, index);
         right.onclick = () => {
-            multipleTopic(element, data, index, true);
+            let answer = data[index].answer;
+            let abcd = ABCD.sort().join('');
+            console.log(abcd);
+            if (abcd === 'answer') {
+                multipleTopic(element, data, index, true);
+                ABCD = [];
+            } else {
+                multipleTopic(element, data, index, true);
+                let lables = document.querySelectorAll('.xuanxiang label');
+                // lables.forEach(item => {
+                //     console.log(item);
+                //     item.className = 'weui-cell weui-check__label duoxuanfalse';
+                // });
+                for (let i = 0; i < abcd.length; i++) {
+                    lables[abcd[i] - 1].className = 'weui-cell weui-check__label duoxuanfalse';
+                }
+                for (let i = 0; i < answer.length; i++) {
+                    if (abcd.includes(answer[i])) {
+                        lables[answer[i] - 1].className = 'weui-cell weui-check__label select';
+                    } else {
+                        lables[answer[i] - 1].className = 'weui-cell weui-check__label duoxuanfalse';
+                    }
+                }
+                ABCD = [];
+            }
+
         }
     }
 }
@@ -183,8 +251,12 @@ function toLeftTopic() {
         lastIndex++;
         return;
     }
-    showTopic(body, topics, lastIndex);
+    // localStorage.setItem('part', part);
+    // historyTopic[lesson] = lastIndex;
+    // localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
+    showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
+
 }
 next.onclick = toRightTopic;
 function toRightTopic() {
@@ -198,7 +270,7 @@ function toRightTopic() {
         lastIndex--;
         return;
     }
-    showTopic(body, topics, lastIndex);
+    showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
 }
 // =========================================================
@@ -231,12 +303,22 @@ function select(type, element, data, index) {
             }
             console.log(ABCD)
             if (data[index].answer != ABCD) {
-                target.className = 'weui-cell weui-check__label false';
+                if (target.className.indexOf('false') === -1) {
+                    target.className = 'weui-cell weui-check__label false';
+                } else {
+                    target.className = 'weui-cell weui-check__label';
+                }
             } else {
                 singleTopic(element, data, index, true);
             }
         } else {
-            target.className = 'weui-cell weui-check__label select';
+            ABCD.push(target.getAttribute('select'));
+            console.log(ABCD);
+            if (target.className.indexOf('select') === -1) {
+                target.className = 'weui-cell weui-check__label select';
+            } else {
+                target.className = 'weui-cell weui-check__label';
+            }
         }
 
     }
