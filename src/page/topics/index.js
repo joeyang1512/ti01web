@@ -5,6 +5,7 @@ import { getQesByTime } from '~/ajax/mineQes';
 import codes from '~/config/codeConfig';
 import { todayBegin } from '../../../public/js/filters';
 import { getTodayUserRank } from '~/ajax/clockIn';
+import { getTopicsNum } from '~/ajax/topics'
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
@@ -16,6 +17,8 @@ sinceListener('os');
 sinceListener('all');
 sinceListener('todayQuestion', mineQesUrl + '?id=3', 'rgb(255, 245, 245)');
 sinceListener('todayRank', clockInUrl, 'rgb(255, 245, 245)');
+// 获取本地刷题记录
+let alreadyDid = localStorage.getItem('alreadyDid') ? JSON.parse(localStorage.getItem('alreadyDid')) : { cpu: [], net: [], link: [], china: [], os: [], all: [] };
 // ================ 页面数据初始化 =================
 init();
 function init() {
@@ -41,6 +44,15 @@ function init() {
         if (res.code == codes.success) {
             reportRank.innerText = res.data;
         }
+    });
+    getTopicsNum().then(res => {
+        console.log(res.data)
+        topicsNum[0].innerHTML = `${alreadyDid['net'].length}/${res.data['net']}`;
+        topicsNum[1].innerHTML = `${alreadyDid['cpu'].length}/${res.data['cpu']}`;
+        topicsNum[2].innerHTML = `${alreadyDid['link'].length}/${res.data['link']}`;
+        topicsNum[3].innerHTML = `${alreadyDid['china'].length}/${res.data['china']}`;
+        topicsNum[4].innerHTML = `${alreadyDid['os'].length}/${res.data['os']}`;
+        topicsNum[5].innerHTML = `${alreadyDid['all'].length}/${res.data['all']}`;
     })
 }
 
