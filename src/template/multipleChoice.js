@@ -79,9 +79,9 @@ function multiple(Element, data, index) {
   </label>`
   ];
   let str = `<div class="weui-cells__title">${data[index].title.replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff">
+    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <img ${src} alt="" class="img" style="margin:3vw; padding-right: 50px;width: 93vw;">
+    <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;">
     </div>`
   Element.innerHTML = str;
 };
@@ -165,9 +165,9 @@ function multipleTopic(Element, data, index, flag) {
 </label>`
   ];
   let str = `<div class="weui-cells__title">${index + 1}.(多选)${data[index].title.replace(/\\n/g, '<br/>')}</div>
-  <div class="weui-cells weui-cells_radio xuanxiang" style="backgroudColor:#fff">
+  <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;">
   ${items.slice(0, data[index].choice.length).join('')}
-  <img ${src} alt="" class="img"  style="margin:3vw; padding-right: 50px;width: 93vw;">
+  <img ${src} alt="" class="img"  style="margin:0 3vw; padding-right: 50px;width: 93vw;">
   </div>`
   Element.innerHTML = str;
 };

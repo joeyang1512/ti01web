@@ -13,22 +13,17 @@ let lessonSelect = document.querySelector('.lessonSelect'); // 章节选择
 let lessonTitle = document.querySelector('.lessonTitle');// 题目
 let collection = document.getElementById('collection');// 收藏按钮
 let ABCD = [];
+let rightFlag = true;// 用来确定是否点击确定
 // ================存取localStorage========================
+let historyTopic = localStorage.getItem('historyTopic') ? JSON.parse(localStorage.getItem('historyTopic')) : { cpu: 0, net: 0, link: 0, china: 0, os: 0, all: 0 };
 let lastIndex = localStorage.getItem('historyTopic') ? JSON.parse(localStorage.getItem('historyTopic'))[lesson] : 0;
-let part = localStorage.getItem('part') ? localStorage.getItem('part') : '';
+let part = localStorage.getItem('part') ? JSON.parse(localStorage.getItem('part')) : { cpu: '', net: '', link: '', china: '', os: '', all: '' };
 let starTopic = localStorage.getItem('starTopic') ? JSON.parse(localStorage.getItem('starTopic')) : {}, // 所收藏的题目集合
     topicId,
     crrentTopic;
 console.log(starTopic);
-let historyTopic = {
-    cpu: 0,
-    net: 0,
-    china: 0,
-    link: 0,
-    os: 0,
-    all: 0
-};
 let currentPartTopic;
+let alreadyDid = localStorage.getItem('alreadyDid') ? JSON.parse(localStorage.getItem('alreadyDid')) : { cpu: [], net: [], link: [], china: [], os: [], all: [] };
 // ========================================================
 // ================获取所有章节=============================
 let obj = { cpu: '计算机组成原理', net: '计算机网络', china: '考研政治', link: '数据结构', os: '操作系统', all: '408综合', };
@@ -39,10 +34,11 @@ getTopicAllPart(obj[lesson]).then(res => {
         parts.push(res.data[i].part);
     }
     topicsOfPart = new Array(parts.length);
-    if (!part) {
-        part = parts[0];
-        lessonTitle.innerHTML = part;
+    if (!part[lesson]) {
+        part[lesson] = parts[0];
+        localStorage.setItem('part', JSON.stringify(part));
     }
+    lessonTitle.innerHTML = part[lesson];
     lessonSelect.innerHTML = '<div>' + parts.join('</div><div>') + '</div>';
     lessonSelect.style.display = 'none';
 })
@@ -55,23 +51,24 @@ lessonPart.onclick = function () {
 }
 
 lessonSelect.onclick = function (e) {// 确定是哪一个章节
+
     e.stopPropagation();
     e.preventDefault();
     lessonSelect.style.display = 'block';
     let target = e.target;
     if (target.className === 'lessonSelect') return;
-    part = target.innerText;
-    // localStorage.setItem('part', part);
+    part[lesson] = target.innerText;
+    localStorage.setItem('part', JSON.stringify(part));// 存储章节
     // console.log();
-    lessonTitle.innerHTML = part;
-    let i = parts.indexOf(part);
-    lessonTitle.innerHTML = `${part}${topicsOfPart[i].length}`;
+    lessonTitle.innerHTML = part[lesson];
+    let i = parts.indexOf(part[lesson]);
+    lessonTitle.innerHTML = `${part[lesson]}(${topicsOfPart[i].length})`;
     lastIndex = 0;
     // console.log(i);
     // loadBylesson(null, part);
     // console.log(topicsOfPart[i]);
     currentPartTopic = topicsOfPart[i];
-    if (part === '全部') {
+    if (part[lesson] === '全部') {
         showTopic(body, topics, lastIndex);
     } else {
         showTopic(body, currentPartTopic, lastIndex);
@@ -89,33 +86,33 @@ function bodyFn() {
 console.log(lesson);
 switch (lesson) {
     case 'cpu':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('计算机组成原理');
-        console.log(topicsOfPart);
+        // console.log(topicsOfPart);
 
         break;
     case 'net':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('计算机网络');
 
         break;
     case 'china':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('考研政治');
 
         break;
     case 'link':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('数据结构');
 
         break;
     case 'os':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('操作系统');
 
         break;
     case 'all':
-        lessonTitle.innerHTML = `${part}`;
+        lessonTitle.innerHTML = `${part[lesson]}`;
         loadBylesson('408综合');
 
         break;
@@ -159,11 +156,12 @@ function topicsDivideToParts(data) {
         });
     }
 
-    // if (!currentPartTopic) {
-    currentPartTopic = topicsOfPart[parts.indexOf(part)];
-    // }
-    lessonTitle.innerHTML = `${part}${topicsOfPart[0].length}`;
+    if (!currentPartTopic) {
+        currentPartTopic = topicsOfPart[parts.indexOf(part[lesson])];
+    }
     console.log(topicsOfPart);
+    lessonTitle.innerHTML = `${part[lesson]}(${topicsOfPart[0].length})`;
+
 }
 // 展示题目
 function showTopic(element, data, index) {
@@ -205,6 +203,12 @@ function showTopic(element, data, index) {
         multipleTopic(element, data, index, false);
         select(2, element, data, index);
         right.onclick = () => {
+            if (!alreadyDid[lesson].includes(data[index].id)) {
+                alreadyDid[lesson].push(data[index].id);
+                localStorage.setItem('alreadyDid', JSON.stringify(alreadyDid));
+            }
+            if (!rightFlag) return;
+            rightFlag = false;
             let answer = data[index].answer;
             let abcd = ABCD.sort().join('');
             console.log(abcd);
@@ -241,6 +245,7 @@ let last = document.getElementById('last'),
     next = document.getElementById('next');
 last.onclick = toLeftTopic;
 function toLeftTopic() {
+    rightFlag = true;
     lastIndex--;
     if (lastIndex < 0) {
         let toast = toastTip('亲，这是第一题了哦！');
@@ -251,15 +256,15 @@ function toLeftTopic() {
         lastIndex++;
         return;
     }
-    // localStorage.setItem('part', part);
-    // historyTopic[lesson] = lastIndex;
-    // localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
+    historyTopic[lesson] = lastIndex;
+    localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
     showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
 
 }
 next.onclick = toRightTopic;
 function toRightTopic() {
+    rightFlag = true;
     lastIndex++;
     if (lastIndex >= topics.length) {
         let toast = toastTip('亲，这是最后一题了哦！');
@@ -270,6 +275,9 @@ function toRightTopic() {
         lastIndex--;
         return;
     }
+    console.log(historyTopic);
+    historyTopic[lesson] = lastIndex;
+    localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
     showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
 }
@@ -284,14 +292,21 @@ backBtn.onclick = function () {
 
 // ==================点击选择==========================
 function select(type, element, data, index) {
+
     let xuanxiang = document.querySelector('.xuanxiang');
     xuanxiang.onclick = function (e) {
+        if (!alreadyDid[lesson].includes(data[index].id)) {
+            alreadyDid[lesson].push(data[index].id);
+            localStorage.setItem('alreadyDid', JSON.stringify(alreadyDid));
+        }
         let target = e.target;
         if (target.tagName === 'IMG') return;
+        if (target.getAttribute('flag')) return;
         while (target !== xuanxiang && target.tagName !== 'LABEL') {
             target = target.parentNode
         }
-        console.log(xuanxiang.children[2] === target);
+        // console.log(xuanxiang.children[2] === target);
+        // console.log(target);
         if (type === 1) {
             let ABCD = 1;
             for (let i = 0; i < xuanxiang.children.length; i++) {
