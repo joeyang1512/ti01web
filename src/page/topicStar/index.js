@@ -3,7 +3,7 @@ import { toastTip } from '../../util/sinceui';
 import { single } from '../../template/singleChoice';
 import { multiple } from '../../template/multipleChoice'
 let body = document.querySelector('.weui-panel__bd');
-let starTopic = JSON.parse(localStorage.getItem('starTopic'));
+let starTopic = localStorage.getItem('starTopic') ? JSON.parse(localStorage.getItem('starTopic')) : {};
 let data = Object.values(starTopic);
 let backBtn = document.getElementById('backBtn');
 let topicBody = document.querySelector('body');
@@ -12,7 +12,8 @@ let star = document.getElementById('lesson');// 收藏按钮
 let id;// 当前进入题目的id
 // console.log(starTopic);
 let toast = toastTip('暂无收藏');
-if (!starTopic) {
+console.log(data);
+if (data.length === 0) {
     toast(true);
     setTimeout(() => {
         toast(false);
@@ -26,7 +27,7 @@ function changePage(data) {
     for (let i = 0; i < data.length; i++) {
         let flag = Boolean(data[i].img),
             imgSrc = flag ? 'src=' + data[i].img : null;
-        str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id}>
+        str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#333">
   
           <div class="weui-media-box__bd">
             <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
@@ -40,7 +41,7 @@ function changePage(data) {
 // 给题目注册点击事件
 topicBody.addEventListener('click', topicBodyFn, false);
 function topicBodyFn(e) {
-    
+
     let target = e.target;
     // console.log(target.tagName);
     // console.log(e);

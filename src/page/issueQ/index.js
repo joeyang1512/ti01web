@@ -31,29 +31,50 @@ body.oninput = function () {
 
 // 取消返回原本页面
 cancel.onclick = function () {
-    
+
     // load(false);// 隐藏加载loading
     window.history.back(-1);
 }
+// 将base64转换为文件
+function dataURLtoFile(dataurl, filename) {
+    let arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+}
 
 // 上传图片
-uploaderInput.onchange = function () {
-    let img = document.createElement('img');
-    let fileReader = new FileReader();
-    let li = document.querySelector('.weui-uploader__file');
-
-    file = uploaderInput.files[0];
-    fileReader.readAsDataURL(file);
-    fileReader.onload = function () {
-        img.style.width = '96px';
-        img.style.height = '96px';
-        img.src = fileReader.result;
-        img.style.display = 'block';
-    }
-    li.appendChild(img);
-    // 把上传图片按钮删除
+compressImg('uploaderInput', 'imgUpload', 96, function (src) {
+    // 此处为回调函数，当图片压缩完成并成功显示后执行
+    // 可得到图片数据值src
+    // console.log(src);
+    file = dataURLtoFile(src, 'dingding.jpg');
+    console.log(file);
     uploaderInputMParent.removeChild(uploaderInputParent);
-}
+});
+// uploaderInput.onchange = function () {
+//     let img = document.createElement('img');
+//     let fileReader = new FileReader();
+//     let li = document.querySelector('.weui-uploader__file');
+
+//     file = uploaderInput.files[0];
+//     console.log(file);
+//     fileReader.readAsDataURL(file);
+//     fileReader.onload = function () {
+//         img.style.width = '96px';
+//         img.style.height = '96px';
+//         img.src = fileReader.result;
+//         img.style.display = 'block';
+//     }
+//     li.appendChild(img);
+//     // 把上传图片按钮删除
+//     uploaderInputMParent.removeChild(uploaderInputParent);
+// }
 
 // id = 33;
 // 通过是否有id来判断是发布评论还是发布问题
@@ -80,7 +101,7 @@ if (id === 'false') {// 问题
             let type = type1.value,
                 word = body.value;
             addQuestion({ word, file, type }).then(res => {
-                // console.log(res);
+                console.log(res);
                 if (res.code === '0') {
                     ask().then(res => {
                         console.log(res);
@@ -88,6 +109,7 @@ if (id === 'false') {// 问题
                     load(false);// 隐藏加载loading
                     window.history.back(-1);
                 } else {
+                    load(false);// 隐藏加载loading
                     toastTip(true, res.errMsg);
                     setTimeout(() => {
                         toastTip(false);
@@ -135,6 +157,7 @@ if (id === 'false') {// 问题
                     load(false);// 隐藏加载loading
                     window.history.back(-1);
                 } else {
+                    load(false);// 隐藏加载loading
                     toastTip(true, res.errMsg);
                     setTimeout(() => {
                         toastTip(false);

@@ -8,6 +8,8 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css" />
   <link rel="stylesheet" href="../../../public/css/since-icon.css">
+  <script src="../../../public/js/exif.min.js"></script>
+  <script src="../../../public/js/processImg.min.js"></script>
 </head>
 
 <body>
@@ -73,11 +75,13 @@
       </div>
       <div class="weui-uploader__bd">
         
-        <div class="weui-uploader__input-box" style="background-color:  rgb(237, 237, 237);">
+        <div class="weui-uploader__input-box" style="background-color:  rgb(237, 237, 237);" >
           <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" />
         </div>
         <ul class="weui-uploader__files" id="uploaderFiles" >
-          <li class="weui-uploader__file" ></li>
+          <li class="weui-uploader__file" >
+            <img src="" alt="" id="imgUpload">
+          </li>
         </ul>
       </div>
     </div>

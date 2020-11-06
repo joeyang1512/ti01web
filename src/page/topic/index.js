@@ -158,14 +158,14 @@ function topicsDivideToParts(data) {
             return item.part === parts[i] ? item : false;
         });
     }
-
+    let i = parts.indexOf(part[lesson]);
     if (!currentPartTopic) {
-        currentPartTopic = topicsOfPart[parts.indexOf(part[lesson])];
+        currentPartTopic = topicsOfPart[i];
     }
     if (topicsOfPart.length === 0) {
         return;
     }
-    lessonTitle.innerHTML = `${part[lesson]}(${topicsOfPart[0].length})`;
+    lessonTitle.innerHTML = `${part[lesson]}(${topicsOfPart[i].length})`;
 
 }
 // 展示题目
@@ -332,11 +332,14 @@ function select(type, element, data, index) {
                 singleTopic(element, data, index, true);
             }
         } else {
-            ABCD.push(target.getAttribute('select'));
-            console.log(ABCD);
+
             if (target.className.indexOf('select') === -1) {
+                ABCD.push(target.getAttribute('select'));
+                console.log(ABCD);
                 target.className = 'weui-cell weui-check__label select';
             } else {
+                ABCD.splice(ABCD.indexOf(target.getAttribute('select')), 1);
+                console.log(ABCD);
                 target.className = 'weui-cell weui-check__label';
             }
         }

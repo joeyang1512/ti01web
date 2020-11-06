@@ -121,9 +121,7 @@ function changePage(data) {
           <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
           <p class="weui-media-box__desc">${data[i].lesson}</p>
         </div>
-        <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" alt="" ${imgSrc}>
-        </div>
+        
       </a>`
   }
   body.innerHTML = str;
