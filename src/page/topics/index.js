@@ -145,3 +145,9 @@ todayTopic.addEventListener('click', todayTopicFn, false);
 function todayTopicFn() {
     window.location.href = '../topicStar/index.html';
 }
+// 进入错题本
+let todayQuestion = document.getElementById('todayQuestion');
+todayQuestion.addEventListener('click', todayQuestionFn, false);
+function todayQuestionFn() {
+    window.location.href = '../mistakeBook/index.html';
+}

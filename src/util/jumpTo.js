@@ -75,3 +75,7 @@ export const topicStarUrl = host + 'to/topicStar';
 export const totopicStar = () => {
       window.location.href = topicStarUrl;
   }
+export const mistakeBookUrl = host + 'to/mistakeBook';
+export const tomistakeBook = () => {
+      window.location.href = mistakeBookUrl;
+  }

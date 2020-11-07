@@ -82,5 +82,9 @@ module.exports = [
   {
     name:'topicStar',
     title:'题目收藏'
+  },
+  {
+    name:'mistakeBook',
+    title:'错题本'
   }
 ];

@@ -25,8 +25,6 @@ if (data.length === 0) {
 function changePage(data) {
     let str = '';
     for (let i = 0; i < data.length; i++) {
-        let flag = Boolean(data[i].img),
-            imgSrc = flag ? 'src=' + data[i].img : null;
         str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#333">
   
           <div class="weui-media-box__bd">
