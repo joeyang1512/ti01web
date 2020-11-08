@@ -60,6 +60,10 @@ module.exports = [
     title: '打卡'
   },
   {
+    name: 'topic_rank',
+    title: '排行榜'
+  },
+  {
     name:'pictureToQ',
     title:'拍照搜题'
   },
