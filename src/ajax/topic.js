@@ -25,4 +25,9 @@ export const getTopicByLesson = (lesson) => {
 export const getTopicAllPart = (lesson) => {
     return post('/types/findByLesson', { lesson });
 }
-
+export const addLog = (obj) => {
+    return post('/topich/add', obj);
+}
+export const showRight = (tid) => {
+    return post('/topich/pright', { tid });
+}

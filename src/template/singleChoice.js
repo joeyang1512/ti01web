@@ -16,7 +16,7 @@ function single(Element, data, index) {
   let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none'];
   let src = data[index].image ? `src=${data[index].image}` : '';
   arr[data[index].answer] = 'checked';
-  let items = [`<label class="weui-cell weui-check__label" for="x11">
+  let items = [`<label class="weui-cell weui-check__label" for="x11" select="1">
     <div class="weui-cell__bd">
       <p>A. ${data[index].choice[0]}</p>
     </div>
@@ -25,7 +25,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x12">
+  `<label class="weui-cell weui-check__label" for="x12" select="2">
     <div class="weui-cell__bd">
       <p>B. ${data[index].choice[1]}</p>
     </div>
@@ -34,7 +34,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x13">
+  `<label class="weui-cell weui-check__label" for="x13" select="3">
     <div class="weui-cell__bd">
       <p>C. ${data[index].choice[2]}</p>
     </div>
@@ -43,7 +43,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x14">
+  `<label class="weui-cell weui-check__label" for="x14" select="4">
     <div class="weui-cell__bd">
       <p>D. ${data[index].choice[3]}</p>
     </div>
@@ -52,7 +52,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x15">
+  `<label class="weui-cell weui-check__label" for="x15" select="5">
     <div class="weui-cell__bd">
       <p>E. ${data[index].choice[4]}</p>
     </div>
@@ -61,7 +61,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x16">
+  `<label class="weui-cell weui-check__label" for="x16" select="6">
     <div class="weui-cell__bd">
       <p>F. ${data[index].choice[5]}</p>
     </div>
@@ -70,7 +70,7 @@ function single(Element, data, index) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x17">
+  `<label class="weui-cell weui-check__label" for="x17" select="7">
     <div class="weui-cell__bd">
       <p>G. ${data[index].choice[6]}</p>
     </div>
@@ -83,11 +83,15 @@ function single(Element, data, index) {
   let str = `<div class="weui-cells__title">${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
     <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;">
+    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:12px;"></span>
+    <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
     </div>`
   Element.innerHTML = str;
 };
 function singleTopic(Element, data, index, flag) {
+  if (index === undefined) {
+    data[index] = data;
+  }
   // console.log(data);
   // console.log(typeof data[index].choice);
   // console.log(data[index].choice);
@@ -99,7 +103,7 @@ function singleTopic(Element, data, index, flag) {
   let arr = ['none', 'none', 'none', 'none', 'none', 'none', 'none'];
   let src = data[index].image ? `src=${data[index].image}` : '';
   flag ? arr[data[index].answer] = 'checked' : 'none';
-  let items = [`<label class="weui-cell weui-check__label" for="x11">
+  let items = [`<label class="weui-cell weui-check__label" for="x11" select="1">
     <div class="weui-cell__bd">
       <p>A. ${data[index].choice[0]}</p>
     </div>
@@ -108,7 +112,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x12">
+  `<label class="weui-cell weui-check__label" for="x12" select="2">
     <div class="weui-cell__bd">
       <p>B. ${data[index].choice[1]}</p>
     </div>
@@ -117,7 +121,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x13">
+  `<label class="weui-cell weui-check__label" for="x13" select="3">
     <div class="weui-cell__bd">
       <p>C. ${data[index].choice[2]}</p>
     </div>
@@ -126,7 +130,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x14">
+  `<label class="weui-cell weui-check__label" for="x14" select="4">
     <div class="weui-cell__bd">
       <p>D. ${data[index].choice[3]}</p>
     </div>
@@ -135,7 +139,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x15">
+  `<label class="weui-cell weui-check__label" for="x15" select="5">
     <div class="weui-cell__bd">
       <p>E. ${data[index].choice[4]}</p>
     </div>
@@ -144,7 +148,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x16">
+  `<label class="weui-cell weui-check__label" for="x16" select="6">
     <div class="weui-cell__bd">
       <p>F. ${data[index].choice[5]}</p>
     </div>
@@ -153,7 +157,7 @@ function singleTopic(Element, data, index, flag) {
       <span class="weui-icon-checked" ></span>
     </div>
   </label>`,
-  `<label class="weui-cell weui-check__label" for="x17">
+  `<label class="weui-cell weui-check__label" for="x17" select="7">
     <div class="weui-cell__bd">
       <p>G. ${data[index].choice[6]}</p>
     </div>
@@ -163,10 +167,10 @@ function singleTopic(Element, data, index, flag) {
     </div>
   </label>`
   ];
-  let str = `<div class="weui-cells__title">${index + 1}.(单选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
+  let str = `<div class="weui-cells__title">${index !== undefined ? (index + 1) + '.' : ''}(单选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
     <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;">
+    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;"></span><img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
     </div>`
   Element.innerHTML = str;
 };

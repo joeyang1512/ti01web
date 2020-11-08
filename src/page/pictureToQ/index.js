@@ -121,9 +121,7 @@ function changePage(data) {
           <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
           <p class="weui-media-box__desc">${data[i].lesson}</p>
         </div>
-        <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" alt="" ${imgSrc}>
-        </div>
+        
       </a>`
   }
   body.innerHTML = str;
@@ -132,7 +130,7 @@ function changePage(data) {
   topic.click();
 }
 camera.onclick = function () {
-  str = '';
+  // str = '';
   body.innerHTML = `<div class="container">
     <label for="fileSelect">
       <i class="iconcamera_fill camera" style="font-size: 80px;"></i>
@@ -163,35 +161,6 @@ topic.onclick = function () {
       } else {
         multiple(body, timus, index);
       }
-
-      /* let src = '', str = '';
-      timus[index].image ? 'src=' + timus[index].image : null;
-      let arr = ['none', 'none'];
-      arr[timus[index].answer] = 'checked';
-      str = `<div class="weui-cells__title">${timus[index].title}</div>
-            <div class="weui-cells weui-cells_radio">
-              <label class="weui-cell weui-check__label" for="x11">
-                <div class="weui-cell__bd">
-                  <p>${timus[index].choice[0]}</p>
-                </div>
-                <div class="weui-cell__ft" style="display:${arr[0]}">
-                  <input type="radio" class="weui-check" name="radio1" id="x11" ${arr[0]} >
-                  <span class="weui-icon-checked" style="display:${arr[0]}"></span>
-                </div>
-              </label>
-              <label class="weui-cell weui-check__label" for="x12">
-        
-                <div class="weui-cell__bd">
-                  <p>${timus[index].choice[1]}</p>
-                </div>
-                <div class="weui-cell__ft">
-                  <input type="radio" name="radio1" class="weui-check" id="x12" ${arr[1]}>
-                  <span class="weui-icon-checked"></span>
-                </div>
-              </label>
-              <img src="../../../public/img/1.jpg" alt="" class="img">
-            </div>`
-      body.innerHTML = str; */
     }
   })
 }
