@@ -1,4 +1,4 @@
-import { getTopicAllPart, getTopicByLesson } from '~/ajax/topic';
+import { getTopicAllPart, getTopicByLesson, addLog, showRight } from '~/ajax/topic';
 import './index.less';
 import { singleTopic } from '../../template/singleChoice';
 import { loading, toastTip, EventUtil } from '../../util/sinceui';
@@ -12,6 +12,7 @@ let lesson = decodeURI(getQueryVariable('lesson'));// 科目
 let lessonSelect = document.querySelector('.lessonSelect'); // 章节选择
 let lessonTitle = document.querySelector('.lessonTitle');// 题目
 let collection = document.getElementById('collection');// 收藏按钮
+
 let ABCD = [];
 let rightFlag = true;// 用来确定是否点击确定
 // ================存取localStorage========================
@@ -123,7 +124,13 @@ function init() {
 }
 
 // =======================================================
-
+// 展示正确率
+function showAccracy(tid) {
+    let accuracy = document.querySelector('.accuracy');
+    showRight(tid).then(res => {
+        accuracy.innerHTML = `正确率：${res.data}`;
+    });
+}
 // ================请求数据，显示题目========================
 function loadBylesson(lesson) {
     let load = loading('加载中');
@@ -140,6 +147,8 @@ function loadBylesson(lesson) {
             // });
             topicsDivideToParts(topics);
             showTopic(body, currentPartTopic, lastIndex);
+            // 展示正确率
+            showAccracy(currentPartTopic[lastIndex].id);
         } else {
             load(false);
             let toast = toastTip(res.errMsg);
@@ -218,9 +227,11 @@ function showTopic(element, data, index) {
             let abcd = ABCD.sort().join('');
             console.log(abcd);
             if (abcd === 'answer') {
+                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '0' });
                 multipleTopic(element, data, index, true);
                 ABCD = [];
             } else {
+                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '1' });
                 multipleTopic(element, data, index, true);
                 let lables = document.querySelectorAll('.xuanxiang label');
                 // lables.forEach(item => {
@@ -265,7 +276,7 @@ function toLeftTopic() {
     localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
     showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
-
+    showAccracy(currentPartTopic[lastIndex].id);
 }
 next.onclick = toRightTopic;
 function toRightTopic() {
@@ -285,6 +296,7 @@ function toRightTopic() {
     localStorage.setItem('historyTopic', JSON.stringify(historyTopic));
     showTopic(body, currentPartTopic, lastIndex);
     // 讲修改后的lastIndex存进localStorage
+    showAccracy(currentPartTopic[lastIndex].id);
 }
 // =========================================================
 
@@ -323,12 +335,14 @@ function select(type, element, data, index) {
             }
             console.log(ABCD)
             if (data[index].answer != ABCD) {
+                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '1' });
                 if (target.className.indexOf('false') === -1) {
                     target.className = 'weui-cell weui-check__label false';
                 } else {
                     target.className = 'weui-cell weui-check__label';
                 }
             } else {
+                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '0' });
                 singleTopic(element, data, index, true);
             }
         } else {
