@@ -5,7 +5,7 @@ import { getQesByTime } from '~/ajax/mineQes';
 import codes from '~/config/codeConfig';
 import { todayBegin } from '../../../public/js/filters';
 import { getTodayUserRank } from '~/ajax/clockIn';
-import { getTopicsNum } from '~/ajax/topics'
+import { getTopicsNum, getMistakes } from '~/ajax/topics'
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
@@ -32,13 +32,13 @@ function init() {
         shoreupNum.innerText = Object.keys(JSON.parse(localStorage.getItem('starTopic'))).length
     }
     // console.log(todayBegin());
-    getQesByTime(todayBegin()).then((res) => {
-        if (res.code == codes.success) {
-            todayQuestionNum.innerText = res.data.length;
-        } else if (res.code == codes.noNum) {
-            todayQuestionNum.innerText = 0;
-        }
-    });
+    // getQesByTime(todayBegin()).then((res) => {
+    //     if (res.code == codes.success) {
+    //         todayQuestionNum.innerText = res.data.length;
+    //     } else if (res.code == codes.noNum) {
+    //         todayQuestionNum.innerText = 0;
+    //     }
+    // });
     getTodayUserRank().then((res) => {
         console.log(res);
         if (res.code == codes.success) {
@@ -53,6 +53,10 @@ function init() {
         topicsNum[3].innerHTML = `${alreadyDid['china'].length}/${res.data['china']}`;
         topicsNum[4].innerHTML = `${alreadyDid['os'].length}/${res.data['os']}`;
         topicsNum[5].innerHTML = `${alreadyDid['all'].length}/${res.data['all']}`;
+    });
+    getMistakes().then(res => {
+        console.log(res);
+        todayQuestionNum.innerHTML = res.data.length;
     })
 }
 
