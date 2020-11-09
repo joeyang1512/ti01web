@@ -1,5 +1,5 @@
 import './index.less';
-import { forumUrl, mineUrl, topicsUrl, mineQesUrl, clockInUrl } from '~/util/jumpTo';
+import { forumUrl, mineUrl, topicsUrl } from '~/util/jumpTo';
 import { sinceListener } from '~/util/sinceui';
 import codes from '~/config/codeConfig';
 import { getMyRank } from '~/ajax/topic_rank';
