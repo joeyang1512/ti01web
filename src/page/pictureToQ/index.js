@@ -12,42 +12,52 @@ let body = document.querySelector('.weui-panel__bd');
 let timu = document.querySelector('.body');
 let str = '';
 let flag = true;
+tishi.addEventListener('click', tishiFn, false);
+
+function tishiFn() {
+    let toast = toastTip('本功能正在完善！</br>非产品最终质量😎');
+    toast(true);
+    setTimeout(() => {
+        toast(false);
+    }, 2000);
+}
 input.onchange = () => {
   // alert();
+  str = ''
   let file = input.files[0];
   if (window.FileReader) {
-      let fr = new FileReader();
-      fr.readAsDataURL(file);
-      fr.onload = (e) => {
-          cropperImage(e);
-      };
+    let fr = new FileReader();
+    fr.readAsDataURL(file);
+    fr.onload = (e) => {
+      cropperImage(e);
+    };
   }
 }
 window.orientation == 90;
 function cropperImage(e) {
-  
+
   $('#mark').show()
   $('#portrait').attr('src', e.target.result);
   // document.getElementById('portrait').src = e.target.result;
   $('#portrait').cropper({
-      // aspectRatio: 53 / 53,
-      viewMode: 1,
-      autoCropArea: 0.7,
-      highlight: true,
-      preview: '.small',
-      // 是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域。
-      // dragCrop: false,
-      // 是否允许移动裁剪图片
-      // movable: false,
-      // 是否允许改变剪裁框的大小
-      // resizable: false,
-      // 是否通过拖拽来移动剪裁框
-      // cropBoxMovable: false,
-      // 是否通过拖动来调整剪裁框的大小
-      // cropBoxResizable: false,
-      // crop: function(ev) {
-      //     console.log(ev);
-      // }
+    // aspectRatio: 53 / 53,
+    viewMode: 1,
+    autoCropArea: 0.7,
+    highlight: true,
+    preview: '.small',
+    // 是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域。
+    // dragCrop: false,
+    // 是否允许移动裁剪图片
+    // movable: false,
+    // 是否允许改变剪裁框的大小
+    // resizable: false,
+    // 是否通过拖拽来移动剪裁框
+    // cropBoxMovable: false,
+    // 是否通过拖动来调整剪裁框的大小
+    // cropBoxResizable: false,
+    // crop: function(ev) {
+    //     console.log(ev);
+    // }
   });
 }
 $('#cancel').on('click', function () {
@@ -58,8 +68,8 @@ $('#cancel').on('click', function () {
 $('#confirm').on('click', function () {
   let $imgData = $('#portrait').cropper('getCroppedCanvas');
   let dataurl = $imgData.toDataURL('image/png');
-  console.log($imgData);
-  console.log(dataurl);
+  // console.log($imgData);
+  // console.log(dataurl);
   upload(dataurl);
   $('#portrait').cropper('destroy');
   $('#mark').hide()
@@ -68,16 +78,16 @@ $('#confirm').on('click', function () {
 
 const base64ToBlob = function (base64Data) {
   let arr = base64Data.split(','),
-      fileType = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      l = bstr.length,
-      u8Arr = new Uint8Array(l);
-      
+    fileType = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    l = bstr.length,
+    u8Arr = new Uint8Array(l);
+
   while (l--) {
-      u8Arr[l] = bstr.charCodeAt(l);
+    u8Arr[l] = bstr.charCodeAt(l);
   }
   return new Blob([u8Arr], {
-      type: fileType
+    type: fileType
   });
 };
 // blob转file

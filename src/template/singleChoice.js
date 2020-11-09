@@ -80,10 +80,10 @@ function single(Element, data, index) {
     </div>
   </label>`
   ];
-  let str = `<div class="weui-cells__title">${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;">
+  let str = `<div class="weui-cells__title" ><span style="color:#000">${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</span></div>
+    <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;style="color:#000"">
     ${items.slice(0, data[index].choice.length).join('')}
-    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:12px;"></span>
+    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:12px;backgroudColor:#fff;"></span>
     <img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
     </div>`
   Element.innerHTML = str;
@@ -167,10 +167,10 @@ function singleTopic(Element, data, index, flag) {
     </div>
   </label>`
   ];
-  let str = `<div class="weui-cells__title">${index !== undefined ? (index + 1) + '.' : ''}(单选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
-    <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;">
+  let str = `<div class="weui-cells__title" ><span style="color:#000">${index !== undefined ? (index + 1) + '.' : ''}(单选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</span></div>
+    <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;color:#000;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;"></span><img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
+    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;backgroundColor:#fff"></span><img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
     </div>`
   Element.innerHTML = str;
 };
