@@ -1,5 +1,5 @@
 import './index.less';
-import { getMistakes, addLog, showRight } from '~/ajax/mistakeBook';
+import { getMistakes, showRight } from '~/ajax/mistakeBook';
 
 
 import { toastTip } from '../../util/sinceui';
@@ -13,7 +13,7 @@ let dataValue = [];
 let backBtn = document.getElementById('backBtn');
 // let star = document.getElementById('lesson');// 删除错题按钮
 let topicBody = document.querySelector('body');
-let footer = document.querySelector('.footer');
+let footer = document.querySelector('.footerFather');
 let flag = true;// 标识是否进入题目详情
 let id;// 当前进入题目的id
 // console.log(starTopic);
@@ -55,6 +55,7 @@ function showAccracy(tid) {
 }
 // 展示错题
 function changePage(data) {
+    footer.style.display = 'none';
     let str = '';
     for (let i = 0; i < data.length; i++) {
         str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#06ae56;">
@@ -86,9 +87,9 @@ function tishiFn() {
     // }
 }
 // 给题目注册点击事件
-topicBody.addEventListener('click', topicBodyFn, false);
+topicBody.addEventListener('click', topicBodyFn, true);
 function topicBodyFn(e) {
-    footer.style.display = 'flex';
+    footer.style.display = 'block';
     let target = e.target;
     // console.log(target.tagName);
     // console.log(e);
@@ -176,18 +177,20 @@ function lableClick(dataItem) {
     }, false);
 }
 // 返回上一页
-backBtn.addEventListener('click', backBtnFn, false);
+backBtn.addEventListener('click', backBtnFn, true);
 function backBtnFn() {
+    console.log('ahhaha');
     if (flag) {
         window.location.href = '../topics/index.html';
         return;
     }
     // star.className = 'iconcollection_fill';
-
+    
     flag = true;
-    init();
+    // init();
     // console.log()
     // star.style.display = 'none';
     // data = Object.values(starTopic);
-    // changePage(dataValue);
+    changePage(dataValue);
+    footer.style.display = 'none';
 }
