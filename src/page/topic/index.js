@@ -148,7 +148,10 @@ function loadBylesson(lesson) {
             topicsDivideToParts(topics);
             showTopic(body, currentPartTopic, lastIndex);
             // 展示正确率
-            showAccracy(currentPartTopic[lastIndex].id);
+            if (lastIndex < currentPartTopic.length) {
+                showAccracy(currentPartTopic[lastIndex].id);
+            };
+
         } else {
             load(false);
             let toast = toastTip(res.errMsg);
@@ -282,8 +285,10 @@ next.onclick = toRightTopic;
 function toRightTopic() {
     rightFlag = true;
     lastIndex++;
-    if (lastIndex >= topics.length) {
-        let toast = toastTip('亲，这是最后一题了哦！');
+    // console.log(lastIndex);
+    // console.log(currentPartTopic.length);
+    if (lastIndex >= currentPartTopic.length) {
+        let toast = toastTip('本章结束，请切换章节');
         toast(true);
         setTimeout(() => {
             toast(false);
@@ -303,13 +308,13 @@ function toRightTopic() {
 // ==================返回上一页==========================
 let backBtn = document.getElementById('backBtn');
 backBtn.onclick = function () {
-    window.history.back(-1);
+    window.location.href = '../topics/index.html';
 }
 // =========================================================
 
 // ==================点击选择==========================
 function select(type, element, data, index) {
-
+    let flag = true;
     let xuanxiang = document.querySelector('.xuanxiang');
     xuanxiang.onclick = function (e) {
         if (!alreadyDid[lesson].includes(data[index].id)) {
@@ -324,6 +329,7 @@ function select(type, element, data, index) {
         }
         // console.log(xuanxiang.children[2] === target);
         // console.log(target);
+        // console.log('hhhhhhhh')
         if (type === 1) {
             let ABCD = 1;
             for (let i = 0; i < xuanxiang.children.length; i++) {
@@ -334,16 +340,24 @@ function select(type, element, data, index) {
                 ABCD++;
             }
             console.log(ABCD)
-            if (data[index].answer != ABCD) {
-                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '1' });
+            if (data[index].answer == ABCD) {
+                if (flag) {
+                    console.log('true')
+                    addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '0' });
+                    flag = false;
+                }
+                singleTopic(element, data, index, true);
+            } else {
+                if (flag) {
+                    console.log('false');
+                    addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '1' });
+                    flag = false;
+                }
                 if (target.className.indexOf('false') === -1) {
                     target.className = 'weui-cell weui-check__label false';
                 } else {
                     target.className = 'weui-cell weui-check__label';
                 }
-            } else {
-                addLog({ tlesson: data[index].lesson, tpart: data[index].part, tid: data[index].id, res: '0' });
-                singleTopic(element, data, index, true);
             }
         } else {
 

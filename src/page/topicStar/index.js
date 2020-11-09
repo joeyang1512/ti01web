@@ -28,8 +28,8 @@ function changePage(data) {
         str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#333">
   
           <div class="weui-media-box__bd">
-            <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
-            <p class="weui-media-box__desc">${data[i].lesson}</p>
+            <h4 class="weui-media-box__title" style="color:#333;">${data[i].title.replace(/\\n/g, '')}</h4>
+            <p class="weui-media-box__desc" style="color:#999;">${data[i].lesson}</p>
           </div>
           
         </a>`
@@ -78,5 +78,6 @@ star.addEventListener('click', starFn, false);
 function starFn() {
     star.className = 'iconcollection';
     delete starTopic[id];
+    console.log(starTopic);
     localStorage.setItem('starTopic', JSON.stringify(starTopic));
 }
