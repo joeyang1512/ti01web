@@ -51,6 +51,10 @@ export const clockInUrl = host + 'to/clockIn';
 export const toclockIn = () => {
       window.location.href = clockInUrl;
   }
+export const topic_rankUrl = host + 'to/topic_rank';
+export const totopic_rank = () => {
+      window.location.href = topic_rankUrl;
+  }
 export const pictureToQUrl = host + 'to/pictureToQ';
 export const topictureToQ = () => {
       window.location.href = pictureToQUrl;
@@ -78,4 +82,8 @@ export const totopicStar = () => {
 export const mistakeBookUrl = host + 'to/mistakeBook';
 export const tomistakeBook = () => {
       window.location.href = mistakeBookUrl;
+  }
+export const softInfoUrl = host + 'to/softInfo';
+export const tosoftInfo = () => {
+      window.location.href = softInfoUrl;
   }

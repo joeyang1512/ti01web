@@ -90,5 +90,9 @@ module.exports = [
   {
     name:'mistakeBook',
     title:'错题本'
+  },
+  {
+    name:'softInfo',
+    title:'软件信息'
   }
 ];
