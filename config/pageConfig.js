@@ -94,5 +94,9 @@ module.exports = [
   {
     name:'softInfo',
     title:'软件信息'
+  },
+  {
+    name:'about',
+    title:'关于我们'
   }
 ];

@@ -8,7 +8,7 @@ sinceListener('forum', forumUrl)
 sinceListener('mine', mineUrl);
 sinceListener('report', clockInUrl);
 sinceListener('rank');
-sinceListener('about', ourUrl);
+sinceListener('about', '/page/about/index.html');
 sinceListener('shoreup', mineQesUrl + '?id=1');
 sinceListener('answer', mineQesUrl + '?id=2');
 sinceListener('gain', gainUrl);

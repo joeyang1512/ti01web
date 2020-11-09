@@ -87,3 +87,7 @@ export const softInfoUrl = host + 'to/softInfo';
 export const tosoftInfo = () => {
       window.location.href = softInfoUrl;
   }
+export const aboutUrl = host + 'to/about';
+export const toabout = () => {
+      window.location.href = aboutUrl;
+  }
