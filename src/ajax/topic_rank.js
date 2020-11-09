@@ -11,3 +11,6 @@ export const getTodayRank = () => {
 export const getAllRank = () => {
     return post('/topich/numrank');
 }
+export const getMyRank = () => {
+    return post('/topich/todayMyRank');
+}

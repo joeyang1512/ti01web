@@ -1,11 +1,10 @@
 import './index.less';
 import { forumUrl, mineUrl, topicsUrl, mineQesUrl, clockInUrl } from '~/util/jumpTo';
 import { sinceListener } from '~/util/sinceui';
-import { getQesByTime } from '~/ajax/mineQes';
 import codes from '~/config/codeConfig';
-import { todayBegin } from '../../../public/js/filters';
-import { getTodayUserRank } from '~/ajax/clockIn';
-import { getTopicsNum, getMistakes } from '~/ajax/topics'
+import { getMyRank } from '~/ajax/topic_rank';
+import { getTopicsNum, getMistakes } from '~/ajax/topics';
+
 sinceListener('topics', topicsUrl);
 sinceListener('forum', forumUrl);
 sinceListener('mine', mineUrl);
@@ -15,8 +14,8 @@ sinceListener('link');
 sinceListener('china');
 sinceListener('os');
 sinceListener('all');
-sinceListener('todayQuestion', mineQesUrl + '?id=3', 'rgb(255, 245, 245)');
-sinceListener('todayRank', clockInUrl, 'rgb(255, 245, 245)');
+sinceListener('todayQuestion', null, 'rgb(255, 245, 245)');
+sinceListener('todayRank', '/page/topic_rank/index.html', 'rgb(255, 245, 245)');
 // 获取本地刷题记录
 let alreadyDid = localStorage.getItem('alreadyDid') ? JSON.parse(localStorage.getItem('alreadyDid')) : { cpu: [], net: [], link: [], china: [], os: [], all: [] };
 // ================ 页面数据初始化 =================
@@ -39,7 +38,7 @@ function init() {
     //         todayQuestionNum.innerText = 0;
     //     }
     // });
-    getTodayUserRank().then((res) => {
+    getMyRank().then((res) => {
         console.log(res);
         if (res.code == codes.success) {
             reportRank.innerText = res.data;

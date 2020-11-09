@@ -128,7 +128,7 @@ function init() {
 function showAccracy(tid) {
     let accuracy = document.querySelector('.accuracy');
     showRight(tid).then(res => {
-        accuracy.innerHTML = `正确率：${res.data}`;
+        accuracy.innerHTML = `全服正确率：${res.data}`;
     });
 }
 // ================请求数据，显示题目========================
