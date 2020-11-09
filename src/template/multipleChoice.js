@@ -78,10 +78,10 @@ function multiple(Element, data, index) {
     </div>
   </label>`
   ];
-  let str = `<div class="weui-cells__title">${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
+  let str = `<div class="weui-cells__title"><span style="color:#000">${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</span></div>
     <div class="weui-cells weui-cells_radio" style="backgroudColor:#fff;margin-bottom:9vh;">
     ${items.slice(0, data[index].choice.length).join('')}
-    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;"></span><img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
+    <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;backgroudColor:#fff;"></span><img ${src} alt="" class="img" style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
     </div>`
   Element.innerHTML = str;
 };
@@ -103,7 +103,7 @@ function multipleTopic(Element, data, index, flag) {
   }
 
   console.log(arr);
-  let items = [`<label class="weui-cell weui-cells_checkbox" for="x11" select="1">
+  let items = [`<label class="weui-cell weui-check__label" for="x11" select="1">
   <div class="weui-cell__bd">
     <p>A. ${data[index].choice[0]}</p>
   </div>
@@ -167,10 +167,10 @@ function multipleTopic(Element, data, index, flag) {
   </div>
 </label>`
   ];
-  let str = `<div class="weui-cells__title">${index !== undefined ? (index + 1) + '.' : ''}(多选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</div>
-  <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;">
+  let str = `<div class="weui-cells__title"><span style="color:#000">${index !== undefined ? (index + 1) + '.' : ''}(多选)${data[index].title.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\\n/g, '<br/>')}</span></div>
+  <div class="weui-cells weui-cells_radio xuanxiang" flag="lableFather" style="backgroudColor:#fff;margin-bottom:9vh;color:#000">
   ${items.slice(0, data[index].choice.length).join('')}
-  <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;"></span>
+  <span class="accuracy" style="color:#999;margin:0 3vw;font-size:13px;backgroudColor:#fff;"></span>
   <img ${src} alt="" class="img"  style="margin:0 3vw; padding-right: 50px;width: 93vw;display:${src ? 'block' : 'none'};">
   </div>`
   Element.innerHTML = str;

@@ -57,16 +57,33 @@ function showAccracy(tid) {
 function changePage(data) {
     let str = '';
     for (let i = 0; i < data.length; i++) {
-        str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#333">
+        str += `<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg listOfTi" tiId=${data[i].id} style="color:#06ae56;">
   
-          <div class="weui-media-box__bd">
-            <h4 class="weui-media-box__title">${data[i].title.replace(/\\n/g, '')}</h4>
-            <p class="weui-media-box__desc">${data[i].lesson}</p>
+          <div class="weui-media-box__bd" >
+            <h4 class="weui-media-box__title" style="color:#333;">${data[i].title.replace(/\\n/g, '')}</h4>
+            <p class="weui-media-box__desc" style="color:#999;">${data[i].lesson}</p>
           </div>
           
         </a>`
     }
     body.innerHTML = str;
+}
+// 提示：
+tishi.addEventListener('click', tishiFn, false);
+// let toast = null;
+function tishiFn() {
+    let toast = toastTip('错题本的题目，只有在题库中再次答对才会消失哦!😂');
+    toast(true);
+    setTimeout(() => {
+        toast(false);
+    }, 2000);
+    // if (!toast) {
+    //     toast = toastTip('错题本里的题目，只有在题库中再次刷对才会消失哦');
+    //     toast(true);
+    // } else {
+    //     toast(false);
+    //     toast = null;
+    // }
 }
 // 给题目注册点击事件
 topicBody.addEventListener('click', topicBodyFn, false);
@@ -115,7 +132,7 @@ function lableClick(dataItem) {
             res.splice(res.indexOf(select), 1);
         } else {
             res.push(select);
-            span.innerHTML = '<i class="iconright" id="right" style="color: rgba(237,27,36,0.75);font-size:25px"></i> ';
+            span.innerHTML = '<i class="iconright"  style="color: rgba(237,27,36,0.75);font-size:25px"></i> ';
         }
         console.log(res);
 
@@ -135,18 +152,18 @@ function lableClick(dataItem) {
         for (let i = 0; i < label.length; i++) {
             let select = label[i].getAttribute('select');
             if (!dataItem.answer.includes(select)) {
-                label[i].querySelector('.weui-cell__ft span').innerHTML = '<i class="iconclose" id="right" style="color: rgba(237,27,36,0.75);font-size:25px"></i> ';
+                label[i].querySelector('.weui-cell__ft span').innerHTML = '<i class="iconclose"  style="color: rgba(237,27,36,0.75);font-size:25px;"></i> ';
             }
         }
         if (dataItem.answer === resStr) {
-            addLog({ tlesson: dataItem.lesson, tpart: dataItem.part, tid: dataItem.id, res: '0' });
+            // addLog({ tlesson: dataItem.lesson, tpart: dataItem.part, tid: dataItem.id, res: '0' });
             let toast = toastTip('恭喜你，答对了！');
             toast(true);
             setTimeout(() => {
                 toast(false);
             }, 700);
         } else {
-            addLog({ tlesson: dataItem.lesson, tpart: dataItem.part, tid: dataItem.id, res: '1' });
+            // addLog({ tlesson: dataItem.lesson, tpart: dataItem.part, tid: dataItem.id, res: '1' });
             let toast = toastTip('怎么回事？又打错了！');
             toast(true);
             setTimeout(() => {
@@ -162,13 +179,15 @@ function lableClick(dataItem) {
 backBtn.addEventListener('click', backBtnFn, false);
 function backBtnFn() {
     if (flag) {
-        window.history.back(-1);
+        window.location.href = '../topics/index.html';
         return;
     }
     // star.className = 'iconcollection_fill';
-    // init();
+
     flag = true;
+    init();
+    // console.log()
     // star.style.display = 'none';
     // data = Object.values(starTopic);
-    changePage(dataValue);
+    // changePage(dataValue);
 }
