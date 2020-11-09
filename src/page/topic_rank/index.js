@@ -1,12 +1,8 @@
 import './index.less';
 import {
-    getTodayAllRank,
-    getTodayUserRank,
-    getAllUserRank,
-    addDaka,
-    isDaka, 
-    gainReport
-} from '~/ajax/clockIn'
+    getAllRank,
+    getTodayRank,
+} from '~/ajax/topic_rank'
 
 import {
     formatDate,
@@ -18,7 +14,7 @@ let rank = [];
 
 // 获取今日排名
 function getToday() {
-    getTodayAllRank().then(res => {
+    getTodayRank().then(res => {
         if (res.code == '0') {
             rank = res.data.slice(0, 20);
             mapRank();
@@ -31,10 +27,10 @@ function getToday() {
 }
 // 获取总排名
 function getAll() {
-    getAllUserRank().then(res => {
+    getAllRank().then(res => {
         if (res.code == '0') {
             rank = res.data.slice(0, 20);
-            mapRank1();
+            mapRank();
         } else {
             $('.list').append(`<div class='empty'>
                                     <p> 暂时还没有排名~ </p>
@@ -65,23 +61,6 @@ $('.tab_all').click(() => {
 });
 
 // 将返回的所有结果渲染到页面上
-function mapRank1() {
-    $('.list').empty();
-    for (let i = 0; i < rank.length; i++) {
-        $('.list').append(`<div class="item">
-            <span class="index">` + (i + 1) + `</span>
-            <div class="content">
-                <div class="userImg" style="background-image: url('` + isPicEmpty(rank[i].image) + `');" ></div>
-                <span class="userName">` + rank[i].name + `</span>
-            </div>
-            <span class="time">` + rank[i].num + ` 次</span>
-        </div>`)
-    }
-    $('.list').append(`<div class='empty'>
-                            <p> 只能到这里了~ </p>
-                        </div>`);
-}
-// 将返回的所有结果渲染到页面上
 function mapRank() {
     $('.list').empty();
     for (let i = 0; i < rank.length; i++) {
@@ -91,7 +70,7 @@ function mapRank() {
                 <div class="userImg" style="background-image: url('` + isPicEmpty(rank[i].image) + `');" ></div>
                 <span class="userName">` + rank[i].name + `</span>
             </div>
-            <span class="time">` + formatDate(new Date(Number(rank[i].uptime)), 'hh:mm') + `</span>
+            <span class="time">` + rank[i].num + '道 ' + rank[i].right * 100 + '%' + `</span>
         </div>`)
     }
     $('.list').append(`<div class='empty'>
@@ -102,23 +81,6 @@ function mapRank() {
 
 // 后退按钮
 $('#backBtn').click(function () {
+    console.log(1);
     window.history.back();
-});
-
-// 判断用户今日是否打卡
-isDaka().then(res => {
-    if (res.code == '0') {
-        // 打卡按钮
-        $('.dakaBtn').click(function () {
-            addDaka('132', '123').then(res => {
-                if (res.code == '0') {
-                    $('.dakaBtn').addClass('active');
-                    getToday();
-                    gainReport();
-                }
-            })
-        });
-    } else {
-        $('.dakaBtn').addClass('active');
-    }
 });

@@ -1,0 +1,179 @@
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.icon {
+    font-size: 20px;
+    color: #333;
+}
+
+body {
+    background-color: #F1F1F1;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.headerBox {
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+
+    .header,
+    .logo,
+    .addBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo,
+    .addBox {
+        width: 40px;
+        height: 50px;
+
+        i {
+            font-size: 28px;
+            color: #a0a0a0;
+        }
+    }
+
+    .title {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-size: 16px;
+    }
+
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .selected {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+
+        .tab {
+            flex: 1;
+            height: 50px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
+            position: relative;
+        }
+
+        .active::after {
+            content: '';
+            display: block;
+            height: 2px;
+            border-radius: 5px;
+            width: 100%;
+            position: absolute;
+            background-color: rgba(237, 27, 36, 0.5);
+        }
+    }
+
+    .list {
+        background-color: #fff;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        flex: 1;
+    }
+
+    .listBox {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 0;
+    }
+
+    .item {
+        display: flex;
+        padding: 10px 0;
+        background-color: #fff;
+        border-bottom: 1px #eee solid;
+
+        &:nth-child(n+4) {
+            .index {
+                color: #999;
+            }
+        }
+
+        .index {
+            width: 20px;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: 600;
+            color: coral;
+        }
+
+        .time {
+            margin: 0 10px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .index,
+        .content,
+        .time {
+            display: flex;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+
+            .userImg {
+                width: 40px;
+                height: 40px;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                border-radius: 50%;
+            }
+
+            .userName {
+                flex: 1;
+                padding-left: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
+
+
+        }
+    }
+
+    .empty {
+        padding: 20px 0;
+        color: #99a2aa;
+        text-align: center;
+        font-size: 14px;
+    }
+}
