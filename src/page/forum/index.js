@@ -37,6 +37,8 @@ if (tabVal == null) {
 
 // 将返回的所有结果渲染到页面上
 function mapALLquestion() {
+    $('#all_list').empty();
+    $('#inter-footer').empty();
     for (let i = 0; i < arr.length; i++) {
         $('#all_list').append(`<div class="list-item"> 
                                     <div class="item-head">
@@ -78,6 +80,8 @@ function mapALLquestion() {
 for (let i = 0; i < tabList.length; i++) {
     tabList[i].index = i;
     tabList[i].onclick = function () {
+        $('#all_list').empty();
+        $('#inter-footer').empty();
         for (let i = 0; i < tabList.length; i++) {
             tabList[i].className = 'tab';
         }
@@ -92,14 +96,14 @@ for (let i = 0; i < tabList.length; i++) {
 
 // 根据类型获取问题
 function getQesByType(type) {
-    $('#all_list').empty();
-    $('#inter-footer').empty();
     if (type != '推荐') {
         getTypequestion(type).then((res) => {
             if (res.data != null) {
                 arr = res.data;
                 mapALLquestion();
             } else {
+                $('#all_list').empty();
+                $('#inter-footer').empty();
                 $('#all_list').append(`<div class='empty'>
                                             <img class='empty_img' src='/public/img/empty.png'></img>
                                             <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
