@@ -25,8 +25,15 @@ let title = document.querySelector('.weui-media-box__title'),
 let load = loading('上传中');
 
 // 监听输入字数
-body.oninput = function () {
+body.oninput = function (e) {
     words.innerText = body.value.length;
+}
+body.onkeypress = function (e) {
+    e.preventDefault();
+    if (e.key === 'Enter') {
+        body.value += '\n';
+    }
+    // console.log(body.value.length);
 }
 
 // 取消返回原本页面
@@ -87,7 +94,7 @@ if (id === 'false') {// 问题
 
     next.onclick = function () {
         // 判断内容是否为空
-        if (!type1.value || !(body.value || uploaderInput.files[0])) {
+        if (!type1.value || !(body.value || file)) {
             let toast = toastTip('科目问题不能为空');
             toast(true);
             setTimeout(() => {
@@ -134,8 +141,7 @@ if (id === 'false') {// 问题
     });
     // 点击发布评论
     next.onclick = function () {
-
-        if (!body.value && !uploaderInput.files[0]) {
+        if (!body.value && !file) {
             let toast = toastTip('评论内容不能为空');
             toast(true);
             setTimeout(() => {
@@ -143,7 +149,6 @@ if (id === 'false') {// 问题
             }, 1000);
             return;
         }
-
         load(true);// 显示加载loading
 
         if (flag) {
