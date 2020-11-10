@@ -61,7 +61,7 @@ function mapALLquestion() {
                                 </div>`);
     }
     $('#all_list').append(`<div class='empty'>
-                        <img class='empty_img' src='/public/img/empty.png'></img>
+                        
                         <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
                     </div>`)
     $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
@@ -105,7 +105,7 @@ function getQesByType(type) {
                 $('#all_list').empty();
                 $('#inter-footer').empty();
                 $('#all_list').append(`<div class='empty'>
-                                            <img class='empty_img' src='/public/img/empty.png'></img>
+                                           
                                             <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
                                         </div>`)
                 $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
