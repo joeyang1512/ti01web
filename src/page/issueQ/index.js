@@ -28,13 +28,14 @@ let load = loading('上传中');
 body.oninput = function (e) {
     words.innerText = body.value.length;
 }
-body.onkeypress = function (e) {
-    e.preventDefault();
-    if (e.key === 'Enter') {
-        body.value += '\n';
-    }
-    // console.log(body.value.length);
-}
+// body.onkeypress = function (e) {
+//     console.log(e);
+//     if (e.which === 13) {
+//         // e.prevtreentDefault();
+//         body.value += '\n';
+//     }
+//     // console.log(body.value.length);
+// }
 
 // 取消返回原本页面
 cancel.onclick = function () {
@@ -107,7 +108,7 @@ if (id === 'false') {// 问题
 
         if (flag) {
             let type = type1.value,
-                word = body.value;
+                word = body.value.replace(/\\n/g, '<br/>');
             addQuestion({ word, file, type }).then(res => {
                 console.log(res);
                 if (res.code === '0') {
@@ -152,8 +153,8 @@ if (id === 'false') {// 问题
         load(true);// 显示加载loading
 
         if (flag) {
-            let word = body.value;
-            // console.log(word, id, file);
+            let word = body.value.replace(/\\n/g, '<br/>');
+
             answerQustion(word, id, file).then(res => {
                 console.log(res);
                 if (res.code === '0') {
