@@ -25,8 +25,15 @@ let title = document.querySelector('.weui-media-box__title'),
 let load = loading('上传中');
 
 // 监听输入字数
-body.oninput = function () {
+body.oninput = function (e) {
     words.innerText = body.value.length;
+}
+body.onkeypress = function (e) {
+    e.preventDefault();
+    if (e.key === 'Enter') {
+        body.value += '\n';
+    }
+    // console.log(body.value.length);
 }
 
 // 取消返回原本页面
