@@ -43,7 +43,7 @@ module.exports = [
   },
   {
     name: 'issueQ',
-    title: '发布题目',
+    title: '发布',
 
   },
   {
