@@ -62,7 +62,7 @@ function mapALLquestion() {
     }
     $('#all_list').append(`<div class='empty'>
                         
-                        <p> 只能到这里了~ <br> 我们以后不见不散哦 </p>
+                                 <p> 一路陪伴，一起上岸 <br> 一战成硕，一研为定 </p>
                     </div>`)
     $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
                                 <p>Copyright &copy; 2014
@@ -105,8 +105,7 @@ function getQesByType(type) {
                 $('#all_list').empty();
                 $('#inter-footer').empty();
                 $('#all_list').append(`<div class='empty'>
-                                           
-                                            <p> 暂时还没有问题哦~ <br> 赶紧去添加一个问题吧 </p>
+                                            <p> 一路陪伴，一起上岸 <br> 一战成硕，一研为定 </p>
                                         </div>`)
                 $('#inter-footer').append(`<p><a href="http://www.since88.cn">森思公司</a></p>
                                                 <p>Copyright &copy; 2014

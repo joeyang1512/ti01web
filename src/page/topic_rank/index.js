@@ -70,7 +70,7 @@ function mapRank() {
                 <div class="userImg" style="background-image: url('` + isPicEmpty(rank[i].image) + `');" ></div>
                 <span class="userName">` + rank[i].name + `</span>
             </div>
-            <span class="time"> <small>正确率:${rank[i].right * 100}% </small>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b style="color:#444">${rank[i].num} 道</b> </span>
+            <span class="time"> <small>正确率:${Math.round(rank[i].right * 100)}% </small>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b style="color:#444">${rank[i].num} 道</b> </span>
         </div>`)
     }
     $('.list').append(`<div class='empty'>
