@@ -73,6 +73,10 @@ function changePage(data) {
 tishi.addEventListener('click', tishiFn, true);
 // let toast = null;
 function tishiFn() {
+    if (flag) {
+        footer.style.display = 'none';
+    }
+
     let toast = toastTip('错题本的题目，只有在题库中再次答对才会消失哦!😂');
     toast(true);
     setTimeout(() => {
@@ -185,7 +189,7 @@ function backBtnFn() {
         return;
     }
     // star.className = 'iconcollection_fill';
-    
+
     flag = true;
     // init();
     // console.log()

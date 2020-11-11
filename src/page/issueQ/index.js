@@ -55,17 +55,17 @@ function dataURLtoFile(dataurl, filename) {
     }
     return new File([u8arr], filename, { type: mime });
 }
-
-// 上传图片
-compressImg('uploaderInput', 'imgUpload', 480, function (src) {
+compressImg('uploaderInput', 'imgUpload', 720, function (src) {
     // 此处为回调函数，当图片压缩完成并成功显示后执行
     // 可得到图片数据值src
     // console.log(src);
     imgUpload.style.display = 'block';
     file = dataURLtoFile(src, 'dingding.jpg');
+    // console.log(file.size);
     // console.log(file);
     uploaderInputMParent.removeChild(uploaderInputParent);
 });
+
 // uploaderInput.onchange = function () {
 //     let img = document.createElement('img');
 //     let fileReader = new FileReader();
