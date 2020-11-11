@@ -70,7 +70,7 @@ function changePage(data) {
     body.innerHTML = str;
 }
 // 提示：
-tishi.addEventListener('click', tishiFn, false);
+tishi.addEventListener('click', tishiFn, true);
 // let toast = null;
 function tishiFn() {
     let toast = toastTip('错题本的题目，只有在题库中再次答对才会消失哦!😂');
