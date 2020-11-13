@@ -13,7 +13,7 @@ let timu = document.querySelector('.body');
 let str = '';
 let flag = true;
 tishi.addEventListener('click', tishiFn, false);
-
+// 右上角的点击事件，告诉用户功能尚未完善
 function tishiFn() {
     let toast = toastTip('本功能正在完善！</br>非产品最终质量😎');
     toast(true);
@@ -21,6 +21,7 @@ function tishiFn() {
         toast(false);
     }, 2000);
 }
+// 图片上传完成后出发的监听函数
 input.onchange = () => {
   // alert();
   str = ''
@@ -33,6 +34,7 @@ input.onchange = () => {
     };
   }
 }
+// 这块是裁剪函数，不是我写的调用的其他类库haha
 window.orientation == 90;
 function cropperImage(e) {
 
@@ -96,8 +98,7 @@ const blobToFile = function (newBlob, fileName) {
   newBlob.name = fileName;
   return newBlob;
 };
-// 调用
-
+// 在数据没请求回来之前，loading加载状态
 function upload(data) {
   let toast = loading('搜索中');
   const blob = base64ToBlob(data);
@@ -120,7 +121,7 @@ function upload(data) {
   });
 };
 
-
+// 拍照后数据请求回来，调用changePage切换页面
 function changePage(data) {
   for (let i = 0; i < data.length; i++) {
     let flag = Boolean(data[i].img),
@@ -139,6 +140,7 @@ function changePage(data) {
   topic.className = 'iconactivity_fill';
   topic.click();
 }
+// 点击拍照后执行的裁剪，发送请求
 camera.onclick = function () {
   // str = '';
   body.innerHTML = `<div class="container">
@@ -149,6 +151,7 @@ camera.onclick = function () {
   camera.className = 'iconcamera_fill';
   topic.className = 'iconactivity';
 }
+// 这可用事件代理，我没用，当时没想起来parentNode
 topic.onclick = function () {
   if (!str) {
     let toast = document.getElementById('toast');
@@ -174,7 +177,7 @@ topic.onclick = function () {
     }
   })
 }
-
+// 返回按钮：通过判断是题目中的话，就重新渲染innerHTML，如果是题目列表或者拍照页面，点击返回就返回上一个页面
 backBtn.onclick = function () {
   if (!flag) {
     topic.click();
