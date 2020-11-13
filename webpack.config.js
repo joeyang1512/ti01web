@@ -57,7 +57,7 @@ module.exports = {
   devtool: 'source-map',
   entry,
   output: {
-    filename: 'page/[name]/index.b.js',
+    filename: 'page/[name]/index.[hash:4].b.js',
     path: outputPath,
   },
 
@@ -92,7 +92,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
       allChunks: true,
-      filename: 'page/[name]/[name].css',
+      filename: 'page/[name]/[name].[hash:4].css',
     }), // 打包后的文件名
     ...htmlWebpackPlugin,
     new CleanWebpackPlugin(),

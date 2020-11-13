@@ -21,7 +21,7 @@ let title = document.querySelector('.weui-media-box__title'),
     desc = document.querySelector('.weui-media-box__desc'),
     img = document.querySelector('.weui-media-box__thumb'),
     issueTitle = document.querySelector('.issue');// 评论内容
-
+let imgPost = 'png';
 let load = loading('上传中');
 
 // 监听输入字数
@@ -55,12 +55,16 @@ function dataURLtoFile(dataurl, filename) {
     }
     return new File([u8arr], filename, { type: mime });
 }
+uploaderInput.onchange = () => {
+    let imtFile = uploaderInput.files[0].name.split('.');
+    imgPost = imtFile[imtFile.length - 1];
+}
 compressImg('uploaderInput', 'imgUpload', 720, function (src) {
     // 此处为回调函数，当图片压缩完成并成功显示后执行
     // 可得到图片数据值src
     // console.log(src);
     imgUpload.style.display = 'block';
-    file = dataURLtoFile(src, 'dingding.jpg');
+    file = dataURLtoFile(src, `dingding.${imgPost}`);
     // console.log(file.size);
     // console.log(file);
     uploaderInputMParent.removeChild(uploaderInputParent);
